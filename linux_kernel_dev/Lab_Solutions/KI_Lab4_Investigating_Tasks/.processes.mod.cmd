@@ -1,0 +1,1 @@
+cmd_/home/student/linux-kernel-development/Lab_Solutions/KI_Lab4_Investigating_Tasks/processes.mod := { echo  /home/student/linux-kernel-development/Lab_Solutions/KI_Lab4_Investigating_Tasks/processes.o; echo; } > /home/student/linux-kernel-development/Lab_Solutions/KI_Lab4_Investigating_Tasks/processes.mod

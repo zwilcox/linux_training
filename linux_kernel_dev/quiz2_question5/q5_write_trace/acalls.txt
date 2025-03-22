@@ -1,0 +1,319 @@
+ mutex_unlock();
+ __x64_sys_write() {
+   ksys_write() {
+     __fdget_pos() {
+       __fget_light();
+     }
+     vfs_write() {
+       rw_verify_area() {
+         security_file_permission() {
+           selinux_file_permission() {
+             __inode_security_revalidate() {
+               _cond_resched() {
+                 rcu_all_qs();
+               }
+             }
+             file_has_perm() {
+               bpf_fd_pass();
+               inode_has_perm() {
+                 avc_has_perm();
+               }
+             }
+           }
+         }
+       }
+       __vfs_write() {
+         new_sync_write() {
+           sock_write_iter() {
+             sock_sendmsg() {
+               security_socket_sendmsg() {
+                 selinux_socket_sendmsg() {
+                   sock_has_perm() {
+                     avc_has_perm();
+                   }
+                 }
+               }
+               inet_sendmsg() {
+                 inet_send_prepare();
+                 tcp_sendmsg() {
+                   lock_sock_nested() {
+                     _cond_resched() {
+                       rcu_all_qs();
+                     }
+                     _raw_spin_lock_bh();
+                     __local_bh_enable_ip();
+                   }
+                   tcp_sendmsg_locked() {
+                     tcp_rate_check_app_limited();
+                     sk_stream_wait_connect();
+                     sock_zerocopy_put_abort();
+                     sk_stream_error() {
+                       send_sig() {
+                         do_send_sig_info() {
+                           __lock_task_sighand() {
+                             _raw_spin_lock_irqsave();
+                           }
+                           send_signal() {
+                             task_active_pid_ns();
+                             __task_pid_nr_ns();
+                             __send_signal() {
+                               prepare_signal();
+                               __sigqueue_alloc() {
+                                 kmem_cache_alloc() {
+                                   should_failslab();
+                                   memcg_kmem_put_cache();
+                                 }
+                               }
+                               task_active_pid_ns();
+                               __task_pid_nr_ns();
+                               from_kuid_munged() {
+                                 map_id_up();
+                               }
+                               complete_signal() {
+                                 task_clear_jobctl_pending() {
+                                   task_clear_jobctl_trapping();
+                                 }
+                                 signal_wake_up_state() {
+                                   wake_up_state() {
+                                     try_to_wake_up();
+                                   }
+                                   kick_process();
+                                 }
+                               }
+                             }
+                           }
+                           _raw_spin_unlock_irqrestore();
+                         }
+                       }
+                     }
+                   }
+                   release_sock() {
+                     _raw_spin_lock_bh() {
+                       smp_irq_work_interrupt() {
+                         irq_enter() {
+                           rcu_irq_enter();
+                           irqtime_account_irq();
+                         }
+                         __wake_up() {
+                           __wake_up_common_lock() {
+                             _raw_spin_lock_irqsave();
+                             __wake_up_common();
+                             _raw_spin_unlock_irqrestore();
+                           }
+                         }
+                         __wake_up() {
+                           __wake_up_common_lock() {
+                             _raw_spin_lock_irqsave();
+                             __wake_up_common() {
+                               autoremove_wake_function() {
+                                 default_wake_function() {
+                                   try_to_wake_up() {
+                                     _raw_spin_lock_irqsave();
+                                     select_task_rq_fair() {
+                                       available_idle_cpu();
+                                       update_cfs_rq_h_load();
+                                       select_idle_sibling() {
+                                         available_idle_cpu();
+                                       }
+                                     }
+                                     _raw_spin_lock();
+                                     update_rq_clock();
+                                     ttwu_do_activate() {
+                                       activate_task() {
+                                         psi_task_change() {
+                                           record_times();
+                                           record_times();
+                                           record_times();
+                                           record_times();
+                                           record_times();
+                                         }
+                                         enqueue_task_fair() {
+                                           enqueue_entity() {
+                                             update_curr();
+                                             __update_load_avg_se();
+                                             __update_load_avg_cfs_rq();
+                                             update_cfs_group();
+                                             account_entity_enqueue();
+                                             place_entity();
+                                             __enqueue_entity();
+                                           }
+                                           enqueue_entity() {
+                                             update_curr();
+                                             __update_load_avg_se();
+                                             __update_load_avg_cfs_rq();
+                                             update_cfs_group() {
+                                               reweight_entity();
+                                             }
+                                             account_entity_enqueue();
+                                             place_entity();
+                                             __enqueue_entity();
+                                           }
+                                           hrtick_update();
+                                         }
+                                       }
+                                       ttwu_do_wakeup() {
+                                         check_preempt_curr() {
+                                           resched_curr();
+                                         }
+                                       }
+                                     }
+                                     _raw_spin_unlock_irqrestore();
+                                   }
+                                 }
+                               }
+                             }
+                             _raw_spin_unlock_irqrestore();
+                           }
+                         }
+                         irq_exit() {
+                           irqtime_account_irq();
+                           idle_cpu();
+                           rcu_irq_exit();
+                         }
+                       }
+                     }
+                     smp_irq_work_interrupt() {
+                       irq_enter() {
+                         rcu_irq_enter();
+                         irqtime_account_irq();
+                       }
+                       __wake_up() {
+                         __wake_up_common_lock() {
+                           _raw_spin_lock_irqsave();
+                           __wake_up_common();
+                           _raw_spin_unlock_irqrestore();
+                         }
+                       }
+                       __wake_up() {
+                         __wake_up_common_lock() {
+                           _raw_spin_lock_irqsave();
+                           __wake_up_common() {
+                             autoremove_wake_function() {
+                               default_wake_function() {
+                                 try_to_wake_up() {
+                                   _raw_spin_lock_irqsave();
+                                   select_task_rq_fair() {
+                                     available_idle_cpu();
+                                     update_cfs_rq_h_load();
+                                     select_idle_sibling() {
+                                       available_idle_cpu();
+                                     }
+                                   }
+                                   _raw_spin_lock();
+                                   update_rq_clock();
+                                   ttwu_do_activate() {
+                                     activate_task() {
+                                       psi_task_change() {
+                                         record_times();
+                                         record_times();
+                                         record_times();
+                                         record_times();
+                                         record_times();
+                                       }
+                                       enqueue_task_fair() {
+                                         enqueue_entity() {
+                                           update_curr();
+                                           __update_load_avg_se();
+                                           __update_load_avg_cfs_rq();
+                                           update_cfs_group();
+                                           account_entity_enqueue();
+                                           place_entity();
+                                           __enqueue_entity();
+                                         }
+                                         enqueue_entity() {
+                                           update_curr();
+                                           __update_load_avg_se();
+                                           __update_load_avg_cfs_rq();
+                                           update_cfs_group() {
+                                             reweight_entity();
+                                           }
+                                           account_entity_enqueue();
+                                           place_entity();
+                                           __enqueue_entity();
+                                         }
+                                         hrtick_update();
+                                       }
+                                     }
+                                     ttwu_do_wakeup() {
+                                       check_preempt_curr() {
+                                         resched_curr();
+                                       }
+                                     }
+                                   }
+                                   _raw_spin_unlock_irqrestore();
+                                 }
+                               }
+                             }
+                           }
+                           _raw_spin_unlock_irqrestore();
+                         }
+                       }
+                       irq_exit() {
+                         irqtime_account_irq();
+                         idle_cpu();
+                         rcu_irq_exit();
+                       }
+                     }
+                     do_IRQ() {
+                       irq_enter() {
+                         rcu_irq_enter();
+                         irqtime_account_irq();
+                       }
+                       handle_edge_irq() {
+                         _raw_spin_lock();
+                         irq_may_run();
+                         irq_chip_ack_parent() {
+                           apic_ack_irq();
+                         }
+                         handle_irq_event() {
+                           handle_irq_event_percpu() {
+                             __handle_irq_event_percpu() {
+                               xhci_msi_irq() {
+                                 xhci_irq() {
+                                   usb_hcd_is_primary_hcd();
+                                   _raw_spin_lock_irqsave();
+                                   xhci_dma_to_transfer_ring();
+                                   xhci_get_ep_ctx();
+                                   trb_in_td();
+                                   xhci_dma_to_transfer_ring();
+                                   sum_trb_lengths.isra.0();
+                                   finish_td() {
+                                     xhci_dma_to_transfer_ring();
+                                     xhci_get_ep_ctx();
+                                     inc_deq();
+                                     xhci_td_cleanup() {
+                                       xhci_unmap_td_bounce_buffer.isra.0();
+                                     }
+                                   }
+                                   inc_deq();
+                                   xhci_update_erst_dequeue();
+                                   _raw_spin_unlock_irqrestore();
+                                 }
+                               }
+                             }
+                             add_interrupt_randomness();
+                             note_interrupt();
+                           }
+                           _raw_spin_lock();
+                         }
+                       }
+                       irq_exit() {
+                         irqtime_account_irq();
+                         idle_cpu();
+                         rcu_irq_exit();
+                       }
+                     }
+                     tcp_release_cb();
+                     _raw_spin_unlock_bh() {
+                       __local_bh_enable_ip();
+                     }
+                   }
+                 }
+               }
+             }
+           }
+         }
+       }
+     }
+   }
+ }

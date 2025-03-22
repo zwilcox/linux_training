@@ -1,0 +1,5 @@
+x64 non-volatile/calleE saved: RBP, RBX, RDI, RSI, R12-R15
+x64 volatile/calleR saved: RAX, RCX, RDX, R8, R9, R10, R11
+
+x86 non-volatile/calleE saved: EBX, EDI, and ESI
+x86 volatile/calleR saved: EAX, ECX, EDX

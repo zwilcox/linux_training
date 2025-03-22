@@ -1,0 +1,16 @@
+This is a quick demo for LD_PRELOAD (slide 63):
+Step 1: run make
+Step 2: see command sequence below
+Step 3: talk through target.c source with the students
+
+[student@localhost ret_patch]$ ./target
+Please run this program as root
+[student@localhost ret_patch]$ sudo ./target
+[sudo] password for student: 
+I see the id as 0
+I see the id as 0
+Nice
+[student@localhost ret_patch]$ LD_PRELOAD=./preloadthis.so ./target
+I see the id as 1000
+No, really, run it as root
+

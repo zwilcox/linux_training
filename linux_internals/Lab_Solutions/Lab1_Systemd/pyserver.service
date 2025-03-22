@@ -1,0 +1,12 @@
+[Unit]
+Description=Python Server
+After=network.target
+
+[Service]
+User=student
+WorkingDirectory=/home/student/durp
+ExecStart=/usr/bin/python3 -m http.server --bind 0.0.0.0 8081
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,27 @@
+File Overview: THIS IS AN OPTIONAL LAB - give if time allotted
+
+bpf-helper.c 
+- bpf helper functions for seccomp 
+- used by sandboxer.c to install seccomp for your program 
+- NO need to edit
+
+hexdump.c
+- contains a helper function to print out a hexdump of a given buffer
+- use it during debugging to view memory around and make observations about kernel structures etc
+- NO need to edit
+
+rooter.c
+- EDIT: this is the file you need to fill out!
+- first: get your read/write/peek primatives filled out
+- second: figure out how to find the cred struct, overwrite creds, disable seccomp and disable selinux
+
+roothelper.c
+- this is a vulnerable driver - it's pretty much the most vulnerable one you could find
+- allows for arbitrary read/write of any memory and also lets you view current
+- leverage this to get your primatives
+- NO need to edit
+
+sandboxer.c
+- this uses bpf-helper to install seccomp for you rooter program
+- in addition to selinux and being run as non-root, the seccomp filter limits the syscalls allowed for rooter
+

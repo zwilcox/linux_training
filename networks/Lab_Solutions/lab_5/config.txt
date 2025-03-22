@@ -1,0 +1,12 @@
+[target]
+    ip = 172.16.1.190 
+    ipv6 = a:c:7:9:5d2:a8ae:b0b3:7d16
+    ports = 1-10000
+    mac = 54:bf:64:90:0b:d8
+
+
+[me]
+    ip =  172.16.1.100
+    ipv6 = ::1
+    ports = 65432
+    mac = A4:BB:6D:E1:86:C2

@@ -1,0 +1,10 @@
+The included binary, ReTestLabs, is a partially stripped binary. You will be asked questions regarding the binary.
+
+The binary is a bad text version of a clicker game. No extra credit will be given for high scores, so don't waste too much time.
+
+Game state is kept in a game struct per game, and a few other structures are used to keep track of things.
+
+Much like real-world RE situations, you will likely not have enough time to fully annotate the binary.  Instead, focus on doing only what you will need to do to answer the questions.
+
+Read through all of the questions FIRST; some of them provide useful information about what the code really does.
+

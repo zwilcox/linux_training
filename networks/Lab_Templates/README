@@ -1,0 +1,9 @@
+- The file cno_net_helper.py should be included in each lab folder.  You will need to manually move it to each of your solution lab folders.  
+
+- Be sure that you have added to following import statment:
+
+import cno_net_helper.py as cno
+
+to import the helper module and use the functions within each of their lab files.
+
+

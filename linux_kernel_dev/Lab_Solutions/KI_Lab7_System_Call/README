@@ -1,0 +1,8 @@
+1) Copy the ext folder to the kernel source root directory
+2) Add the following line to include/linux/syscalls.h:
+	asmlinkage long sys_helloworld(void);
+3) Add an entry for the syscall in arch/x86_64/entry/syscalls/syscall_64.tbl
+	e.g., 335	common	helloworld	__x64_sys_helloworld
+4) Edit the top-level kernel Makefile by adding ext/ to core-y
+	e.g.,
+		core-y += ext/

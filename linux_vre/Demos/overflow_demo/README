@@ -1,0 +1,21 @@
+Basic buffer overflow example that will cause the ./demo binary to hang forever.
+
+Intended for slide 151 but can also be referenced as quick demo for slide 29 
+
+Step 1: run the ./demo for reference
+Step 2: run ./exploit.py (will execute a subprocess.run of ./demo)
+Step 3: investigate .py file if desired
+
+
+gdb ./demo 
+	r <<< $(python3 -c "print('A'*0x200)")
+		Runs a command within the $(…), and pipes the output into the executable’s stdin
+info frame - saved rip = 0x4141414141414141
+
+
+./exploit - use gdb to attach to pid of demo 
+info frame
+0x6afafeeb - Can see it inserted ebfe into rip - jmp loop 
+
+
+

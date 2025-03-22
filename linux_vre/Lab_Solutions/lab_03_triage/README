@@ -1,0 +1,32 @@
+1:
+SIGFPE
+Floating point exception - 
+not much here other than a divide by zero error (can't do much with this) - 
+either tiggers or doesn't
+
+2:
+SIGSEGV
+We have overwritten stuff on the stack - overflows are always worth noting - 
+can we influence RIP???
+"0\nAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA..." - 
+we pass a legit 0 to the switch case in the server but then blast the arguments
+
+3:
+SIGSEGV 
+during a strcpy - different error than the overflow from above - 
+not as much here to influence compared to the overflow above
+"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA..." - 
+here we just pass an invalid option to the server...
+
+4: 
+SIGSEGV
+4 is outside of the bounds of the function pointer array
+and so it calls the address of `somefish` instead which happens to point 
+somewhere in main - certainly worth noting --- 
+kind of like an overflow without the overflow!  Could be nice redirect/win!
+
+5:
+SIGSEGV - could also be a nice redirect/win if we could influence what area past 
+somefish()!
+RIP is set to 0. Likely because it got called past somefish() and that was 
+initialized to zero

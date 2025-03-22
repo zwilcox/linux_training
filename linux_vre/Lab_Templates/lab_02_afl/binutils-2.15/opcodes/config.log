@@ -1,0 +1,322 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:565: checking for Cygwin environment
+configure:581: afl-gcc -c -g -O2  conftest.c 1>&5
+configure: In function 'main':
+configure:575:20: error: '__CYGWIN32__' undeclared (first use in this function)
+  575 | #define __CYGWIN__ __CYGWIN32__
+      |                    ^~~~~~~~~~~~
+configure:577:8: note: in expansion of macro '__CYGWIN__'
+  577 | return __CYGWIN__;
+      |        ^~~~~~~~~~
+configure:575:20: note: each undeclared identifier is reported only once for each function it appears in
+  575 | #define __CYGWIN__ __CYGWIN32__
+      |                    ^~~~~~~~~~~~
+configure:577:8: note: in expansion of macro '__CYGWIN__'
+  577 | return __CYGWIN__;
+      |        ^~~~~~~~~~
+configure: failed program was:
+#line 570 "configure"
+#include "confdefs.h"
+
+int main() {
+
+#ifndef __CYGWIN__
+#define __CYGWIN__ __CYGWIN32__
+#endif
+return __CYGWIN__;
+; return 0; }
+configure:598: checking for mingw32 environment
+configure:610: afl-gcc -c -g -O2  conftest.c 1>&5
+configure: In function 'main':
+configure:606:8: error: '__MINGW32__' undeclared (first use in this function)
+  606 | return __MINGW32__;
+      |        ^~~~~~~~~~~
+configure:606:8: note: each undeclared identifier is reported only once for each function it appears in
+configure: failed program was:
+#line 603 "configure"
+#include "confdefs.h"
+
+int main() {
+return __MINGW32__;
+; return 0; }
+configure:675: checking host system type
+configure:696: checking target system type
+configure:714: checking build system type
+configure:738: checking for strerror in -lcposix
+configure:757: afl-gcc -o conftest -g -O2   conftest.c -lcposix   1>&5
+/usr/bin/ld: cannot find -lcposix
+collect2: error: ld returned 1 exit status
+configure: failed program was:
+#line 746 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char strerror();
+
+int main() {
+strerror()
+; return 0; }
+configure:797: checking for a BSD compatible install
+configure:850: checking whether build environment is sane
+configure:907: checking whether make sets ${MAKE}
+configure:953: checking for working aclocal
+configure:966: checking for working autoconf
+configure:979: checking for working automake
+configure:992: checking for working autoheader
+configure:1005: checking for working makeinfo
+configure:1028: checking for ar
+configure:1060: checking for ranlib
+configure:1198: checking for gcc
+configure:1311: checking whether the C compiler (afl-gcc -g -O2 ) works
+configure:1327: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1324:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 1324 | main(){return(0);}
+      | ^~~~
+configure:1353: checking whether the C compiler (afl-gcc -g -O2 ) is a cross-compiler
+configure:1358: checking whether we are using GNU C
+configure:1367: afl-gcc -E conftest.c
+configure:1386: checking whether afl-gcc accepts -g
+configure:1429: checking for ld used by GCC
+configure:1497: checking if the linker (ld) is GNU ld
+GNU ld version 2.31.1-37.fc30
+configure:1514: checking for ld option to reload object files
+configure:1526: checking for BSD-compatible nm
+configure:1564: checking whether ln -s works
+configure:1585: checking how to recognise dependant libraries
+configure:1758: checking for object suffix
+configure:1764: afl-gcc -c -g -O2  conftest.c 1>&5
+configure:1784: checking for executable suffix
+configure:1794: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1821: checking for file
+configure:1954: checking for ranlib
+configure:2021: checking for strip
+ltconfig:678:checking for afl-gcc option to produce PIC
+ltconfig:687:checking that afl-gcc PIC flag -fPIC -DPIC works.
+ltconfig:697: afl-gcc -c -g -O2 -fPIC -DPIC -DPIC  conftest.c 1>&5
+ltconfig:749: checking if afl-gcc static flag -static works
+ltconfig:758: afl-gcc -o conftest -g -O2   -static conftest.c  1>&5
+conftest.c:1:1: warning: return type defaults to 'int' [-Wimplicit-int]
+    1 | main(){return(0);}
+      | ^~~~
+/usr/bin/ld: cannot find -lc
+collect2: error: ld returned 1 exit status
+ltconfig:780: finding the maximum length of command line arguments
+ltconfig:@lineno@: result: 49153
+ltconfig:833: checking if afl-gcc supports -c -o file.o
+ltconfig:834: afl-gcc -c -g -O2 -o out/conftest2.o  conftest.c 1>&5
+ltconfig:887: checking if afl-gcc supports -fno-rtti -fno-exceptions
+ltconfig:888: afl-gcc -c -g -O2 -fno-rtti -fno-exceptions -c conftest.c  conftest.c 1>&5
+ltconfig:1431: checking if global_symbol_pipe works
+ltconfig:1432: afl-gcc -c -g -O2  conftest.c 1>&5
+ltconfig:1435: eval "nm conftest.o | sed -n -e 's/^.*[ 	]\([ABCDGISTW][ABCDGISTW]*\)[ 	][ 	]*\(\)\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2\3 \3/p' > conftest.nm"
+ltconfig:1487: afl-gcc -o conftest -g -O2 -fno-builtin   conftest.c conftstm.o 1>&5
+configure:2360: checking whether to enable maintainer-specific portions of Makefiles
+configure:2383: checking whether to install libbfd
+configure:2420: checking for executable suffix
+configure:2456: checking for gcc
+configure:2569: checking whether the C compiler (afl-gcc -g -O2 ) works
+configure:2585: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2582:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 2582 | main(){return(0);}
+      | ^~~~
+configure:2611: checking whether the C compiler (afl-gcc -g -O2 ) is a cross-compiler
+configure:2616: checking whether we are using GNU C
+configure:2644: checking whether afl-gcc accepts -g
+configure:2678: checking how to run the C preprocessor
+configure:2699: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2760: checking for ranlib
+configure:2788: checking for ANSI C header files
+configure:2801: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2868: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure: In function 'main':
+configure:2863:67: warning: implicit declaration of function 'exit' [-Wimplicit-function-declaration]
+ 2863 | if (XOR (islower (i), ISLOWER (i)) || toupper (i) != TOUPPER (i)) exit(2);
+      |                                                                   ^~~~
+configure:2863:67: warning: incompatible implicit declaration of built-in function 'exit'
+configure:2859:1: note: include '<stdlib.h>' or provide a declaration of 'exit'
+ 2858 | #include <ctype.h>
+  +++ |+#include <stdlib.h>
+ 2859 | #define ISLOWER(c) ('a' <= (c) && (c) <= 'z')
+configure:2864:1: warning: incompatible implicit declaration of built-in function 'exit'
+ 2864 | exit (0); }
+      | ^~~~
+configure:2864:1: note: include '<stdlib.h>' or provide a declaration of 'exit'
+configure:2892: checking for working const
+configure:2946: afl-gcc -c -g -O2  conftest.c 1>&5
+configure:2967: checking for inline
+configure:2981: afl-gcc -c -g -O2  conftest.c 1>&5
+configure:2977:10: warning: return type defaults to 'int' [-Wimplicit-int]
+ 2977 | } $ac_kw foo() {
+      |          ^~~
+configure:3007: checking for off_t
+configure:3040: checking for size_t
+configure:3075: checking for working alloca.h
+configure:3087: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3108: checking for alloca
+configure:3141: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3310: checking for unistd.h
+configure:3320: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:3349: checking for getpagesize
+configure:3377: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3402: checking for working mmap
+configure:3550: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3481:7: warning: conflicting types for built-in function 'malloc'; expected 'void *(long unsigned int)' [-Wbuiltin-declaration-mismatch]
+ 3481 | char *malloc();
+      |       ^~~~~~
+configure:3436:1: note: 'malloc' is declared in header '<stdlib.h>'
+ 3435 | #include <sys/mman.h>
+  +++ |+#include <stdlib.h>
+ 3436 | 
+configure: In function 'main':
+configure:3491:13: warning: implicit declaration of function 'getpagesize' [-Wimplicit-function-declaration]
+ 3491 |  pagesize = getpagesize();
+      |             ^~~~~~~~~~~
+configure:3498:3: warning: implicit declaration of function 'exit' [-Wimplicit-function-declaration]
+ 3498 |   exit(1);
+      |   ^~~~
+configure:3498:3: warning: incompatible implicit declaration of built-in function 'exit'
+configure:3498:3: note: include '<stdlib.h>' or provide a declaration of 'exit'
+configure:3500:17: warning: implicit declaration of function 'rand' [-Wimplicit-function-declaration]
+ 3500 |   *(data + i) = rand();
+      |                 ^~~~
+configure:3501:2: warning: implicit declaration of function 'umask' [-Wimplicit-function-declaration]
+ 3501 |  umask(0);
+      |  ^~~~~
+configure:3504:3: warning: incompatible implicit declaration of built-in function 'exit'
+ 3504 |   exit(1);
+      |   ^~~~
+configure:3504:3: note: include '<stdlib.h>' or provide a declaration of 'exit'
+configure:3505:6: warning: implicit declaration of function 'write' [-Wimplicit-function-declaration]
+ 3505 |  if (write(fd, data, pagesize) != pagesize)
+      |      ^~~~~
+configure:3506:3: warning: incompatible implicit declaration of built-in function 'exit'
+ 3506 |   exit(1);
+      |   ^~~~
+configure:3506:3: note: include '<stdlib.h>' or provide a declaration of 'exit'
+configure:3507:2: warning: implicit declaration of function 'close' [-Wimplicit-function-declaration]
+ 3507 |  close(fd);
+      |  ^~~~~
+configure:3516:3: warning: incompatible implicit declaration of built-in function 'exit'
+ 3516 |   exit(1);
+      |   ^~~~
+configure:3516:3: note: include '<stdlib.h>' or provide a declaration of 'exit'
+configure:3519:3: warning: incompatible implicit declaration of built-in function 'exit'
+ 3519 |   exit(1);
+      |   ^~~~
+configure:3519:3: note: include '<stdlib.h>' or provide a declaration of 'exit'
+configure:3520:24: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
+ 3520 |  data2 += (pagesize - ((int) data2 & (pagesize - 1))) & (pagesize - 1);
+      |                        ^
+configure:3523:3: warning: incompatible implicit declaration of built-in function 'exit'
+ 3523 |   exit(1);
+      |   ^~~~
+configure:3523:3: note: include '<stdlib.h>' or provide a declaration of 'exit'
+configure:3526:4: warning: incompatible implicit declaration of built-in function 'exit'
+ 3526 |    exit(1);
+      |    ^~~~
+configure:3526:4: note: include '<stdlib.h>' or provide a declaration of 'exit'
+configure:3537:3: warning: incompatible implicit declaration of built-in function 'exit'
+ 3537 |   exit(1);
+      |   ^~~~
+configure:3537:3: note: include '<stdlib.h>' or provide a declaration of 'exit'
+configure:3538:6: warning: implicit declaration of function 'read' [-Wimplicit-function-declaration]
+ 3538 |  if (read(fd, data3, pagesize) != pagesize)
+      |      ^~~~
+configure:3539:3: warning: incompatible implicit declaration of built-in function 'exit'
+ 3539 |   exit(1);
+      |   ^~~~
+configure:3539:3: note: include '<stdlib.h>' or provide a declaration of 'exit'
+configure:3542:4: warning: incompatible implicit declaration of built-in function 'exit'
+ 3542 |    exit(1);
+      |    ^~~~
+configure:3542:4: note: include '<stdlib.h>' or provide a declaration of 'exit'
+configure:3544:2: warning: implicit declaration of function 'unlink' [-Wimplicit-function-declaration]
+ 3544 |  unlink("conftestmmap");
+      |  ^~~~~~
+configure:3545:2: warning: incompatible implicit declaration of built-in function 'exit'
+ 3545 |  exit(0);
+      |  ^~~~
+configure:3545:2: note: include '<stdlib.h>' or provide a declaration of 'exit'
+configure:3578: checking for argz.h
+configure:3588: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:3578: checking for limits.h
+configure:3588: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:3578: checking for locale.h
+configure:3588: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:3578: checking for nl_types.h
+configure:3588: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:3578: checking for malloc.h
+configure:3588: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:3578: checking for string.h
+configure:3588: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:3578: checking for unistd.h
+configure:3578: checking for values.h
+configure:3588: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:3578: checking for sys/param.h
+configure:3588: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:3618: checking for getcwd
+configure:3646: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3618: checking for munmap
+configure:3646: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3618: checking for putenv
+configure:3646: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3618: checking for setenv
+configure:3646: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3618: checking for setlocale
+configure:3646: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3618: checking for strchr
+configure:3646: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3630:6: warning: conflicting types for built-in function 'strchr'; expected 'char *(const char *, int)' [-Wbuiltin-declaration-mismatch]
+ 3630 | char $ac_func();
+      |      ^~~~~~
+configure:3627:1: note: 'strchr' is declared in header '<string.h>'
+ 3626 | #include <assert.h>
+  +++ |+#include <string.h>
+ 3627 | /* Override any gcc2 internal prototype to avoid an error.  */
+configure:3618: checking for strcasecmp
+configure:3646: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3630:6: warning: conflicting types for built-in function 'strcasecmp'; expected 'int(const char *, const char *)' [-Wbuiltin-declaration-mismatch]
+ 3630 | char $ac_func();
+      |      ^~~~~~~~~~
+configure:3618: checking for __argz_count
+configure:3646: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3618: checking for __argz_stringify
+configure:3646: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3618: checking for __argz_next
+configure:3646: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3675: checking for stpcpy
+configure:3703: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3687:6: warning: conflicting types for built-in function 'stpcpy'; expected 'char *(char *, const char *)' [-Wbuiltin-declaration-mismatch]
+ 3687 | char $ac_func();
+      |      ^~~~~~
+configure:3737: checking for LC_MESSAGES
+configure:3749: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3770: checking whether NLS is requested
+configure:3790: checking whether included gettext is requested
+configure:3809: checking for libintl.h
+configure:3819: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:3836: checking for gettext in libc
+configure:3848: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure: In function 'main':
+configure:3844:8: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
+ 3844 | return (int) gettext ("")
+      |        ^
+configure:3939: checking for msgfmt
+configure:3973: checking for dcgettext
+configure:4001: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3985:6: warning: conflicting types for built-in function 'dcgettext'; expected 'char *(const char *, const char *, int)' [-Wbuiltin-declaration-mismatch]
+ 3985 | char $ac_func();
+      |      ^~~~~~~~~
+configure:4028: checking for gmsgfmt
+configure:4064: checking for xgettext
+configure:4104: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:4296: checking for catalogs to be installed
+configure:4449: checking for a BSD compatible install
+configure:4506: checking for string.h
+configure:4506: checking for strings.h
+configure:4516: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:4506: checking for stdlib.h
+configure:4516: afl-gcc -E  conftest.c >/dev/null 2>conftest.out

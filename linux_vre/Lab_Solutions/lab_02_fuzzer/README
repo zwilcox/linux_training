@@ -1,0 +1,157 @@
+Can use server_fuzzer.py or craft/build your own input binary to fuzz with AFL against readelf
+
+Notes:
+- ALF will populate the out_folder/ with directories for crashes, hangs, plot_data, and queues.
+- plot_data can be used to generate graphs using `afl-plot`
+- the crashes can be thrown into GDB GEF for further anaylsis
+
+	[student@localhost lab_02_afl]$ ls
+	binutils-2.15  binutils-2.15.tar.bz2  in_elf  out_elf  README.txt
+	[student@localhost lab_02_afl]$ cat in_elf/
+	use_after_free <--- example if using the lab05 use_after_free binary (produces a ton of crashes btw)
+	[student@localhost lab_02_afl]$ cd out_elf/
+	[student@localhost out_elf]$ ls
+	crashes  fuzz_bitmap  fuzzer_stats  hangs  plot_data  queue
+	[student@localhost out_elf]$ cd crashes/
+	[student@localhost crashes]$ ls
+	id:000000,sig:08,src:000000,op:flip1,pos:40                     id:000344,sig:11,src:000739,op:flip4,pos:823
+	id:000001,sig:08,src:000000,op:flip1,pos:40                     id:000345,sig:11,src:000743,op:flip1,pos:1350
+	id:000002,sig:06,src:000000,op:flip1,pos:40                     id:000346,sig:11,src:000743,op:flip1,pos:23556
+	id:000003,sig:06,src:000000,op:flip1,pos:41                     id:000347,sig:11,src:000744,op:flip1,pos:13
+	id:000004,sig:06,src:000000,op:flip1,pos:41                     id:000348,sig:11,src:000744,op:flip2,pos:176
+
+	[student@localhost crashes]$ gdb ../../binutils-2.15/binutils/readelf
+	gef➤  r -a ../../in_elf/binary id:000017,sig:08,src:000000,op:flip1,pos:16916
+	Starting program: /home/student/linux-vr-and-exploitation/Lab_Templates/lab_02_afl/binutils-2.15/binutils/readelf -a ../../in_elf/use_after_free id:000000,sig:08,src:000000,op:flip1,pos:40
+	warning: Loadable section ".note.gnu.property" outside of ELF segments
+
+	File: ../../in_elf/use_after_free
+	ELF Header:
+	  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00
+	  Class:                             ELF64
+	  Data:                              2's complement, little endian
+	  Version:                           1 (current)
+	  OS/ABI:                            UNIX - System V
+	  ABI Version:                       0
+	  Type:                              EXEC (Executable file)
+	  Machine:                           Advanced Micro Devices X86-64
+	  Version:                           0x1
+	  Entry point address:               0x4010d0
+	  Start of program headers:          64 (bytes into file)
+	  Start of section headers:          23256 (bytes into file)
+	  Flags:                             0x0
+	  Size of this header:               64 (bytes)
+	  Size of program headers:           56 (bytes)
+	  Number of program headers:         11
+	  Size of section headers:           64 (bytes)
+	  Number of section headers:         35
+	  Section header string table index: 34
+	...
+
+	Dynamic segment at offset 0x2e20 contains 24 entries:
+	  Tag        Type                         Name/Value
+	 0x0000000000000001 (NEEDED)             Shared library: [libc.so.6]
+	 0x000000000000000c (INIT)               0x401000
+	 0x000000000000000d (FINI)               0x401438
+	 0x0000000000000019 (INIT_ARRAY)         0x403e10
+	 0x000000000000001b (INIT_ARRAYSZ)       8 (bytes)
+	 0x000000000000001a (FINI_ARRAY)         0x403e18
+	 0x000000000000001c (FINI_ARRAYSZ)       8 (bytes)
+	 0x000000006ffffef5 (<unknown>: 6ffffef5) 0x400308
+	 0x0000000000000005 (STRTAB)             0x400498
+	 0x0000000000000006 (SYMTAB)             0x400330
+	 0x000000000000000a (STRSZ)              136 (bytes)
+	 0x000000000000000b (SYMENT)             24 (bytes)
+	 0x0000000000000015 (DEBUG)              0x0
+	 0x0000000000000003 (PLTGOT)             0x404000
+	 0x0000000000000002 (PLTRELSZ)           240 (bytes)
+	 0x0000000000000014 (PLTREL)             RELA
+	 0x0000000000000017 (JMPREL)             0x4005c0
+	 0x0000000000000007 (RELA)               0x400560
+	 0x0000000000000008 (RELASZ)             96 (bytes)
+	 0x0000000000000009 (RELAENT)            24 (bytes)
+	 0x000000006ffffffe (VERNEED)            0x400540
+	 0x000000006fffffff (VERNEEDNUM)         1
+	 0x000000006ffffff0 (VERSYM)             0x400520
+	 0x0000000000000000 (NULL)               0x0
+
+	Relocation section '' at offset 0x560 contains 4 entries:
+
+	Program received signal SIGFPE, Arithmetic exception.
+	0x000000000045e492 in process_relocs (file=0x489480) at readelf.c:3795
+	3795			  nsyms = symsec->sh_size / symsec->sh_entsize;
+
+	[ Legend: Modified register | Code | Heap | Stack | String ]
+	──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── registers ────
+	$rax   : 0x24
+	$rbx   : 0x0000000048e278  →  0x0000040000007a ("z"?)
+	$rcx   : 0x0000000048e068  →  0x00000700000031 ("1"?)
+	$rdx   : 0x0
+	$rsp   : 0x007fffffffd0f0  →  0x00000000489480  →  0x00000000fbad2488
+	$rbp   : 0x0
+	$rsi   : 0x0000000048e068  →  0x00000700000031 ("1"?)
+	$rdi   : 0x00000000489480  →  0x00000000fbad2488
+	$rip   : 0x0000000045e492  →  <process_object+32658> div QWORD PTR [rcx+0x20]
+	$r8    : 0x5
+	$r9    : 0x25
+	$r10   : 0x007fffffffcfc7  →  0xef23554df6300034 ("4"?)
+	$r11   : 0x246
+	$r12   : 0x0
+	$r13   : 0x560
+	$r14   : 0x60
+	$r15   : 0xb
+	$eflags: [ZERO carry PARITY adjust sign trap INTERRUPT direction overflow RESUME virtualx86 identification]
+	$cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00
+	──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── stack ────
+	0x007fffffffd0f0│+0x0000: 0x00000000489480  →  0x00000000fbad2488	 ← $rsp
+	0x007fffffffd0f8│+0x0008: 0x0000000048e068  →  0x00000700000031 ("1"?)
+	0x007fffffffd100│+0x0010: 0x00000000000d68 ("h\r"?)
+	0x007fffffffd108│+0x0018: 0x00000000489480  →  0x00000000fbad2488
+	0x007fffffffd110│+0x0020: 0x00000000489480  →  0x00000000fbad2488
+	0x007fffffffd118│+0x0028: 0x00000000456522  →  <process_object+34> mov rax, QWORD PTR [rsp+0x10]
+	0x007fffffffd120│+0x0030: 0x00000000489560  →  0x0000000000000000
+	0x007fffffffd128│+0x0038: 0x0000000000000000
+	────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── code:x86:64 ────
+	     0x45e485 <process_object+32645> mov    rsi, rcx
+	     0x45e488 <process_object+32648> mov    QWORD PTR [rsp+0x8], rcx
+	     0x45e48d <process_object+32653> mov    rdi, QWORD PTR [rsp+0x18]
+	 →   0x45e492 <process_object+32658> div    QWORD PTR [rcx+0x20]
+	     0x45e496 <process_object+32662> test   r12d, r12d
+	     0x45e499 <process_object+32665> mov    QWORD PTR [rsp], rax
+	     0x45e49d <process_object+32669> je     0x45e942 <process_object+33858>
+	     0x45e4a3 <process_object+32675> nop
+	     0x45e4a4 <process_object+32676> lea    rsp, [rsp-0x98]
+	──────────────────────────────────────────────────────────────────────────────────────────────────────────── source:readelf.c+3795 ────
+	   3790	 	      if (section->sh_link)
+	   3791	 		{
+	   3792	 		  Elf_Internal_Shdr *symsec;
+	   3793
+	   3794	 		  symsec = SECTION_HEADER (section->sh_link);
+	 → 3795	 		  nsyms = symsec->sh_size / symsec->sh_entsize;
+	   3796	 		  symtab = GET_ELF_SYMBOLS (file, symsec);
+	   3797
+	   3798	 		  if (symtab == NULL)
+	   3799	 		    continue;
+	   3800
+	────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── threads ────
+	[#0] Id 1, Name: "readelf", stopped 0x45e492 in process_relocs (), reason: SIGFPE
+	──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── trace ────
+	[#0] 0x45e492 → process_relocs(file=0x489480)
+	[#1] 0x45e492 → process_object(file=<optimized out>, file_name=<optimized out>)
+	[#2] 0x45e492 → process_object(file_name=<optimized out>, file=0x489480)
+	[#3] 0x404249 → process_file(file_name=0x7fffffffd81d "id:000000,sig:08,src:000000,op:flip1,pos:40")
+	[#4] 0x404249 → main(argc=<optimized out>, argv=0x7fffffffd3f8)
+	───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+	gef➤
+
+Notes:
+- notice the SIGFPE and back trace as well as the '→   0x45e492 <process_object+32658> div    QWORD PTR [rcx+0x20]' assembly instruction
+- examine the memory at [rcx+0x20] and see that you are dividing by 0 (zero) which causes the SIGFPE (floating-point exception)
+	gef➤  x/2x $rcx + 0x20
+	0x48e088:	0x00000000	0x00000000
+
+See additional sites for AFL crash analysis info:
+- https://afl-1.readthedocs.io/en/latest/fuzzing.html#interpreting-output
+- https://afl-1.readthedocs.io/en/latest/user_guide.html#status-screen
+- https://afl-1.readthedocs.io/en/latest/related_projects.html#crash-triage-coverage-analysis-and-other-companion-tools
+- https://trustfoundry.net/introduction-to-triaging-fuzzer-generated-crashes/

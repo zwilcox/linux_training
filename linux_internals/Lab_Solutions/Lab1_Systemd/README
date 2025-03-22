@@ -1,0 +1,30 @@
+Copy the pyserver.service file to /etc/systemd/system
+
+To make the service start at boot run
+`sudo systemctl enable pyserver.service`
+
+To start the python server run
+`sudo systemctl start pyserver.service`
+
+Note: have the students play around with enabling/disabling/starting/stopping to see how the status changes
+Note: there are more 'pieces' included in the service file than are really needed by the students. Below should work just fine --- will serve root / 
+[Unit]
+Description=Python Server
+
+[Service]
+User=student
+ExecStart=/usr/bin/python3 -m http.server --bind 0.0.0.0 8081
+Restart=on-failure
+
+
+HEADERS:
+Description=: This directive can be used to describe the name and basic functionality of the unit. It is returned by various systemd tools, so it is good to set this to something short, specific, and informative.
+
+After=: The units listed in this directive will be started before starting the current unit. This does not imply a dependency relationship and one must be established through the above directives if this is required.
+
+ExecStart=: This specifies the full path and the arguments of the command to be executed to start the process. This may only be specified once (except for “oneshot” services). If the path to the command is preceded by a dash “-” character, non-zero exit statuses will be accepted without marking the unit activation as failed.
+
+Restart=: This indicates the circumstances under which systemd will attempt to automatically restart the service. This can be set to values like “always”, “on-success”, “on-failure”, “on-abnormal”, “on-abort”, or “on-watchdog”. These will trigger a restart according to the way that the service was stopped.
+
+WantedBy=: The WantedBy= directive is the most common way to specify how a unit should be enabled. This directive allows you to specify a dependency relationship in a similar way to the Wants= directive does in the [Unit] section. The difference is that this directive is included in the ancillary unit allowing the primary unit listed to remain relatively clean. When a unit with this directive is enabled, a directory will be created within /etc/systemd/system named after the specified unit with .wants appended to the end. Within this, a symbolic link to the current unit will be created, creating the dependency. For instance, if the current unit has WantedBy=multi-user.target, a directory called multi-user.target.wants will be created within /etc/systemd/system (if not already available) and a symbolic link to the current unit will be placed within. Disabling this unit removes the link and removes the dependency relationship.
+

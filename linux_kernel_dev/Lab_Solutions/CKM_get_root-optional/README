@@ -1,0 +1,3 @@
+Make will insmod roothelper.ko
+Run by make, then ./sandboxer
+

@@ -1,0 +1,2 @@
+Use webserver_lab10, and shellcode of your choice.
+exploit64 (created from shellcode.py) and DynamicRevTCPShell.txt should both be provided.

@@ -1,0 +1,1 @@
+cmd_/home/student/linux-kernel-development/Lab_Solutions/KI_Lab2_Basic_Kernel_Module/loader.mod := { echo  /home/student/linux-kernel-development/Lab_Solutions/KI_Lab2_Basic_Kernel_Module/loader.o; echo; } > /home/student/linux-kernel-development/Lab_Solutions/KI_Lab2_Basic_Kernel_Module/loader.mod

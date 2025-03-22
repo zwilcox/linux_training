@@ -1,0 +1,327 @@
+CPU 0 is empty
+CPU 1 is empty
+CPU 2 is empty
+CPU 3 is empty
+CPU 4 is empty
+CPU 6 is empty
+CPU 7 is empty
+cpus=8
+           proga-32755 [005] 625596.627130: funcgraph_entry:        1.318 us   |  mutex_unlock();
+           proga-32755 [005] 625596.628014: funcgraph_entry:                   |  __x64_sys_write() {
+           proga-32755 [005] 625596.628015: funcgraph_entry:                   |    ksys_write() {
+           proga-32755 [005] 625596.628015: funcgraph_entry:                   |      __fdget_pos() {
+           proga-32755 [005] 625596.628015: funcgraph_entry:        0.173 us   |        __fget_light();
+           proga-32755 [005] 625596.628016: funcgraph_exit:         0.505 us   |      }
+           proga-32755 [005] 625596.628016: funcgraph_entry:                   |      vfs_write() {
+           proga-32755 [005] 625596.628016: funcgraph_entry:                   |        rw_verify_area() {
+           proga-32755 [005] 625596.628016: funcgraph_entry:                   |          security_file_permission() {
+           proga-32755 [005] 625596.628016: funcgraph_entry:                   |            selinux_file_permission() {
+           proga-32755 [005] 625596.628016: funcgraph_entry:                   |              __inode_security_revalidate() {
+           proga-32755 [005] 625596.628017: funcgraph_entry:                   |                _cond_resched() {
+           proga-32755 [005] 625596.628017: funcgraph_entry:        0.100 us   |                  rcu_all_qs();
+           proga-32755 [005] 625596.628017: funcgraph_exit:         0.302 us   |                }
+           proga-32755 [005] 625596.628017: funcgraph_exit:         0.499 us   |              }
+           proga-32755 [005] 625596.628017: funcgraph_entry:                   |              file_has_perm() {
+           proga-32755 [005] 625596.628017: funcgraph_entry:        0.140 us   |                bpf_fd_pass();
+           proga-32755 [005] 625596.628018: funcgraph_entry:                   |                inode_has_perm() {
+           proga-32755 [005] 625596.628018: funcgraph_entry:        0.146 us   |                  avc_has_perm();
+           proga-32755 [005] 625596.628018: funcgraph_exit:         0.376 us   |                }
+           proga-32755 [005] 625596.628018: funcgraph_exit:         0.872 us   |              }
+           proga-32755 [005] 625596.628018: funcgraph_exit:         1.859 us   |            }
+           proga-32755 [005] 625596.628018: funcgraph_exit:         2.078 us   |          }
+           proga-32755 [005] 625596.628018: funcgraph_exit:         2.265 us   |        }
+           proga-32755 [005] 625596.628018: funcgraph_entry:                   |        __vfs_write() {
+           proga-32755 [005] 625596.628019: funcgraph_entry:                   |          new_sync_write() {
+           proga-32755 [005] 625596.628019: funcgraph_entry:                   |            sock_write_iter() {
+           proga-32755 [005] 625596.628019: funcgraph_entry:                   |              sock_sendmsg() {
+           proga-32755 [005] 625596.628019: funcgraph_entry:                   |                security_socket_sendmsg() {
+           proga-32755 [005] 625596.628019: funcgraph_entry:                   |                  selinux_socket_sendmsg() {
+           proga-32755 [005] 625596.628019: funcgraph_entry:                   |                    sock_has_perm() {
+           proga-32755 [005] 625596.628019: funcgraph_entry:        0.090 us   |                      avc_has_perm();
+           proga-32755 [005] 625596.628019: funcgraph_exit:         0.288 us   |                    }
+           proga-32755 [005] 625596.628020: funcgraph_exit:         0.460 us   |                  }
+           proga-32755 [005] 625596.628020: funcgraph_exit:         0.694 us   |                }
+           proga-32755 [005] 625596.628020: funcgraph_entry:                   |                inet_sendmsg() {
+           proga-32755 [005] 625596.628020: funcgraph_entry:        0.098 us   |                  inet_send_prepare();
+           proga-32755 [005] 625596.628020: funcgraph_entry:                   |                  tcp_sendmsg() {
+           proga-32755 [005] 625596.628020: funcgraph_entry:                   |                    lock_sock_nested() {
+           proga-32755 [005] 625596.628020: funcgraph_entry:                   |                      _cond_resched() {
+           proga-32755 [005] 625596.628021: funcgraph_entry:        0.099 us   |                        rcu_all_qs();
+           proga-32755 [005] 625596.628021: funcgraph_exit:         0.300 us   |                      }
+           proga-32755 [005] 625596.628021: funcgraph_entry:        0.104 us   |                      _raw_spin_lock_bh();
+           proga-32755 [005] 625596.628021: funcgraph_entry:        0.083 us   |                      __local_bh_enable_ip();
+           proga-32755 [005] 625596.628021: funcgraph_exit:         0.829 us   |                    }
+           proga-32755 [005] 625596.628021: funcgraph_entry:                   |                    tcp_sendmsg_locked() {
+           proga-32755 [005] 625596.628022: funcgraph_entry:        0.153 us   |                      tcp_rate_check_app_limited();
+           proga-32755 [005] 625596.628022: funcgraph_entry:        0.140 us   |                      sk_stream_wait_connect();
+           proga-32755 [005] 625596.628022: funcgraph_entry:        0.128 us   |                      sock_zerocopy_put_abort();
+           proga-32755 [005] 625596.628023: funcgraph_entry:                   |                      sk_stream_error() {
+           proga-32755 [005] 625596.628023: funcgraph_entry:                   |                        send_sig() {
+           proga-32755 [005] 625596.628023: funcgraph_entry:                   |                          do_send_sig_info() {
+           proga-32755 [005] 625596.628023: funcgraph_entry:                   |                            __lock_task_sighand() {
+           proga-32755 [005] 625596.628023: funcgraph_entry:        0.229 us   |                              _raw_spin_lock_irqsave();
+           proga-32755 [005] 625596.628024: funcgraph_exit:         0.443 us   |                            }
+           proga-32755 [005] 625596.628024: funcgraph_entry:                   |                            send_signal() {
+           proga-32755 [005] 625596.628024: funcgraph_entry:        0.308 us   |                              task_active_pid_ns();
+           proga-32755 [005] 625596.628024: funcgraph_entry:        0.134 us   |                              __task_pid_nr_ns();
+           proga-32755 [005] 625596.628025: funcgraph_entry:                   |                              __send_signal() {
+           proga-32755 [005] 625596.628025: funcgraph_entry:        0.177 us   |                                prepare_signal();
+           proga-32755 [005] 625596.628025: funcgraph_entry:                   |                                __sigqueue_alloc() {
+           proga-32755 [005] 625596.628026: funcgraph_entry:                   |                                  kmem_cache_alloc() {
+           proga-32755 [005] 625596.628026: funcgraph_entry:        0.086 us   |                                    should_failslab();
+           proga-32755 [005] 625596.628026: funcgraph_entry:        0.166 us   |                                    memcg_kmem_put_cache();
+           proga-32755 [005] 625596.628026: funcgraph_exit:         0.794 us   |                                  }
+           proga-32755 [005] 625596.628027: funcgraph_exit:         1.400 us   |                                }
+           proga-32755 [005] 625596.628027: funcgraph_entry:        0.088 us   |                                task_active_pid_ns();
+           proga-32755 [005] 625596.628027: funcgraph_entry:        0.095 us   |                                __task_pid_nr_ns();
+           proga-32755 [005] 625596.628027: funcgraph_entry:                   |                                from_kuid_munged() {
+           proga-32755 [005] 625596.628027: funcgraph_entry:        0.099 us   |                                  map_id_up();
+           proga-32755 [005] 625596.628027: funcgraph_exit:         0.316 us   |                                }
+           proga-32755 [005] 625596.628027: funcgraph_entry:                   |                                complete_signal() {
+           proga-32755 [005] 625596.628028: funcgraph_entry:                   |                                  task_clear_jobctl_pending() {
+           proga-32755 [005] 625596.628028: funcgraph_entry:        0.123 us   |                                    task_clear_jobctl_trapping();
+           proga-32755 [005] 625596.628028: funcgraph_exit:         0.389 us   |                                  }
+           proga-32755 [005] 625596.628028: funcgraph_entry:                   |                                  signal_wake_up_state() {
+           proga-32755 [005] 625596.628028: funcgraph_entry:                   |                                    wake_up_state() {
+           proga-32755 [005] 625596.628028: funcgraph_entry:        0.105 us   |                                      try_to_wake_up();
+           proga-32755 [005] 625596.628029: funcgraph_exit:         0.315 us   |                                    }
+           proga-32755 [005] 625596.628029: funcgraph_entry:        0.122 us   |                                    kick_process();
+           proga-32755 [005] 625596.628029: funcgraph_exit:         0.782 us   |                                  }
+           proga-32755 [005] 625596.628029: funcgraph_exit:         1.670 us   |                                }
+           proga-32755 [005] 625596.628029: funcgraph_exit:         4.585 us   |                              }
+           proga-32755 [005] 625596.628029: funcgraph_exit:         5.512 us   |                            }
+           proga-32755 [005] 625596.628029: funcgraph_entry:        0.134 us   |                            _raw_spin_unlock_irqrestore();
+           proga-32755 [005] 625596.628030: funcgraph_exit:         6.640 us   |                          }
+           proga-32755 [005] 625596.628030: funcgraph_exit:         6.978 us   |                        }
+           proga-32755 [005] 625596.628030: funcgraph_exit:         7.325 us   |                      }
+           proga-32755 [005] 625596.628030: funcgraph_exit:         8.790 us   |                    }
+           proga-32755 [005] 625596.628030: funcgraph_entry:                   |                    release_sock() {
+           proga-32755 [005] 625596.628031: funcgraph_entry:                   |                      _raw_spin_lock_bh() {
+           proga-32755 [005] 625596.628032: funcgraph_entry:                   |                        smp_irq_work_interrupt() {
+           proga-32755 [005] 625596.628032: funcgraph_entry:                   |                          irq_enter() {
+           proga-32755 [005] 625596.628032: funcgraph_entry:        0.127 us   |                            rcu_irq_enter();
+           proga-32755 [005] 625596.628032: funcgraph_entry:        0.134 us   |                            irqtime_account_irq();
+           proga-32755 [005] 625596.628032: funcgraph_exit:         0.622 us   |                          }
+           proga-32755 [005] 625596.628033: funcgraph_entry:                   |                          __wake_up() {
+           proga-32755 [005] 625596.628033: funcgraph_entry:                   |                            __wake_up_common_lock() {
+           proga-32755 [005] 625596.628033: funcgraph_entry:        0.084 us   |                              _raw_spin_lock_irqsave();
+           proga-32755 [005] 625596.628033: funcgraph_entry:        0.132 us   |                              __wake_up_common();
+           proga-32755 [005] 625596.628034: funcgraph_entry:        0.127 us   |                              _raw_spin_unlock_irqrestore();
+           proga-32755 [005] 625596.628034: funcgraph_exit:         0.884 us   |                            }
+           proga-32755 [005] 625596.628034: funcgraph_exit:         1.147 us   |                          }
+           proga-32755 [005] 625596.628034: funcgraph_entry:                   |                          __wake_up() {
+           proga-32755 [005] 625596.628034: funcgraph_entry:                   |                            __wake_up_common_lock() {
+           proga-32755 [005] 625596.628034: funcgraph_entry:        0.121 us   |                              _raw_spin_lock_irqsave();
+           proga-32755 [005] 625596.628035: funcgraph_entry:                   |                              __wake_up_common() {
+           proga-32755 [005] 625596.628035: funcgraph_entry:                   |                                autoremove_wake_function() {
+           proga-32755 [005] 625596.628035: funcgraph_entry:                   |                                  default_wake_function() {
+           proga-32755 [005] 625596.628035: funcgraph_entry:                   |                                    try_to_wake_up() {
+           proga-32755 [005] 625596.628035: funcgraph_entry:        0.362 us   |                                      _raw_spin_lock_irqsave();
+           proga-32755 [005] 625596.628036: funcgraph_entry:                   |                                      select_task_rq_fair() {
+           proga-32755 [005] 625596.628036: funcgraph_entry:        0.130 us   |                                        available_idle_cpu();
+           proga-32755 [005] 625596.628036: funcgraph_entry:        0.324 us   |                                        update_cfs_rq_h_load();
+           proga-32755 [005] 625596.628037: funcgraph_entry:                   |                                        select_idle_sibling() {
+           proga-32755 [005] 625596.628037: funcgraph_entry:        0.200 us   |                                          available_idle_cpu();
+           proga-32755 [005] 625596.628037: funcgraph_exit:         0.453 us   |                                        }
+           proga-32755 [005] 625596.628038: funcgraph_exit:         1.620 us   |                                      }
+           proga-32755 [005] 625596.628038: funcgraph_entry:        0.168 us   |                                      _raw_spin_lock();
+           proga-32755 [005] 625596.628038: funcgraph_entry:        0.234 us   |                                      update_rq_clock();
+           proga-32755 [005] 625596.628038: funcgraph_entry:                   |                                      ttwu_do_activate() {
+           proga-32755 [005] 625596.628039: funcgraph_entry:                   |                                        activate_task() {
+           proga-32755 [005] 625596.628039: funcgraph_entry:                   |                                          psi_task_change() {
+           proga-32755 [005] 625596.628039: funcgraph_entry:        0.140 us   |                                            record_times();
+           proga-32755 [005] 625596.628040: funcgraph_entry:        0.137 us   |                                            record_times();
+           proga-32755 [005] 625596.628040: funcgraph_entry:        0.133 us   |                                            record_times();
+           proga-32755 [005] 625596.628041: funcgraph_entry:        0.128 us   |                                            record_times();
+           proga-32755 [005] 625596.628041: funcgraph_entry:        0.126 us   |                                            record_times();
+           proga-32755 [005] 625596.628041: funcgraph_exit:         2.652 us   |                                          }
+           proga-32755 [005] 625596.628042: funcgraph_entry:                   |                                          enqueue_task_fair() {
+           proga-32755 [005] 625596.628042: funcgraph_entry:                   |                                            enqueue_entity() {
+           proga-32755 [005] 625596.628042: funcgraph_entry:        0.139 us   |                                              update_curr();
+           proga-32755 [005] 625596.628042: funcgraph_entry:        0.154 us   |                                              __update_load_avg_se();
+           proga-32755 [005] 625596.628042: funcgraph_entry:        0.186 us   |                                              __update_load_avg_cfs_rq();
+           proga-32755 [005] 625596.628043: funcgraph_entry:        0.142 us   |                                              update_cfs_group();
+           proga-32755 [005] 625596.628043: funcgraph_entry:        0.196 us   |                                              account_entity_enqueue();
+           proga-32755 [005] 625596.628043: funcgraph_entry:        0.125 us   |                                              place_entity();
+           proga-32755 [005] 625596.628044: funcgraph_entry:        0.130 us   |                                              __enqueue_entity();
+           proga-32755 [005] 625596.628044: funcgraph_exit:         2.223 us   |                                            }
+           proga-32755 [005] 625596.628044: funcgraph_entry:                   |                                            enqueue_entity() {
+           proga-32755 [005] 625596.628044: funcgraph_entry:        0.120 us   |                                              update_curr();
+           proga-32755 [005] 625596.628045: funcgraph_entry:        0.137 us   |                                              __update_load_avg_se();
+           proga-32755 [005] 625596.628045: funcgraph_entry:        0.128 us   |                                              __update_load_avg_cfs_rq();
+           proga-32755 [005] 625596.628045: funcgraph_entry:                   |                                              update_cfs_group() {
+           proga-32755 [005] 625596.628045: funcgraph_entry:        0.146 us   |                                                reweight_entity();
+           proga-32755 [005] 625596.628046: funcgraph_exit:         0.449 us   |                                              }
+           proga-32755 [005] 625596.628046: funcgraph_entry:        0.128 us   |                                              account_entity_enqueue();
+           proga-32755 [005] 625596.628046: funcgraph_entry:        0.124 us   |                                              place_entity();
+           proga-32755 [005] 625596.628046: funcgraph_entry:        0.127 us   |                                              __enqueue_entity();
+           proga-32755 [005] 625596.628046: funcgraph_exit:         2.324 us   |                                            }
+           proga-32755 [005] 625596.628047: funcgraph_entry:        0.119 us   |                                            hrtick_update();
+           proga-32755 [005] 625596.628047: funcgraph_exit:         5.298 us   |                                          }
+           proga-32755 [005] 625596.628047: funcgraph_exit:         8.425 us   |                                        }
+           proga-32755 [005] 625596.628047: funcgraph_entry:                   |                                        ttwu_do_wakeup() {
+           proga-32755 [005] 625596.628047: funcgraph_entry:                   |                                          check_preempt_curr() {
+           proga-32755 [005] 625596.628047: funcgraph_entry:        0.179 us   |                                            resched_curr();
+           proga-32755 [005] 625596.628048: funcgraph_exit:         0.444 us   |                                          }
+           proga-32755 [005] 625596.628048: funcgraph_exit:         0.829 us   |                                        }
+           proga-32755 [005] 625596.628048: funcgraph_exit:         9.616 us   |                                      }
+           proga-32755 [005] 625596.628048: funcgraph_entry:        0.131 us   |                                      _raw_spin_unlock_irqrestore();
+           proga-32755 [005] 625596.628048: funcgraph_exit:       + 13.274 us  |                                    }
+           proga-32755 [005] 625596.628048: funcgraph_exit:       + 13.506 us  |                                  }
+           proga-32755 [005] 625596.628049: funcgraph_exit:       + 13.770 us  |                                }
+           proga-32755 [005] 625596.628049: funcgraph_exit:       + 14.214 us  |                              }
+           proga-32755 [005] 625596.628049: funcgraph_entry:        0.129 us   |                              _raw_spin_unlock_irqrestore();
+           proga-32755 [005] 625596.628049: funcgraph_exit:       + 15.083 us  |                            }
+           proga-32755 [005] 625596.628049: funcgraph_exit:       + 15.321 us  |                          }
+           proga-32755 [005] 625596.628050: funcgraph_entry:                   |                          irq_exit() {
+           proga-32755 [005] 625596.628050: funcgraph_entry:        0.137 us   |                            irqtime_account_irq();
+           proga-32755 [005] 625596.628050: funcgraph_entry:        0.216 us   |                            idle_cpu();
+           proga-32755 [005] 625596.628051: funcgraph_entry:        0.138 us   |                            rcu_irq_exit();
+           proga-32755 [005] 625596.628051: funcgraph_exit:         1.285 us   |                          }
+           proga-32755 [005] 625596.628051: funcgraph_exit:       + 19.216 us  |                        }
+           proga-32755 [005] 625596.628051: funcgraph_exit:       + 20.861 us  |                      }
+           proga-32755 [005] 625596.628052: funcgraph_entry:                   |                      smp_irq_work_interrupt() {
+           proga-32755 [005] 625596.628052: funcgraph_entry:                   |                        irq_enter() {
+           proga-32755 [005] 625596.628052: funcgraph_entry:        0.127 us   |                          rcu_irq_enter();
+           proga-32755 [005] 625596.628053: funcgraph_entry:        0.148 us   |                          irqtime_account_irq();
+           proga-32755 [005] 625596.628053: funcgraph_exit:         0.643 us   |                        }
+           proga-32755 [005] 625596.628053: funcgraph_entry:                   |                        __wake_up() {
+           proga-32755 [005] 625596.628053: funcgraph_entry:                   |                          __wake_up_common_lock() {
+           proga-32755 [005] 625596.628053: funcgraph_entry:        0.131 us   |                            _raw_spin_lock_irqsave();
+           proga-32755 [005] 625596.628054: funcgraph_entry:        0.141 us   |                            __wake_up_common();
+           proga-32755 [005] 625596.628054: funcgraph_entry:        0.130 us   |                            _raw_spin_unlock_irqrestore();
+           proga-32755 [005] 625596.628054: funcgraph_exit:         0.907 us   |                          }
+           proga-32755 [005] 625596.628054: funcgraph_exit:         1.152 us   |                        }
+           proga-32755 [005] 625596.628054: funcgraph_entry:                   |                        __wake_up() {
+           proga-32755 [005] 625596.628054: funcgraph_entry:                   |                          __wake_up_common_lock() {
+           proga-32755 [005] 625596.628055: funcgraph_entry:        0.123 us   |                            _raw_spin_lock_irqsave();
+           proga-32755 [005] 625596.628055: funcgraph_entry:                   |                            __wake_up_common() {
+           proga-32755 [005] 625596.628055: funcgraph_entry:                   |                              autoremove_wake_function() {
+           proga-32755 [005] 625596.628055: funcgraph_entry:                   |                                default_wake_function() {
+           proga-32755 [005] 625596.628055: funcgraph_entry:                   |                                  try_to_wake_up() {
+           proga-32755 [005] 625596.628055: funcgraph_entry:        0.125 us   |                                    _raw_spin_lock_irqsave();
+           proga-32755 [005] 625596.628056: funcgraph_entry:                   |                                    select_task_rq_fair() {
+           proga-32755 [005] 625596.628056: funcgraph_entry:        0.135 us   |                                      available_idle_cpu();
+           proga-32755 [005] 625596.628056: funcgraph_entry:        0.167 us   |                                      update_cfs_rq_h_load();
+           proga-32755 [005] 625596.628057: funcgraph_entry:                   |                                      select_idle_sibling() {
+           proga-32755 [005] 625596.628057: funcgraph_entry:        0.224 us   |                                        available_idle_cpu();
+           proga-32755 [005] 625596.628057: funcgraph_exit:         0.457 us   |                                      }
+           proga-32755 [005] 625596.628057: funcgraph_exit:         1.363 us   |                                    }
+           proga-32755 [005] 625596.628057: funcgraph_entry:        0.164 us   |                                    _raw_spin_lock();
+           proga-32755 [005] 625596.628058: funcgraph_entry:        0.166 us   |                                    update_rq_clock();
+           proga-32755 [005] 625596.628058: funcgraph_entry:                   |                                    ttwu_do_activate() {
+           proga-32755 [005] 625596.628058: funcgraph_entry:                   |                                      activate_task() {
+           proga-32755 [005] 625596.628058: funcgraph_entry:                   |                                        psi_task_change() {
+           proga-32755 [005] 625596.628058: funcgraph_entry:        0.135 us   |                                          record_times();
+           proga-32755 [005] 625596.628059: funcgraph_entry:        0.129 us   |                                          record_times();
+           proga-32755 [005] 625596.628059: funcgraph_entry:        0.128 us   |                                          record_times();
+           proga-32755 [005] 625596.628060: funcgraph_entry:        0.137 us   |                                          record_times();
+           proga-32755 [005] 625596.628060: funcgraph_entry:        0.130 us   |                                          record_times();
+           proga-32755 [005] 625596.628060: funcgraph_exit:         1.937 us   |                                        }
+           proga-32755 [005] 625596.628060: funcgraph_entry:                   |                                        enqueue_task_fair() {
+           proga-32755 [005] 625596.628060: funcgraph_entry:                   |                                          enqueue_entity() {
+           proga-32755 [005] 625596.628061: funcgraph_entry:        0.094 us   |                                            update_curr();
+           proga-32755 [005] 625596.628061: funcgraph_entry:        0.130 us   |                                            __update_load_avg_se();
+           proga-32755 [005] 625596.628061: funcgraph_entry:        0.160 us   |                                            __update_load_avg_cfs_rq();
+           proga-32755 [005] 625596.628061: funcgraph_entry:        0.135 us   |                                            update_cfs_group();
+           proga-32755 [005] 625596.628062: funcgraph_entry:        0.140 us   |                                            account_entity_enqueue();
+           proga-32755 [005] 625596.628062: funcgraph_entry:        0.127 us   |                                            place_entity();
+           proga-32755 [005] 625596.628062: funcgraph_entry:        0.123 us   |                                            __enqueue_entity();
+           proga-32755 [005] 625596.628063: funcgraph_exit:         2.050 us   |                                          }
+           proga-32755 [005] 625596.628063: funcgraph_entry:                   |                                          enqueue_entity() {
+           proga-32755 [005] 625596.628063: funcgraph_entry:        0.158 us   |                                            update_curr();
+           proga-32755 [005] 625596.628063: funcgraph_entry:        0.124 us   |                                            __update_load_avg_se();
+           proga-32755 [005] 625596.628063: funcgraph_entry:        0.163 us   |                                            __update_load_avg_cfs_rq();
+           proga-32755 [005] 625596.628064: funcgraph_entry:                   |                                            update_cfs_group() {
+           proga-32755 [005] 625596.628064: funcgraph_entry:        0.141 us   |                                              reweight_entity();
+           proga-32755 [005] 625596.628064: funcgraph_exit:         0.413 us   |                                            }
+           proga-32755 [005] 625596.628064: funcgraph_entry:        0.118 us   |                                            account_entity_enqueue();
+           proga-32755 [005] 625596.628065: funcgraph_entry:        0.133 us   |                                            place_entity();
+           proga-32755 [005] 625596.628065: funcgraph_entry:        0.121 us   |                                            __enqueue_entity();
+           proga-32755 [005] 625596.628065: funcgraph_exit:         2.334 us   |                                          }
+           proga-32755 [005] 625596.628065: funcgraph_entry:        0.121 us   |                                          hrtick_update();
+           proga-32755 [005] 625596.628065: funcgraph_exit:         5.086 us   |                                        }
+           proga-32755 [005] 625596.628066: funcgraph_exit:         7.491 us   |                                      }
+           proga-32755 [005] 625596.628066: funcgraph_entry:                   |                                      ttwu_do_wakeup() {
+           proga-32755 [005] 625596.628066: funcgraph_entry:                   |                                        check_preempt_curr() {
+           proga-32755 [005] 625596.628066: funcgraph_entry:        0.162 us   |                                          resched_curr();
+           proga-32755 [005] 625596.628066: funcgraph_exit:         0.407 us   |                                        }
+           proga-32755 [005] 625596.628066: funcgraph_exit:         0.738 us   |                                      }
+           proga-32755 [005] 625596.628067: funcgraph_exit:         8.606 us   |                                    }
+           proga-32755 [005] 625596.628067: funcgraph_entry:        0.131 us   |                                    _raw_spin_unlock_irqrestore();
+           proga-32755 [005] 625596.628067: funcgraph_exit:       + 11.651 us  |                                  }
+           proga-32755 [005] 625596.628067: funcgraph_exit:       + 11.884 us  |                                }
+           proga-32755 [005] 625596.628067: funcgraph_exit:       + 12.132 us  |                              }
+           proga-32755 [005] 625596.628068: funcgraph_exit:       + 12.757 us  |                            }
+           proga-32755 [005] 625596.628068: funcgraph_entry:        0.140 us   |                            _raw_spin_unlock_irqrestore();
+           proga-32755 [005] 625596.628068: funcgraph_exit:       + 13.525 us  |                          }
+           proga-32755 [005] 625596.628068: funcgraph_exit:       + 13.762 us  |                        }
+           proga-32755 [005] 625596.628069: funcgraph_entry:                   |                        irq_exit() {
+           proga-32755 [005] 625596.628069: funcgraph_entry:        0.142 us   |                          irqtime_account_irq();
+           proga-32755 [005] 625596.628069: funcgraph_entry:        0.134 us   |                          idle_cpu();
+           proga-32755 [005] 625596.628069: funcgraph_entry:        0.191 us   |                          rcu_irq_exit();
+           proga-32755 [005] 625596.628070: funcgraph_exit:         1.003 us   |                        }
+           proga-32755 [005] 625596.628070: funcgraph_exit:       + 17.643 us  |                      }
+           proga-32755 [005] 625596.628070: funcgraph_entry:                   |                      do_IRQ() {
+           proga-32755 [005] 625596.628070: funcgraph_entry:                   |                        irq_enter() {
+           proga-32755 [005] 625596.628070: funcgraph_entry:        0.126 us   |                          rcu_irq_enter();
+           proga-32755 [005] 625596.628070: funcgraph_entry:        0.139 us   |                          irqtime_account_irq();
+           proga-32755 [005] 625596.628071: funcgraph_exit:         0.649 us   |                        }
+           proga-32755 [005] 625596.628071: funcgraph_entry:                   |                        handle_edge_irq() {
+           proga-32755 [005] 625596.628071: funcgraph_entry:        0.130 us   |                          _raw_spin_lock();
+           proga-32755 [005] 625596.628071: funcgraph_entry:        0.127 us   |                          irq_may_run();
+           proga-32755 [005] 625596.628072: funcgraph_entry:                   |                          irq_chip_ack_parent() {
+           proga-32755 [005] 625596.628072: funcgraph_entry:        0.188 us   |                            apic_ack_irq();
+           proga-32755 [005] 625596.628072: funcgraph_exit:         0.455 us   |                          }
+           proga-32755 [005] 625596.628072: funcgraph_entry:                   |                          handle_irq_event() {
+           proga-32755 [005] 625596.628072: funcgraph_entry:                   |                            handle_irq_event_percpu() {
+           proga-32755 [005] 625596.628072: funcgraph_entry:                   |                              __handle_irq_event_percpu() {
+           proga-32755 [005] 625596.628072: funcgraph_entry:                   |                                xhci_msi_irq() {
+           proga-32755 [005] 625596.628073: funcgraph_entry:                   |                                  xhci_irq() {
+           proga-32755 [005] 625596.628073: funcgraph_entry:        0.126 us   |                                    usb_hcd_is_primary_hcd();
+           proga-32755 [005] 625596.628073: funcgraph_entry:        0.176 us   |                                    _raw_spin_lock_irqsave();
+           proga-32755 [005] 625596.628074: funcgraph_entry:        0.121 us   |                                    xhci_dma_to_transfer_ring();
+           proga-32755 [005] 625596.628074: funcgraph_entry:        0.141 us   |                                    xhci_get_ep_ctx();
+           proga-32755 [005] 625596.628075: funcgraph_entry:        0.143 us   |                                    trb_in_td();
+           proga-32755 [005] 625596.628075: funcgraph_entry:        0.123 us   |                                    xhci_dma_to_transfer_ring();
+           proga-32755 [005] 625596.628075: funcgraph_entry:        0.120 us   |                                    sum_trb_lengths.isra.0();
+           proga-32755 [005] 625596.628076: funcgraph_entry:                   |                                    finish_td() {
+           proga-32755 [005] 625596.628076: funcgraph_entry:        0.119 us   |                                      xhci_dma_to_transfer_ring();
+           proga-32755 [005] 625596.628076: funcgraph_entry:        0.120 us   |                                      xhci_get_ep_ctx();
+           proga-32755 [005] 625596.628076: funcgraph_entry:        0.121 us   |                                      inc_deq();
+           proga-32755 [005] 625596.628077: funcgraph_entry:                   |                                      xhci_td_cleanup() {
+           proga-32755 [005] 625596.628077: funcgraph_entry:        0.122 us   |                                        xhci_unmap_td_bounce_buffer.isra.0();
+           proga-32755 [005] 625596.628077: funcgraph_exit:         0.369 us   |                                      }
+           proga-32755 [005] 625596.628077: funcgraph_exit:         1.359 us   |                                    }
+           proga-32755 [005] 625596.628077: funcgraph_entry:        0.135 us   |                                    inc_deq();
+           proga-32755 [005] 625596.628077: funcgraph_entry:        1.386 us   |                                    xhci_update_erst_dequeue();
+           proga-32755 [005] 625596.628079: funcgraph_entry:        0.131 us   |                                    _raw_spin_unlock_irqrestore();
+           proga-32755 [005] 625596.628079: funcgraph_exit:         6.781 us   |                                  }
+           proga-32755 [005] 625596.628079: funcgraph_exit:         7.008 us   |                                }
+           proga-32755 [005] 625596.628080: funcgraph_exit:         7.287 us   |                              }
+           proga-32755 [005] 625596.628080: funcgraph_entry:        0.139 us   |                              add_interrupt_randomness();
+           proga-32755 [005] 625596.628080: funcgraph_entry:        0.129 us   |                              note_interrupt();
+           proga-32755 [005] 625596.628080: funcgraph_exit:         8.050 us   |                            }
+           proga-32755 [005] 625596.628080: funcgraph_entry:        0.123 us   |                            _raw_spin_lock();
+           proga-32755 [005] 625596.628081: funcgraph_exit:         8.543 us   |                          }
+           proga-32755 [005] 625596.628081: funcgraph_exit:         9.882 us   |                        }
+           proga-32755 [005] 625596.628081: funcgraph_entry:                   |                        irq_exit() {
+           proga-32755 [005] 625596.628081: funcgraph_entry:        0.131 us   |                          irqtime_account_irq();
+           proga-32755 [005] 625596.628081: funcgraph_entry:        0.128 us   |                          idle_cpu();
+           proga-32755 [005] 625596.628081: funcgraph_entry:        0.115 us   |                          rcu_irq_exit();
+           proga-32755 [005] 625596.628082: funcgraph_exit:         0.860 us   |                        }
+           proga-32755 [005] 625596.628082: funcgraph_exit:       + 11.897 us  |                      }
+           proga-32755 [005] 625596.628082: funcgraph_entry:        0.134 us   |                      tcp_release_cb();
+           proga-32755 [005] 625596.628082: funcgraph_entry:                   |                      _raw_spin_unlock_bh() {
+           proga-32755 [005] 625596.628083: funcgraph_entry:        0.132 us   |                        __local_bh_enable_ip();
+           proga-32755 [005] 625596.628083: funcgraph_exit:         0.370 us   |                      }
+           proga-32755 [005] 625596.628083: funcgraph_exit:       + 52.640 us  |                    }
+           proga-32755 [005] 625596.628083: funcgraph_exit:       + 62.772 us  |                  }
+           proga-32755 [005] 625596.628083: funcgraph_exit:       + 63.312 us  |                }
+           proga-32755 [005] 625596.628083: funcgraph_exit:       + 64.428 us  |              }
+           proga-32755 [005] 625596.628083: funcgraph_exit:       + 64.676 us  |            }
+           proga-32755 [005] 625596.628083: funcgraph_exit:       + 64.924 us  |          }
+           proga-32755 [005] 625596.628084: funcgraph_exit:       + 65.146 us  |        }
+           proga-32755 [005] 625596.628084: funcgraph_exit:       + 67.770 us  |      }
+           proga-32755 [005] 625596.628084: funcgraph_exit:       + 68.718 us  |    }
+           proga-32755 [005] 625596.628084: funcgraph_exit:       + 69.833 us  |  }

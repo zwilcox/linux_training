@@ -1,0 +1,151 @@
+Quiz 1
+    Q1
+        Slide 23: Code that executes within ring 0 is allowed to use special instructions
+        that control how the system reacts to interrupts, exceptions
+        HLT – Halt,
+    Q2
+        https://elixir.bootlin.com/linux/v5.2.15/A/ident/wrmsrl
+        https://elixir.bootlin.com/linux/v5.2.15/source/arch/x86/include/asm/msr.h#L282
+        https://elixir.bootlin.com/linux/v5.2.15/C/ident/native_write_msr
+        https://elixir.bootlin.com/linux/v5.2.15/source/arch/x86/include/asm/msr.h#L160
+        https://elixir.bootlin.com/linux/v5.2.15/C/ident/__wrmsr
+        https://elixir.bootlin.com/linux/v5.2.15/source/arch/x86/include/asm/msr.h#L103
+    Q3
+        lsmod | grep driver name  <-- to check whether module is loaded
+    Q4
+        Slide 82: To enter the kernel (ring 0) an interrupt or system call is required
+        Slide 18: Interrupts can occur for a variety of reasons
+            Program accesses memory that isn’t paged in
+
+Quiz 2
+    Q1
+        0x7FFDBD056E00 - tohex(16) = 0x7FFDBD056DF0
+    Q2
+        Slide 121: Things to remember list_heads point to other list_heads, not data
+    Q3
+        [student@localhost ~]$ ps -ef
+        UID        PID  PPID  C STIME TTY          TIME CMD
+        root         1     0  0 Nov07 ?        00:00:33 /usr/lib/systemd/systemd --switc
+        root         2     0  0 Nov07 ?        00:00:00 [kthreadd]
+        Square brackets means kernel threads
+
+        https://elixir.bootlin.com/linux/v5.2.15/source/kernel/kthread.c#L568
+        kthreadd is the first kernel thread, its only job is to create new
+        kernel threads
+
+    Q4
+        ptrace_traceme
+        https://elixir.bootlin.com/linux/v5.2.15/source/kernel/ptrace.c#L1135
+
+    Q5
+        pipe_write
+        https://elixir.bootlin.com/linux/v5.2.15/source/fs/read_write.c#L490
+        https://elixir.bootlin.com/linux/v5.2.15/source/include/linux/fs.h#L922
+        https://elixir.bootlin.com/linux/v5.2.15/C/ident/file_operations
+        https://elixir.bootlin.com/linux/v5.2.15/source/fs/pipe.c#L1022
+
+        trace command route
+        trace-cmd -p function_graph -F .prog -o 
+
+Quiz 3
+    Q1
+        Slide 126: kthread_stop does NOT stop a thread – it wakes it up if it’s asleep,
+        and sets a flag that allows the targeted kthread to see that it has
+        been asked to stop
+    Q2
+        Slide 153: Raised softirqs are executed when
+        Returning from an a hardware interrupt (in interrupt context)
+        Called by a kernel thread (process)
+                Slide 82: The kernel invokes its services in response to these events
+                System calls are handled in the context of the process that invoked it
+    Q3
+        Slide 21: After an interrupt handler runs, it terminates in an iret instruction,
+        which restores state for the code that was interrupted
+    Q4
+        https://elixir.bootlin.com/linux/v5.2.15/source/include/linux/fs.h#L1791
+    Q5
+        #define MINORBITS	20
+        #define MINORMASK	((1U << MINORBITS) - 1)
+        #define MAJOR(dev)	((unsigned int) ((dev) >> MINORBITS))
+        #define MINOR(dev)	((unsigned int) ((dev) & MINORMASK))
+        #define MKDEV(ma,mi)	(((ma) << MINORBITS) | (mi))
+        (Maj 1, Min 9)
+        1 << 20 = 1048576
+        1048576 | 9 = 1048585
+    Q6
+        https://elixir.bootlin.com/linux/v5.2.15/A/ident/copy_in_user
+        copy_in_user(void __user *to, const void __user *from, unsigned long n)
+        Slide 170: The kernel can’t trust anything coming from userspace
+
+Quiz 4
+    Q1
+        Building a custom system means recompiling (so we can add softirqs)
+    Q2
+        Slide 213
+    Q3
+        It may cause programs that use it to enter an infinite loop  (returns 5 not len)
+        The memcpy may overflow the local buffer (memcpy third parameter is unsigned)
+        It does not safely copy memory from usersapce  (uses memcpy)
+    Q4
+        Work backwards
+    Q5
+        Slide 200: The CPU knows where to look for the page table via the CR3 register (physical address)
+        Slide 17: to load the address of its system call handler into the LSTAR register
+        Slide 19: When an interrupt occurs, it is identified by an interrupt vector number
+        (of which there are 256, numbered 0 – 255)
+
+Quiz 5
+    Q1
+        Can't sleep in interrupt handler
+        Can't clear interrupts because there may still be work to be done
+    Q2
+        Syscall for loading modules - insmod
+        do init module
+        if has init module, call routine
+    Q3
+        copy_to_user
+        _copy_to_user
+        raw_copy_to_user -> architecture specific
+        uaccess_64
+        switch case
+    Q4
+        kmalloc
+        slab
+        cat /boot/config-5 | CONFIG_SLOB
+        kmalloc_size -> slab.h -> index
+
+Quiz 6
+    Q1
+        https://wiki.osdev.org/PS/2_Keyboard
+        Scan Code Set 1
+        0x8E backspace released
+    Q2
+        kproves - breakpoints in the kernel
+        https://elixir.bootlin.com/linux/v5.2.15/source/arch/x86/kernel/traps.c#L573
+    Q3
+        Slide 287: If the handler is going to service the interrupt, then it should return
+        IRQ_HANDLED, otherwise it should return IRQ_NONE but technically, it doesn’t matter
+    Q4
+        cat /proc/kallsyms | grep clone
+    Q5
+        https://elixir.bootlin.com/linux/v5.2.15/source/net/ipv4/af_inet.c#L1079
+
+Quiz 7
+    Q1
+        .../linux_kernel_cno/lab_3/sol/probe_exec.c
+        Can kprobe any symbol with an actual address associated with it
+        Inlining will get in the way
+        Can't kprobe if they say nokprobe
+    Q2
+        Slide 309:  This allows highly-specialized tracing and filtering to be 
+        inserted into the kernel at runtime without using a full loadable kernel 
+        module, in a restricted VM environment
+    Q3
+        https://elixir.bootlin.com/linux/v5.2.15/source/kernel/ptrace.c#L40
+        https://elixir.bootlin.com/linux/v5.2.15/source/include/linux/mm.h#L2636
+    Q4
+        https://elixir.bootlin.com/linux/v5.2.15/source/kernel/ptrace.c#L910
+        https://elixir.bootlin.com/linux/v5.2.15/source/kernel/ptrace.c#L1213
+    Q5
+        Slide 352:  This option randomly reorganizes the fields within a struct to
+        change their offsets

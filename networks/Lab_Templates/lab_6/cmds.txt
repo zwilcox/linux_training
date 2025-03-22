@@ -1,0 +1,3 @@
+openssl req -newkey rsa:4096 -nodes -keyout server.key -x509 -days 365 -out server.crt -subj '/CN=pyctf.class.net'
+# NOTE: The Common Name (/CN flag above) MUST match the hostname for the client to verify.
+# This can be done my populating the CN field when prompted, if the `-subj` flag is omitted.

@@ -1,0 +1,4 @@
+This solution isn't super robust. The binary is of type EXEC which is fine but doesn't exactly mirror
+a full ASLR defeat. 
+
+It also just assumes that the client socket fd is 4 instead of actually trying to obtain it somehow. 

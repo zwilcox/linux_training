@@ -1,0 +1,13 @@
+This lab is OPTIONAL and can be given to classes that are ahead or are looking to practice FIFOs (slide 274)
+They should have already created/worked with UNIX Domain Sockets in Systems Programming (slide 275)
+
+FIFO:
+1. Create a program that can read from a fifo
+2. Create a program that can write to a fifo reading from stdin to get the data
+   to send
+3. Combine the programs and add a command line option to specify read/write
+4. Add a command line argument to specify the name of the fifo. Default a name
+   if one is not specified
+
+Notes: There are a reader and writer script that can be used to test each half
+of your connection. Use those to get started and test your solutions

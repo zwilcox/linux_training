@@ -1,0 +1,33 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}",
+                "/usr/include",
+                "/usr/local/include",
+                "/home/student/linux-5.2.11/include",
+                "/home/student/linux-5.2.11/arch/x86/include",
+                "/home/student/linux-5.2.11/arch/x86/include/generated/"
+            ],
+            "defines": [
+                "__KERNEL__",
+                "MODULE"
+            ],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c99",
+            "cppStandard": "c++14",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}",
+                    "//home/student/linux-5.2.11/include",
+                    "/home/student/linux-5.2.11/arch/x86/include",
+                    "/home/student/linux-5.2.11/arch/x86/include/generated/"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "intelliSenseMode": "gcc-x64"
+        }
+    ],
+    "version": 4
+}

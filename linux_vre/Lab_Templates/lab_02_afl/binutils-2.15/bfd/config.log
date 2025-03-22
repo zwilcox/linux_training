@@ -1,0 +1,787 @@
+This file contains any messages produced by compilers while
+running configure, to aid debugging if configure makes a mistake.
+
+configure:556: checking for Cygwin environment
+configure:572: afl-gcc -c -g -O2  conftest.c 1>&5
+configure: In function 'main':
+configure:566:20: error: '__CYGWIN32__' undeclared (first use in this function)
+  566 | #define __CYGWIN__ __CYGWIN32__
+      |                    ^~~~~~~~~~~~
+configure:568:8: note: in expansion of macro '__CYGWIN__'
+  568 | return __CYGWIN__;
+      |        ^~~~~~~~~~
+configure:566:20: note: each undeclared identifier is reported only once for each function it appears in
+  566 | #define __CYGWIN__ __CYGWIN32__
+      |                    ^~~~~~~~~~~~
+configure:568:8: note: in expansion of macro '__CYGWIN__'
+  568 | return __CYGWIN__;
+      |        ^~~~~~~~~~
+configure: failed program was:
+#line 561 "configure"
+#include "confdefs.h"
+
+int main() {
+
+#ifndef __CYGWIN__
+#define __CYGWIN__ __CYGWIN32__
+#endif
+return __CYGWIN__;
+; return 0; }
+configure:589: checking for mingw32 environment
+configure:601: afl-gcc -c -g -O2  conftest.c 1>&5
+configure: In function 'main':
+configure:597:8: error: '__MINGW32__' undeclared (first use in this function)
+  597 | return __MINGW32__;
+      |        ^~~~~~~~~~~
+configure:597:8: note: each undeclared identifier is reported only once for each function it appears in
+configure: failed program was:
+#line 594 "configure"
+#include "confdefs.h"
+
+int main() {
+return __MINGW32__;
+; return 0; }
+configure:666: checking host system type
+configure:687: checking target system type
+configure:705: checking build system type
+configure:729: checking for strerror in -lcposix
+configure:748: afl-gcc -o conftest -g -O2   conftest.c -lcposix   1>&5
+/usr/bin/ld: cannot find -lcposix
+collect2: error: ld returned 1 exit status
+configure: failed program was:
+#line 737 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char strerror();
+
+int main() {
+strerror()
+; return 0; }
+configure:784: checking for a BSD compatible install
+configure:837: checking whether build environment is sane
+configure:894: checking whether make sets ${MAKE}
+configure:940: checking for working aclocal-1.4
+configure:953: checking for working autoconf
+configure:966: checking for working automake-1.4
+configure:979: checking for working autoheader
+configure:992: checking for working makeinfo
+configure:1027: checking for ar
+configure:1059: checking for ranlib
+configure:1197: checking for gcc
+configure:1310: checking whether the C compiler (afl-gcc -g -O2 ) works
+configure:1326: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1323:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 1323 | main(){return(0);}
+      | ^~~~
+configure:1352: checking whether the C compiler (afl-gcc -g -O2 ) is a cross-compiler
+configure:1357: checking whether we are using GNU C
+configure:1366: afl-gcc -E conftest.c
+configure:1385: checking whether afl-gcc accepts -g
+configure:1428: checking for ld used by GCC
+configure:1496: checking if the linker (ld) is GNU ld
+GNU ld version 2.31.1-37.fc30
+configure:1513: checking for ld option to reload object files
+configure:1525: checking for BSD-compatible nm
+configure:1563: checking whether ln -s works
+configure:1584: checking how to recognise dependant libraries
+configure:1757: checking for object suffix
+configure:1763: afl-gcc -c -g -O2  conftest.c 1>&5
+configure:1783: checking for executable suffix
+configure:1793: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:1820: checking for file
+configure:1953: checking for ranlib
+configure:2020: checking for strip
+ltconfig:678:checking for afl-gcc option to produce PIC
+ltconfig:687:checking that afl-gcc PIC flag -fPIC -DPIC works.
+ltconfig:697: afl-gcc -c -g -O2 -fPIC -DPIC -DPIC  conftest.c 1>&5
+ltconfig:749: checking if afl-gcc static flag -static works
+ltconfig:758: afl-gcc -o conftest -g -O2   -static conftest.c  1>&5
+conftest.c:1:1: warning: return type defaults to 'int' [-Wimplicit-int]
+    1 | main(){return(0);}
+      | ^~~~
+/usr/bin/ld: cannot find -lc
+collect2: error: ld returned 1 exit status
+ltconfig:780: finding the maximum length of command line arguments
+ltconfig:@lineno@: result: 49153
+ltconfig:833: checking if afl-gcc supports -c -o file.o
+ltconfig:834: afl-gcc -c -g -O2 -o out/conftest2.o  conftest.c 1>&5
+ltconfig:887: checking if afl-gcc supports -fno-rtti -fno-exceptions
+ltconfig:888: afl-gcc -c -g -O2 -fno-rtti -fno-exceptions -c conftest.c  conftest.c 1>&5
+ltconfig:1431: checking if global_symbol_pipe works
+ltconfig:1432: afl-gcc -c -g -O2  conftest.c 1>&5
+ltconfig:1435: eval "nm conftest.o | sed -n -e 's/^.*[ 	]\([ABCDGISTW][ABCDGISTW]*\)[ 	][ 	]*\(\)\([_A-Za-z][_A-Za-z0-9]*\)$/\1 \2\3 \3/p' > conftest.nm"
+ltconfig:1487: afl-gcc -o conftest -g -O2 -fno-builtin   conftest.c conftstm.o 1>&5
+configure:2381: checking whether to enable maintainer-specific portions of Makefiles
+configure:2404: checking whether to install libbfd
+configure:2441: checking for executable suffix
+configure:2481: checking for gcc
+configure:2594: checking whether the C compiler (afl-gcc -g -O2 ) works
+configure:2610: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:2607:1: warning: return type defaults to 'int' [-Wimplicit-int]
+ 2607 | main(){return(0);}
+      | ^~~~
+configure:2636: checking whether the C compiler (afl-gcc -g -O2 ) is a cross-compiler
+configure:2641: checking whether we are using GNU C
+configure:2669: checking whether afl-gcc accepts -g
+configure:2703: checking how to run the C preprocessor
+configure:2724: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2785: checking for ranlib
+configure:2813: checking for ANSI C header files
+configure:2826: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:2893: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure: In function 'main':
+configure:2888:67: warning: implicit declaration of function 'exit' [-Wimplicit-function-declaration]
+ 2888 | if (XOR (islower (i), ISLOWER (i)) || toupper (i) != TOUPPER (i)) exit(2);
+      |                                                                   ^~~~
+configure:2888:67: warning: incompatible implicit declaration of built-in function 'exit'
+configure:2884:1: note: include '<stdlib.h>' or provide a declaration of 'exit'
+ 2883 | #include <ctype.h>
+  +++ |+#include <stdlib.h>
+ 2884 | #define ISLOWER(c) ('a' <= (c) && (c) <= 'z')
+configure:2889:1: warning: incompatible implicit declaration of built-in function 'exit'
+ 2889 | exit (0); }
+      | ^~~~
+configure:2889:1: note: include '<stdlib.h>' or provide a declaration of 'exit'
+configure:2917: checking for working const
+configure:2971: afl-gcc -c -g -O2  conftest.c 1>&5
+configure:2992: checking for inline
+configure:3006: afl-gcc -c -g -O2  conftest.c 1>&5
+configure:3002:10: warning: return type defaults to 'int' [-Wimplicit-int]
+ 3002 | } $ac_kw foo() {
+      |          ^~~
+configure:3032: checking for off_t
+configure:3065: checking for size_t
+configure:3100: checking for working alloca.h
+configure:3112: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3133: checking for alloca
+configure:3166: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3335: checking for stdlib.h
+configure:3345: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:3335: checking for unistd.h
+configure:3345: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:3335: checking for sys/stat.h
+configure:3345: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:3335: checking for sys/types.h
+configure:3345: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:3374: checking for getpagesize
+configure:3402: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3427: checking for working mmap
+configure:3588: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3519:7: error: conflicting types for 'malloc'
+ 3519 | char *malloc();
+      |       ^~~~~~
+In file included from configure:3467:
+/usr/include/stdlib.h:539:14: note: previous declaration of 'malloc' was here
+  539 | extern void *malloc (size_t __size) __THROW __attribute_malloc__ __wur;
+      |              ^~~~~~
+configure: In function 'main':
+configure:3558:24: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
+ 3558 |  data2 += (pagesize - ((int) data2 & (pagesize - 1))) & (pagesize - 1);
+      |                        ^
+configure: failed program was:
+#line 3435 "configure"
+#include "confdefs.h"
+
+/* Thanks to Mike Haertel and Jim Avera for this test.
+   Here is a matrix of mmap possibilities:
+	mmap private not fixed
+	mmap private fixed at somewhere currently unmapped
+	mmap private fixed at somewhere already mapped
+	mmap shared not fixed
+	mmap shared fixed at somewhere currently unmapped
+	mmap shared fixed at somewhere already mapped
+   For private mappings, we should verify that changes cannot be read()
+   back from the file, nor mmap's back from the file at a different
+   address.  (There have been systems where private was not correctly
+   implemented like the infamous i386 svr4.0, and systems where the
+   VM page cache was not coherent with the filesystem buffer cache
+   like early versions of FreeBSD and possibly contemporary NetBSD.)
+   For shared mappings, we should conversely verify that changes get
+   propogated back to all the places they're supposed to be.
+
+   Grep wants private fixed already mapped.
+   The main things grep needs to know about mmap are:
+   * does it exist and is it safe to write into the mmap'd area
+   * how to use it (BSD variants)  */
+#include <sys/types.h>
+#include <fcntl.h>
+#include <sys/mman.h>
+
+#if HAVE_SYS_TYPES_H
+# include <sys/types.h>
+#endif
+
+#if HAVE_STDLIB_H
+# include <stdlib.h>
+#endif
+
+#if HAVE_SYS_STAT_H
+# include <sys/stat.h>
+#endif
+
+#if HAVE_UNISTD_H
+# include <unistd.h>
+#endif
+
+/* This mess was copied from the GNU getpagesize.h.  */
+#ifndef HAVE_GETPAGESIZE
+
+/* Assume that all systems that can run configure have sys/param.h.  */
+# ifndef HAVE_SYS_PARAM_H
+#  define HAVE_SYS_PARAM_H 1
+# endif
+
+# ifdef _SC_PAGESIZE
+#  define getpagesize() sysconf(_SC_PAGESIZE)
+# else /* no _SC_PAGESIZE */
+#  ifdef HAVE_SYS_PARAM_H
+#   include <sys/param.h>
+#   ifdef EXEC_PAGESIZE
+#    define getpagesize() EXEC_PAGESIZE
+#   else /* no EXEC_PAGESIZE */
+#    ifdef NBPG
+#     define getpagesize() NBPG * CLSIZE
+#     ifndef CLSIZE
+#      define CLSIZE 1
+#     endif /* no CLSIZE */
+#    else /* no NBPG */
+#     ifdef NBPC
+#      define getpagesize() NBPC
+#     else /* no NBPC */
+#      ifdef PAGESIZE
+#       define getpagesize() PAGESIZE
+#      endif /* PAGESIZE */
+#     endif /* no NBPC */
+#    endif /* no NBPG */
+#   endif /* no EXEC_PAGESIZE */
+#  else /* no HAVE_SYS_PARAM_H */
+#   define getpagesize() 8192	/* punt totally */
+#  endif /* no HAVE_SYS_PARAM_H */
+# endif /* no _SC_PAGESIZE */
+
+#endif /* no HAVE_GETPAGESIZE */
+
+#ifdef __cplusplus
+extern "C" { void *malloc(unsigned); }
+#else
+char *malloc();
+#endif
+
+int
+main()
+{
+	char *data, *data2, *data3;
+	int i, pagesize;
+	int fd;
+
+	pagesize = getpagesize();
+
+	/*
+	 * First, make a file with some known garbage in it.
+	 */
+	data = malloc(pagesize);
+	if (!data)
+		exit(1);
+	for (i = 0; i < pagesize; ++i)
+		*(data + i) = rand();
+	umask(0);
+	fd = creat("conftestmmap", 0600);
+	if (fd < 0)
+		exit(1);
+	if (write(fd, data, pagesize) != pagesize)
+		exit(1);
+	close(fd);
+
+	/*
+	 * Next, try to mmap the file at a fixed address which
+	 * already has something else allocated at it.  If we can,
+	 * also make sure that we see the same garbage.
+	 */
+	fd = open("conftestmmap", O_RDWR);
+	if (fd < 0)
+		exit(1);
+	data2 = malloc(2 * pagesize);
+	if (!data2)
+		exit(1);
+	data2 += (pagesize - ((int) data2 & (pagesize - 1))) & (pagesize - 1);
+	if (data2 != mmap(data2, pagesize, PROT_READ | PROT_WRITE,
+	    MAP_PRIVATE | MAP_FIXED, fd, 0L))
+		exit(1);
+	for (i = 0; i < pagesize; ++i)
+		if (*(data + i) != *(data2 + i))
+			exit(1);
+
+	/*
+	 * Finally, make sure that changes to the mapped area
+	 * do not percolate back to the file as seen by read().
+	 * (This is a bug on some variants of i386 svr4.0.)
+	 */
+	for (i = 0; i < pagesize; ++i)
+		*(data2 + i) = *(data2 + i) + 1;
+	data3 = malloc(pagesize);
+	if (!data3)
+		exit(1);
+	if (read(fd, data3, pagesize) != pagesize)
+		exit(1);
+	for (i = 0; i < pagesize; ++i)
+		if (*(data + i) != *(data3 + i))
+			exit(1);
+	close(fd);
+	unlink("conftestmmap");
+	exit(0);
+}
+
+configure:3616: checking for argz.h
+configure:3626: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:3616: checking for limits.h
+configure:3626: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:3616: checking for locale.h
+configure:3626: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:3616: checking for nl_types.h
+configure:3626: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:3616: checking for malloc.h
+configure:3626: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:3616: checking for string.h
+configure:3626: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:3616: checking for unistd.h
+configure:3616: checking for values.h
+configure:3626: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:3616: checking for sys/param.h
+configure:3626: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:3656: checking for getcwd
+configure:3684: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3656: checking for munmap
+configure:3684: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3656: checking for putenv
+configure:3684: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3656: checking for setenv
+configure:3684: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3656: checking for setlocale
+configure:3684: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3656: checking for strchr
+configure:3684: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3668:6: warning: conflicting types for built-in function 'strchr'; expected 'char *(const char *, int)' [-Wbuiltin-declaration-mismatch]
+ 3668 | char $ac_func();
+      |      ^~~~~~
+configure:3665:1: note: 'strchr' is declared in header '<string.h>'
+ 3664 | #include <assert.h>
+  +++ |+#include <string.h>
+ 3665 | /* Override any gcc2 internal prototype to avoid an error.  */
+configure:3656: checking for strcasecmp
+configure:3684: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3668:6: warning: conflicting types for built-in function 'strcasecmp'; expected 'int(const char *, const char *)' [-Wbuiltin-declaration-mismatch]
+ 3668 | char $ac_func();
+      |      ^~~~~~~~~~
+configure:3656: checking for __argz_count
+configure:3684: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3656: checking for __argz_stringify
+configure:3684: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3656: checking for __argz_next
+configure:3684: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3713: checking for stpcpy
+configure:3741: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3725:6: warning: conflicting types for built-in function 'stpcpy'; expected 'char *(char *, const char *)' [-Wbuiltin-declaration-mismatch]
+ 3725 | char $ac_func();
+      |      ^~~~~~
+configure:3775: checking for LC_MESSAGES
+configure:3787: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:3808: checking whether NLS is requested
+configure:3828: checking whether included gettext is requested
+configure:3847: checking for libintl.h
+configure:3857: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:3874: checking for gettext in libc
+configure:3886: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure: In function 'main':
+configure:3882:8: warning: cast from pointer to integer of different size [-Wpointer-to-int-cast]
+ 3882 | return (int) gettext ("")
+      |        ^
+configure:3977: checking for msgfmt
+configure:4011: checking for dcgettext
+configure:4039: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:4023:6: warning: conflicting types for built-in function 'dcgettext'; expected 'char *(const char *, const char *, int)' [-Wbuiltin-declaration-mismatch]
+ 4023 | char $ac_func();
+      |      ^~~~~~~~~
+configure:4066: checking for gmsgfmt
+configure:4102: checking for xgettext
+configure:4142: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:4334: checking for catalogs to be installed
+configure:4450: checking for a BSD compatible install
+configure:4510: checking for long long
+configure:4522: afl-gcc -c -g -O2  conftest.c 1>&5
+configure:4538: checking size of long long
+configure:4554: afl-gcc -c -g -O2  conftest.c 1>&5
+configure: In function 'main':
+configure:4550:20: error: duplicate case value
+ 4550 | switch (0) case 0: case (sizeof (long long) == $ac_size):;
+      |                    ^~~~
+configure:4550:12: note: previously used here
+ 4550 | switch (0) case 0: case (sizeof (long long) == $ac_size):;
+      |            ^~~~
+configure: failed program was:
+#line 4544 "configure"
+#include "confdefs.h"
+#include "confdefs.h"
+#include <sys/types.h>
+
+
+int main() {
+switch (0) case 0: case (sizeof (long long) == 4):;
+; return 0; }
+configure:4554: afl-gcc -c -g -O2  conftest.c 1>&5
+configure:4579: checking size of long
+configure:4595: afl-gcc -c -g -O2  conftest.c 1>&5
+configure: In function 'main':
+configure:4591:20: error: duplicate case value
+ 4591 | switch (0) case 0: case (sizeof (long) == $ac_size):;
+      |                    ^~~~
+configure:4591:12: note: previously used here
+ 4591 | switch (0) case 0: case (sizeof (long) == $ac_size):;
+      |            ^~~~
+configure: failed program was:
+#line 4585 "configure"
+#include "confdefs.h"
+#include "confdefs.h"
+#include <sys/types.h>
+
+
+int main() {
+switch (0) case 0: case (sizeof (long) == 4):;
+; return 0; }
+configure:4595: afl-gcc -c -g -O2  conftest.c 1>&5
+configure:4681: checking for stddef.h
+configure:4691: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:4681: checking for string.h
+configure:4681: checking for strings.h
+configure:4691: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:4681: checking for stdlib.h
+configure:4681: checking for time.h
+configure:4691: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:4681: checking for unistd.h
+configure:4721: checking for fcntl.h
+configure:4731: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:4721: checking for sys/file.h
+configure:4731: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:4721: checking for sys/time.h
+configure:4731: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:4758: checking whether time.h and sys/time.h may both be included
+configure:4772: afl-gcc -c -g -O2  conftest.c 1>&5
+configure:4797: checking for dirent.h that defines DIR
+configure:4810: afl-gcc -c -g -O2  conftest.c 1>&5
+configure:4835: checking for opendir in -ldir
+configure:4854: afl-gcc -o conftest -g -O2   conftest.c -ldir   1>&5
+/usr/bin/ld: cannot find -ldir
+collect2: error: ld returned 1 exit status
+configure: failed program was:
+#line 4843 "configure"
+#include "confdefs.h"
+/* Override any gcc2 internal prototype to avoid an error.  */
+/* We use char because int might match the return type of a gcc2
+    builtin and then its argument prototype would still apply.  */
+char opendir();
+
+int main() {
+opendir()
+; return 0; }
+configure:4920: checking for fcntl
+configure:4948: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:4920: checking for getpagesize
+configure:4920: checking for setitimer
+configure:4948: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:4920: checking for sysconf
+configure:4948: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:4920: checking for fdopen
+configure:4948: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:4920: checking for getuid
+configure:4948: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:4920: checking for getgid
+configure:4948: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:4975: checking for strtoull
+configure:5003: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:5038: checking whether strstr must be declared
+configure:5064: afl-gcc -c -g -O2  conftest.c 1>&5
+configure:5085: checking whether malloc must be declared
+configure:5111: afl-gcc -c -g -O2  conftest.c 1>&5
+configure:5132: checking whether realloc must be declared
+configure:5158: afl-gcc -c -g -O2  conftest.c 1>&5
+configure:5179: checking whether free must be declared
+configure:5205: afl-gcc -c -g -O2  conftest.c 1>&5
+configure:5226: checking whether getenv must be declared
+configure:5252: afl-gcc -c -g -O2  conftest.c 1>&5
+configure:5514: checking for sys/procfs.h
+configure:5524: afl-gcc -E  conftest.c >/dev/null 2>conftest.out
+configure:5552: checking for prstatus_t in sys/procfs.h
+configure:5566: afl-gcc -c -g -O2  conftest.c 1>&5
+configure:5588: checking for prstatus32_t in sys/procfs.h
+configure:5602: afl-gcc -c -g -O2  conftest.c 1>&5
+configure: In function 'main':
+configure:5598:1: error: unknown type name 'prstatus32_t'; did you mean 'prstatus_t'?
+ 5598 | prstatus32_t avar
+      | ^~~~~~~~~~~~
+      | prstatus_t
+configure: failed program was:
+#line 5593 "configure"
+#include "confdefs.h"
+
+#define _SYSCALL32
+#include <sys/procfs.h>
+int main() {
+prstatus32_t avar
+; return 0; }
+configure:5624: checking for prstatus_t.pr_who in sys/procfs.h
+configure:5638: afl-gcc -c -g -O2  conftest.c 1>&5
+configure: In function 'main':
+configure:5634:44: error: 'prstatus_t' {aka 'struct elf_prstatus'} has no member named 'pr_who'
+ 5634 | prstatus_t avar; void* aref = (void*) &avar.pr_who
+      |                                            ^
+configure: failed program was:
+#line 5629 "configure"
+#include "confdefs.h"
+
+#define _SYSCALL32
+#include <sys/procfs.h>
+int main() {
+prstatus_t avar; void* aref = (void*) &avar.pr_who
+; return 0; }
+configure:5660: checking for prstatus32_t.pr_who in sys/procfs.h
+configure:5674: afl-gcc -c -g -O2  conftest.c 1>&5
+configure: In function 'main':
+configure:5670:1: error: unknown type name 'prstatus32_t'; did you mean 'prstatus_t'?
+ 5670 | prstatus32_t avar; void* aref = (void*) &avar.pr_who
+      | ^~~~~~~~~~~~
+      | prstatus_t
+configure:5670:46: error: request for member 'pr_who' in something not a structure or union
+ 5670 | prstatus32_t avar; void* aref = (void*) &avar.pr_who
+      |                                              ^
+configure: failed program was:
+#line 5665 "configure"
+#include "confdefs.h"
+
+#define _SYSCALL32
+#include <sys/procfs.h>
+int main() {
+prstatus32_t avar; void* aref = (void*) &avar.pr_who
+; return 0; }
+configure:5696: checking for pstatus_t in sys/procfs.h
+configure:5710: afl-gcc -c -g -O2  conftest.c 1>&5
+configure: In function 'main':
+configure:5706:1: error: unknown type name 'pstatus_t'; did you mean 'prstatus_t'?
+ 5706 | pstatus_t avar
+      | ^~~~~~~~~
+      | prstatus_t
+configure: failed program was:
+#line 5701 "configure"
+#include "confdefs.h"
+
+#define _SYSCALL32
+#include <sys/procfs.h>
+int main() {
+pstatus_t avar
+; return 0; }
+configure:5732: checking for pxstatus_t in sys/procfs.h
+configure:5746: afl-gcc -c -g -O2  conftest.c 1>&5
+configure: In function 'main':
+configure:5742:1: error: unknown type name 'pxstatus_t'; did you mean 'prstatus_t'?
+ 5742 | pxstatus_t avar
+      | ^~~~~~~~~~
+      | prstatus_t
+configure: failed program was:
+#line 5737 "configure"
+#include "confdefs.h"
+
+#define _SYSCALL32
+#include <sys/procfs.h>
+int main() {
+pxstatus_t avar
+; return 0; }
+configure:5768: checking for pstatus32_t in sys/procfs.h
+configure:5782: afl-gcc -c -g -O2  conftest.c 1>&5
+configure: In function 'main':
+configure:5778:1: error: unknown type name 'pstatus32_t'; did you mean 'prstatus_t'?
+ 5778 | pstatus32_t avar
+      | ^~~~~~~~~~~
+      | prstatus_t
+configure: failed program was:
+#line 5773 "configure"
+#include "confdefs.h"
+
+#define _SYSCALL32
+#include <sys/procfs.h>
+int main() {
+pstatus32_t avar
+; return 0; }
+configure:5804: checking for prpsinfo_t in sys/procfs.h
+configure:5818: afl-gcc -c -g -O2  conftest.c 1>&5
+configure:5840: checking for prpsinfo32_t in sys/procfs.h
+configure:5854: afl-gcc -c -g -O2  conftest.c 1>&5
+configure: In function 'main':
+configure:5850:1: error: unknown type name 'prpsinfo32_t'; did you mean 'prpsinfo_t'?
+ 5850 | prpsinfo32_t avar
+      | ^~~~~~~~~~~~
+      | prpsinfo_t
+configure: failed program was:
+#line 5845 "configure"
+#include "confdefs.h"
+
+#define _SYSCALL32
+#include <sys/procfs.h>
+int main() {
+prpsinfo32_t avar
+; return 0; }
+configure:5876: checking for psinfo_t in sys/procfs.h
+configure:5890: afl-gcc -c -g -O2  conftest.c 1>&5
+configure: In function 'main':
+configure:5886:1: error: unknown type name 'psinfo_t'; did you mean 'prpsinfo_t'?
+ 5886 | psinfo_t avar
+      | ^~~~~~~~
+      | prpsinfo_t
+configure: failed program was:
+#line 5881 "configure"
+#include "confdefs.h"
+
+#define _SYSCALL32
+#include <sys/procfs.h>
+int main() {
+psinfo_t avar
+; return 0; }
+configure:5912: checking for psinfo32_t in sys/procfs.h
+configure:5926: afl-gcc -c -g -O2  conftest.c 1>&5
+configure: In function 'main':
+configure:5922:1: error: unknown type name 'psinfo32_t'
+ 5922 | psinfo32_t avar
+      | ^~~~~~~~~~
+configure: failed program was:
+#line 5917 "configure"
+#include "confdefs.h"
+
+#define _SYSCALL32
+#include <sys/procfs.h>
+int main() {
+psinfo32_t avar
+; return 0; }
+configure:5948: checking for lwpstatus_t in sys/procfs.h
+configure:5962: afl-gcc -c -g -O2  conftest.c 1>&5
+configure: In function 'main':
+configure:5958:1: error: unknown type name 'lwpstatus_t'; did you mean 'prstatus_t'?
+ 5958 | lwpstatus_t avar
+      | ^~~~~~~~~~~
+      | prstatus_t
+configure: failed program was:
+#line 5953 "configure"
+#include "confdefs.h"
+
+#define _SYSCALL32
+#include <sys/procfs.h>
+int main() {
+lwpstatus_t avar
+; return 0; }
+configure:5984: checking for lwpxstatus_t in sys/procfs.h
+configure:5998: afl-gcc -c -g -O2  conftest.c 1>&5
+configure: In function 'main':
+configure:5994:1: error: unknown type name 'lwpxstatus_t'; did you mean 'prstatus_t'?
+ 5994 | lwpxstatus_t avar
+      | ^~~~~~~~~~~~
+      | prstatus_t
+configure: failed program was:
+#line 5989 "configure"
+#include "confdefs.h"
+
+#define _SYSCALL32
+#include <sys/procfs.h>
+int main() {
+lwpxstatus_t avar
+; return 0; }
+configure:6020: checking for lwpstatus_t.pr_context in sys/procfs.h
+configure:6034: afl-gcc -c -g -O2  conftest.c 1>&5
+configure: In function 'main':
+configure:6030:1: error: unknown type name 'lwpstatus_t'; did you mean 'prstatus_t'?
+ 6030 | lwpstatus_t avar; void* aref = (void*) &avar.pr_context
+      | ^~~~~~~~~~~
+      | prstatus_t
+configure:6030:45: error: request for member 'pr_context' in something not a structure or union
+ 6030 | lwpstatus_t avar; void* aref = (void*) &avar.pr_context
+      |                                             ^
+configure: failed program was:
+#line 6025 "configure"
+#include "confdefs.h"
+
+#define _SYSCALL32
+#include <sys/procfs.h>
+int main() {
+lwpstatus_t avar; void* aref = (void*) &avar.pr_context
+; return 0; }
+configure:6056: checking for lwpstatus_t.pr_reg in sys/procfs.h
+configure:6070: afl-gcc -c -g -O2  conftest.c 1>&5
+configure: In function 'main':
+configure:6066:1: error: unknown type name 'lwpstatus_t'; did you mean 'prstatus_t'?
+ 6066 | lwpstatus_t avar; void* aref = (void*) &avar.pr_reg
+      | ^~~~~~~~~~~
+      | prstatus_t
+configure:6066:45: error: request for member 'pr_reg' in something not a structure or union
+ 6066 | lwpstatus_t avar; void* aref = (void*) &avar.pr_reg
+      |                                             ^
+configure: failed program was:
+#line 6061 "configure"
+#include "confdefs.h"
+
+#define _SYSCALL32
+#include <sys/procfs.h>
+int main() {
+lwpstatus_t avar; void* aref = (void*) &avar.pr_reg
+; return 0; }
+configure:6092: checking for win32_pstatus_t in sys/procfs.h
+configure:6106: afl-gcc -c -g -O2  conftest.c 1>&5
+configure: In function 'main':
+configure:6102:1: error: unknown type name 'win32_pstatus_t'
+ 6102 | win32_pstatus_t avar
+      | ^~~~~~~~~~~~~~~
+configure: failed program was:
+#line 6097 "configure"
+#include "confdefs.h"
+
+#define _SYSCALL32
+#include <sys/procfs.h>
+int main() {
+win32_pstatus_t avar
+; return 0; }
+configure:6577: checking for gcc version with buggy 64-bit support
+configure:6622: checking for ftello
+configure:6650: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:6622: checking for ftello64
+configure:6650: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:6622: checking for fseeko
+configure:6650: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:6622: checking for fseeko64
+configure:6650: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:6676: checking size of off_t
+configure:6692: afl-gcc -c -g -O2  conftest.c 1>&5
+configure: In function 'main':
+configure:6688:20: error: duplicate case value
+ 6688 | switch (0) case 0: case (sizeof (off_t) == $ac_size):;
+      |                    ^~~~
+configure:6688:12: note: previously used here
+ 6688 | switch (0) case 0: case (sizeof (off_t) == $ac_size):;
+      |            ^~~~
+configure: failed program was:
+#line 6682 "configure"
+#include "confdefs.h"
+#include "confdefs.h"
+#include <sys/types.h>
+
+
+int main() {
+switch (0) case 0: case (sizeof (off_t) == 4):;
+; return 0; }
+configure:6692: afl-gcc -c -g -O2  conftest.c 1>&5
+configure:6716: checking file_ptr type
+configure:6741: checking for stdlib.h
+configure:6741: checking for unistd.h
+configure:6741: checking for sys/stat.h
+configure:6741: checking for sys/types.h
+configure:6780: checking for getpagesize
+configure:6833: checking for working mmap
+configure:7019: checking for madvise
+configure:7047: afl-gcc -o conftest -g -O2   conftest.c  1>&5
+configure:7019: checking for mprotect
+configure:7047: afl-gcc -o conftest -g -O2   conftest.c  1>&5

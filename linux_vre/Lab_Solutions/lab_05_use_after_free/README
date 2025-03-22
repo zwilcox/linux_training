@@ -1,0 +1,10 @@
+SOLUTION:
+
+login me
+reset
+password AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA <- can range from 33-38 bytes (all valid)
+admin
+
+The vulnerability exists because the free in reset frees the memory to the heap. Then we
+we try and enter a password that is the exact same size as the structure the heap is
+choosing to reuse that same block. The data is then initialized to all A's (x34)

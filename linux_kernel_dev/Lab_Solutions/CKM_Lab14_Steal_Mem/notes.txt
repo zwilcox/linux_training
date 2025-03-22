@@ -1,0 +1,249 @@
+Finding the offset to userspace shouldn't be new - can use ghidra/hexdump/objdump/readelf to find the offset to the var we want to write to. Note that the makefile uses -pie -fPIE to make it, so we have to programattically find the address instead of just hardcoding it.
+
+This was used in the thread kill lab as well, but the task_struct's mm has a member vm_file which is the associated file with a mapped memory area. It's what's printed out in the side if you do cat /proc/<pid>/maps like ld.so, glibc, and the main elf binary name. 
+So in the module we are looking for the filename since that will be the base address of that elf file loaded in memory. From there that base addr + offset will be the address of the var in memory, since we found the base addr programatically we can overcome aslr.
+
+Finding the functions to use:
+We know that ptrace system call has an option that does what we want - man pages show PTRACE_PEEKTEXT, PTRACE_POKETEXT options are able to read/write from memory.
+
+So first we need to find the entry for the syscall ptrace in the kernel source (grep/ag recommended, students may already know where it is from kernel internals)
+ag "SYSCALL_DEFINE\d(ptrace"
+kernel\ptrace.c
+1135:SYSCALL_DEFINE4(ptrace, long, request, long, pid, unsigned long, addr,
+1282:COMPAT_SYSCALL_DEFINE4(ptrace, compat_long_t, request, compat_long_t, pid,
+
+we want the one that's not compat since that's probably the 32-bit version (although in this case it would lead us to the same function in the end)
+
+In ptrace.c, first we see a function to get the task by pid 
+https://elixir.bootlin.com/linux/v5.2.11/source/kernel/ptrace.c#L1135
+1135:SYSCALL_DEFINE4(ptrace, long, request, long, pid, unsigned long, addr, unsigned long, data)
+{
+        ...
+	child = find_get_task_by_vpid(pid);
+	...
+}
+
+if you follow through the functions it eventually gets to pid_task(). Note that find_get_task_by_vpid and a couple of the underlying functions are not exported so we can't use them in the module (could if we were kernel programming), but pid_task is exported so it is usable without copying. Without looking at source, you can just google around and stack overflow also has an answer.
+https://elixir.bootlin.com/linux/v5.2.11/source/kernel/pid.c#L343
+https://stackoverflow.com/questions/8547332/efficient-way-to-find-task-struct-by-pid
+
+pid_task(find_vpid(), PIDTYPE_PID)
+
+If it wasn't mentioned in kernel internals, besides the linked list of task_struct which we have used in prior labs to iterate over all tasks, there is also sometimes a need to get the task_struct from a pid, like to send signals for example. So there is a hashtable also maintained, that gets us fast lookups based on pid. That's what the functions above that we looked are using to find the task. It's similar to how scheduler tasks and vmas have red-black trees for lookup speed but also linked lists if you want to iterate over the whole thing. 
+
+Moving forward, once it gets the task struct, it does some checks based on the type of request, then it makes sure ptrace is ready to perform the actual operation with ptrace_check_attatch(). We are looking for PTRACE_POKE/PEEKTEXT which isn't one of those cases so we want to follow to arch_ptrace
+
+...
+if (request == PTRACE_ATTACH || request == PTRACE_SEIZE) {
+		ret = ptrace_attach(child, request, addr, data);
+		/*
+		 * Some architectures need to do book-keeping after
+		 * a ptrace attach.
+		 */
+		if (!ret)
+			arch_ptrace_attach(child);
+		goto out_put_task_struct;
+	}
+
+	ret = ptrace_check_attach(child, request == PTRACE_KILL ||
+				  request == PTRACE_INTERRUPT);
+	if (ret < 0)
+		goto out_put_task_struct;
+
+	ret = arch_ptrace(child, request, addr, data);
+...
+
+Following arch_ptrace to the x86 version
+https://elixir.bootlin.com/linux/v5.2.11/source/arch/x86/kernel/ptrace.c#L762
+
+Here are more cases for request. PTRACE_POKE/PEEKTEXT is not here so we follow to the default ptrace_request()
+https://elixir.bootlin.com/linux/v5.2.11/source/kernel/ptrace.c#L899
+
+Now we finally reach PTRACE_POKE/PEEKTEXT. They call generic_[poke/peek]text_data respectively, which we will see in a moment are pretty similar.
+
+int ptrace_request(struct task_struct *child, long request,
+		   unsigned long addr, unsigned long data)
+{
+		...
+
+		switch (request) {
+		case PTRACE_PEEKTEXT:
+		case PTRACE_PEEKDATA:
+			return generic_ptrace_peekdata(child, addr, data);
+		case PTRACE_POKETEXT:
+		case PTRACE_POKEDATA:
+			return generic_ptrace_pokedata(child, addr, data);
+
+		...
+}
+
+First let's follow peekdata. It calls ptrace_access_vm, passing in the task_struct and address to read from. It passes in variables to copy the data to, tmp and sizeof(tmp), which corresponds to what it says in the man pages about PTRACE_PEEKTEXT reading a word only. It also suggests that the underlying function actually has the capability to read more than that size. Finally, the flag FOLL_FORCE is being passed in, which we will follow later.
+
+https://elixir.bootlin.com/linux/v5.2.11/source/kernel/ptrace.c#L1180
+int generic_ptrace_peekdata(struct task_struct *tsk, unsigned long addr,
+			    unsigned long data)
+{
+	unsigned long tmp;
+	int copied;
+
+	copied = ptrace_access_vm(tsk, addr, &tmp, sizeof(tmp), FOLL_FORCE);
+	...
+}
+
+NOTE: ptrace_pokedata actually does the same thing but passes in the FOLL_WRITE flag as well:
+
+https://elixir.bootlin.com/linux/v5.2.11/source/kernel/ptrace.c#L1192https://elixir.bootlin.com/linux/v5.2.11/source/kernel/ptrace.c#L1192
+int generic_ptrace_pokedata(struct task_struct *tsk, unsigned long addr,
+			    unsigned long data)
+{
+	int copied;
+
+	copied = ptrace_access_vm(tsk, addr, &data, sizeof(data),
+			FOLL_FORCE | FOLL_WRITE);
+	...
+}
+
+Both of these call ptrace_access_vm, just the pokedata version has that extra flag FOLL_WRITE. So if we have the task_struct, and an addr to read from/write to, we could technically use the function ptrace_access_vm, but it is NOT EXPORTED. Let's keep following that function down to find something usable by our module.
+
+ptrace_access_vm first does some input checks, ex making sure the task struct passed in has a non-null mm. Then eventually it calls __access_remote_vm().
+
+https://elixir.bootlin.com/linux/v5.2.11/source/kernel/ptrace.c#L40
+int ptrace_access_vm(struct task_struct *tsk, unsigned long addr,
+		     void *buf, int len, unsigned int gup_flags)
+{
+	struct mm_struct *mm;
+	int ret;
+
+	mm = get_task_mm(tsk);
+	if (!mm)
+		return 0;
+
+	if (!tsk->ptrace ||
+	    (current != tsk->parent) ||
+	    ((get_dumpable(mm) != SUID_DUMP_USER) &&
+	     !ptracer_capable(tsk, mm->user_ns))) {
+		mmput(mm);
+		return 0;
+	}
+
+	ret = __access_remote_vm(tsk, mm, addr, buf, len, gup_flags);
+	mmput(mm);
+
+	return ret;
+}
+
+__access_remote_vm is where the memory access seems to actually happen. Recall that it's common in the kernel for the function __foo() to be an internal version of the function foo() which is easier to use/has validation checks/is exported etc. In general you only want to use the internal funcs if you have looked around and know what you are skipping over, and so forth. So we look at references to __access_remote_vm to try and find that "outer" function. It turns out that there are two, access_remote_vm() and access_process_vm() that use this. access_process_vm looks more similar to ptrace_access_vm(), and it's the one that's exported, so that's the one we will use. 
+https://elixir.bootlin.com/linux/v5.2.11/source/mm/memory.c#L4441
+
+Moving on with __access_remote_vm. Remember, we pass in an address, the length we want to read/write, and the only difference was the FOLL_WRITE flag also being set. We are always passing in FOLL_FORCE. So we want to be watching where the flags come into play in this function.
+
+It starts by initializing some variables including an int write, which is set if FOLL_WRITE was set. If write is non-zero, eventually copy_to_user_page will be called, which will write to mem. Otherwise, copy_from_user_page will be called to read mem. This is where the actual read/write happens, but we need a little more investigation to see what those flags are doing.
+
+The only place we see the flags being used is get_user_pages_remote(), so that must be the function where the FOLL_FORCE etc comes into play.
+
+https://elixir.bootlin.com/linux/v5.2.11/source/mm/memory.c#L4345
+int __access_remote_vm(struct task_struct *tsk, struct mm_struct *mm,
+		unsigned long addr, void *buf, int len, unsigned int gup_flags)
+{
+	...
+	struct vm_area_struct *vma;
+	void *old_buf = buf;
+	int write = gup_flags & FOLL_WRITE;
+	...
+
+		ret = get_user_pages_remote(tsk, mm, addr, 1,
+				gup_flags, &page, &vma, NULL);
+		...
+			if (write) {
+				copy_to_user_page(vma, page, addr,
+						  maddr + offset, buf, bytes);
+				set_page_dirty_lock(page);
+			} else {
+				copy_from_user_page(vma, page, addr,
+						    buf, maddr + offset, bytes);
+			}
+	...
+}
+
+get_user_pages_remote is a small wrapper around __get_user_pages_locked()
+https://elixir.bootlin.com/linux/v5.2.11/source/mm/gup.c#L1242
+
+__get_user_pages_locked() and the subsequent functions have a lot going on, similar to most things in the kernel that we have been exploring it's easy to get lost. 
+Remember we are looking specifically to see what the FOLL_FORCE and FOLL_WRITE flags do here and don't need to dig into the rest.
+Looks like it calls __get_user_pages, and if there is a page fault it will try again, which fits what we know about page faults. So we should look further into __get_user_pages, which again is the piece that uses the flags.
+
+https://elixir.bootlin.com/linux/v5.2.11/source/mm/gup.c#L1011
+static __always_inline long __get_user_pages_locked(struct task_struct *tsk,
+						struct mm_struct *mm,
+						unsigned long start,
+						unsigned long nr_pages,
+						struct page **pages,
+						struct vm_area_struct **vmas,
+						int *locked,
+						unsigned int flags)
+{
+	...
+	for (;;) {
+		ret = __get_user_pages(tsk, mm, start, nr_pages, flags, pages,
+				       vmas, locked);
+		...
+		/*
+		 * Repeat on the address that fired VM_FAULT_RETRY
+		 * without FAULT_FLAG_ALLOW_RETRY but with
+		 * FAULT_FLAG_TRIED.
+		 */
+		...
+		ret = __get_user_pages(tsk, mm, start, 1, flags | FOLL_TRIED,
+				       pages, NULL, NULL);
+	...
+
+__get_user_pages() again is quite lengthy, and there is some documentation comments that you can read as well. 
+In the main loop, __get_user_pages() goes through each page and does some checks on it (note in our case we only have one page)
+If it's not a user gate page, then it will eventually have to pass through a check function check_vma_flags()
+
+https://elixir.bootlin.com/linux/v5.2.11/source/mm/gup.c#L740
+
+static long __get_user_pages(struct task_struct *tsk, struct mm_struct *mm,
+		unsigned long start, unsigned long nr_pages,
+		unsigned int gup_flags, struct page **pages,
+		struct vm_area_struct **vmas, int *nonblocking)
+{
+	long ret = 0, i = 0;
+	struct vm_area_struct *vma = NULL;
+	...
+	do {
+		struct page *page;
+		unsigned int foll_flags = gup_flags;
+		unsigned int page_increm;
+
+		/* first iteration or cross vma bound */
+		if (!vma || start >= vma->vm_end) {
+			vma = find_extend_vma(mm, start);
+			...
+			if (!vma || check_vma_flags(vma, gup_flags)) {
+				ret = -EFAULT;
+				goto out;
+			}
+			...
+
+And here we finally see what the flags are doing. In check_vma_flags, FOLL_FORCE will ignore the actual read/write permissions of the page, allowing you to get past the check even if a read area was not readable.
+
+https://elixir.bootlin.com/linux/v5.2.11/source/mm/gup.c#L693
+static int check_vma_flags(struct vm_area_struct *vma, unsigned long gup_flags)
+{
+	vm_flags_t vm_flags = vma->vm_flags;
+	int write = (gup_flags & FOLL_WRITE);
+	...
+	if (write) {
+		if (!(vm_flags & VM_WRITE)) {
+			if (!(gup_flags & FOLL_FORCE))
+				return -EFAULT;
+	...
+	} else if (!(vm_flags & VM_READ)) {
+		if (!(gup_flags & FOLL_FORCE))
+			return -EFAULT;
+	...
+}
+
+So access_process_vm() with FOLL_FORCE | FOLL_WRITE will eventually get to __access_process_vm, pass any checks even if VM_WRITE permission was not set, then use copy_to_user_page() to write to memory. If we want to read from memory we can specify the FOLL_FORCE flag only.
+Note that we could have just copied the functionality of the ptrace_access_vm() without really worrying about what the flags do deep down.
