@@ -1,0 +1,68 @@
+Question 1
+1 / 1 pts
+Which of the following are dynamic analysis tools? (Select all that apply) 
+Correct!
+  Valgrind 
+Correct!
+  strace 
+  objdump 
+  strings 
+ 
+Question 2
+1 / 1 pts
+Which of the following requires a runnable target? (Select all that apply) 
+Correct!
+  Hybrid Analysis 
+  Static Analysis 
+Correct!
+  Dynamic Analysis 
+ 
+Question 3
+1 / 1 pts
+Which function was most likely inline assembled with the following instructions?
+
+xor rax, rax
+mov rcx, 32
+rep stosd
+  memcpy 
+  printf 
+Correct!
+  memset 
+  strlen 
+ 
+Question 4
+1 / 1 pts
+In x64 Intel Assembly, if FPO is off, which 8-byte register is used as a base to reference stack arguments? 
+Correct!
+RBP
+Correct Answers
+rbp 
+RBP 
+ 
+Question 5
+1 / 1 pts
+What best describes the function of the following instructions?  
+
+loc_1:
+	cmp byte ptr [rax], 0x20
+	jz end
+	inc rax
+	cmp byte ptr [rax], 0
+	jnz loc_1
+end:
+Correct!
+  Finding the first occurrence of an space 
+  Filling a string with spaces 
+  Filling a buffer with NULLs 
+  Finding the first occurrence of a NULL 
+ 
+Question 6
+1 / 1 pts
+Using your new knowledge of some Linux RE analysis tools, what is the Linux loader associated with the provided crackme binary?
+Correct!
+/lib64/ld-linux-x86-64.so.2
+Correct Answers
+/lib64/ld-linux-x86-64.so.2 
+"/lib64/ld-linux-x86-64.so.2" 
+"ld-linux-x86-64.so.2" 
+ld-linux-x86-64.so.2 

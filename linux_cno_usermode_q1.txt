@@ -1,0 +1,155 @@
+Question 1
+1 / 1 pts
+Which flags does the SYSENTER instruction affect? 
+Correct!
+  IF 
+  NT 
+Correct!
+  VM 
+  The Canadian Flag 
+  SF 
+  OF 
+ 
+Question 2
+1 / 1 pts
+What is true about the following GCC extended inline assembly?
+
+void invlpg(void* m) {
+     __asm__ volatile ("invlpg (%[x])"
+         :
+         : [x] "b" (m)
+         : "memory"
+         );
+}
+  The instruction inserts a volumetric page in memory 
+Correct!
+  It tells GCC to assume memory has been clobbered by the generated assembly 
+Correct!
+  The instruction invalidates a TLB entry 
+Correct!
+  The address stored in the C variable m will be placed in a register 
+  The C variable x is operated on 
+  The output is bound to ebx 
+Correct!
+  The input is bound to the base register (rbx, ebx, bx, or bl) 
+ 
+Question 3
+1 / 1 pts
+Assuming the following starting register values, what memory address has been overwritten after the following instruction is run?  Your answer should be in 0x...hexadecimal format with no leading zeros.
+
+Starting values:
+
+rax: 0x1000
+rbx: 0x10
+rcx: 0xa
+Instruction:
+
+mov %rcx, 0x8(%rax, %rbx, 0x8)
+Correct!
+0x1088
+Correct Answers
+0x1088 
+ 
+Question 4
+1 / 1 pts
+Which of the following code snippets has been made position independent?
+
+Code A
+
+100 0000000000401106 main:
+101   401106:   55                      push   %rbp
+102   401107:   48 89 e5                mov    %rsp,%rbp
+103   40110a:   48 8d 3d 0f 2f 00 00    lea    0x2f0f(%rip),%rdi
+104   401111:   e8 07 00 00 00          callq  40111d
+105   401116:   b8 00 00 00 00          mov    $0x0,%eax
+106   40111b:   5d                      pop    %rbp
+107   40111c:   c3                      retq
+108
+109 000000000040111d:
+110   40111d:   55                      push   %rbp
+111   40111e:   48 89 e5                mov    %rsp,%rbp
+112   401121:   48 89 7d e8             mov    %rdi,-0x18(%rbp)
+113   401125:   48 c7 45 f8 05 15 00    movq   $0x1505,-0x8(%rbp)
+114   40112c:   00
+115   40112d:   eb 1e                   jmp    40114d
+116   40112f:   48 8b 45 f8             mov    -0x8(%rbp),%rax
+117   401133:   48 c1 e0 05             shl    $0x5,%rax
+118   401137:   48 89 c2                mov    %rax,%rdx
+119   40113a:   48 8b 45 f8             mov    -0x8(%rbp),%rax
+120   40113e:   48 01 c2                add    %rax,%rdx
+121   401141:   8b 45 f4                mov    -0xc(%rbp),%eax
+122   401144:   48 98                   cltq
+123   401146:   48 01 d0                add    %rdx,%rax
+124   401149:   48 89 45 f8             mov    %rax,-0x8(%rbp)
+125   40114d:   48 8b 45 e8             mov    -0x18(%rbp),%rax
+126   401151:   48 8d 50 01             lea    0x1(%rax),%rdx
+127   401155:   48 89 55 e8             mov    %rdx,-0x18(%rbp)
+128   401159:   0f b6 00                movzbl (%rax),%eax
+129   40115c:   0f b6 c0                movzbl %al,%eax
+130   40115f:   89 45 f4                mov    %eax,-0xc(%rbp)
+131   401162:   83 7d f4 00             cmpl   $0x0,-0xc(%rbp)
+132   401166:   75 c7                   jne    40112f 
+133   401168:   48 8b 45 f8             mov    -0x8(%rbp),%rax
+134   40116c:   5d                      pop    %rbp
+135   40116d:   c3                      retq
+136   40116e:   66 90                   xchg   %ax,%ax
+Code B
+
+100 0000000000401106 main:
+101   401106:   55                      push   %rbp
+102   401107:   48 89 e5                mov    %rsp,%rbp
+103   40110a:   bf 20 40 40 00          mov    $0x404020,%edi
+104   40110f:   e8 07 00 00 00          callq  40111b
+105   401114:   b8 00 00 00 00          mov    $0x0,%eax
+106   401119:   5d                      pop    %rbp
+107   40111a:   c3                      retq
+108
+109 000000000040111b :
+110   40111b:   55                      push   %rbp
+111   40111c:   48 89 e5                mov    %rsp,%rbp
+112   40111f:   48 89 7d e8             mov    %rdi,-0x18(%rbp)
+113   401123:   48 c7 45 f8 05 15 00    movq   $0x1505,-0x8(%rbp)
+114   40112a:   00
+115   40112b:   eb 1e                   jmp    40114b
+116   40112d:   48 8b 45 f8             mov    -0x8(%rbp),%rax
+117   401131:   48 c1 e0 05             shl    $0x5,%rax
+118   401135:   48 89 c2                mov    %rax,%rdx
+119   401138:   48 8b 45 f8             mov    -0x8(%rbp),%rax
+120   40113c:   48 01 c2                add    %rax,%rdx
+121   40113f:   8b 45 f4                mov    -0xc(%rbp),%eax
+122   401142:   48 98                   cltq
+123   401144:   48 01 d0                add    %rdx,%rax
+124   401147:   48 89 45 f8             mov    %rax,-0x8(%rbp)
+125   40114b:   48 8b 45 e8             mov    -0x18(%rbp),%rax
+126   40114f:   48 8d 50 01             lea    0x1(%rax),%rdx
+127   401153:   48 89 55 e8             mov    %rdx,-0x18(%rbp)
+128   401157:   0f b6 00                movzbl (%rax),%eax
+129   40115a:   0f b6 c0                movzbl %al,%eax
+130   40115d:   89 45 f4                mov    %eax,-0xc(%rbp)
+131   401160:   83 7d f4 00             cmpl   $0x0,-0xc(%rbp)
+132   401164:   75 c7                   jne    40112d
+133   401166:   48 8b 45 f8             mov    -0x8(%rbp),%rax
+134   40116a:   5d                      pop    %rbp
+135   40116b:   c3                      retq
+136   40116c:   0f 1f 40 00             nopl   0x0(%rax)
+  Code B 
+Correct!
+  Code A 
+  Neither 
+ 
+Question 5
+1 / 1 pts
+What is the correct GAS syntax to move the value 10 into the register eax?
+  mov %eax, $10 
+  move 10, %eax 
+Correct!
+  mov $10, %eax 
+  mov %eax = 10 
+ 
+Question 6
+1 / 1 pts
+The environment variable __________ is used to load a specific shared library before any other library during program execution. This allows for interception and modification of system calls and library functions.
+Correct!
+LD_PRELOAD
+Correct Answers
+LD_PRELOAD 

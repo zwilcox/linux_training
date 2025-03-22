@@ -1,0 +1,84 @@
+Question 1
+1 / 1 pts
+On a 64 bit system the following structs are packed (their size is exactly the size of all of their members):
+
+struct list_head {
+  struct list_head* next;
+  struct list_head* prev;
+}
+
+struct my_data {
+  uint64_t bob;
+  unsigned char* ptr;
+  struct list_head lnode;
+};
+If I have a pointer to a struct my_data called ptr with a value of 0x7FFDF6AE7498, and its lnode.next value is 0x7FFDBD056E00, at what memory location does the next struct my_data reside?
+
+Correct!
+0x7FFDBD056DF0
+Correct Answers
+0x7FFDBD056DF0 
+7FFDBD056DF0 
+ 
+Question 2
+1 / 1 pts
+Consider a task_struct A with two children. The "next" pointer from A's children member points to a list_head within a task_struct named sibling
+Show Answers for
+Answer 1:
+Correct!
+list_head 
+Answer 2:
+Correct!
+task_struct 
+Answer 3:
+Correct!
+sibling 
+ 
+Question 3
+1 / 1 pts
+What is the name of the parent of all kthreads? 
+Correct!
+  kthreadd 
+  init 
+  swapper 
+  scheduler 
+  None of these 
+ 
+Question 4
+1 / 1 pts
+In kernel version 5.2.15, in the function that implements the ptrace system call, what is the first function that is called if the request parameter is PTRACE_TRACEME? 
+Correct!
+  ptrace_traceme 
+  do_syscall 
+  ptrace_request 
+  sys_ptrace 
+  trace_pid 
+ 
+Question 5
+1 / 1 pts
+The VFS layer in the kernel allows write() (and other IO) system calls to perform different actions based on the type of file being used.  That is, the write system call will call different internal functions if the file descriptor used is for a file on disk, a pipe, a socket, etc.
+
+Using your understanding of ftrace and/or the kernel source code, determine the name of the function that is called from the VFS layer when you perform a write operation on a pipe.
+
+Hint: Write two very small programs, one that performs a write on a socket, and one that performs a write on a pipe.  Trace the __x64_sys_write function with function_graph for both programs and compare the two outputs. The first function the pipe program's call graph that is different from the ones in the socket program's graph is the answer.
+
+ 
+
+Correct!
+pipe_write
+Correct Answers
+pipe_write 
+pipe_write() 
+ 
+Question 6
+1 / 1 pts
+Which of the following are Linux Kernel source directories? (Select All That Apply)
+  archer 
+Correct!
+  block 
+Correct!
+  security 
+  map 
+Correct!
+  include 
+  all of these 

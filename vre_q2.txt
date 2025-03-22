@@ -1,0 +1,60 @@
+Question 1
+1 / 1 pts
+A/An 
+vUlNeRaBiLiTy
+ is a weakness or flaw in a system, software, or hardware that can be exploited by malicious actors to compromise the system's security. This exploitation can lead to unauthorized access, data breaches, system disruption, or other harmful consequences.
+Answer 1:
+Correct!vulnerability
+ 
+Question 2
+1 / 1 pts
+Affecting which register value would rank the highest priority for triage? Answer is the name of the register, example RBX.
+Correct!
+rip
+Correct Answers
+RIP 
+rip 
+ 
+Question 3
+1 / 1 pts
+Which type of protocol field will likely render basic mutation fuzzing ineffective? 
+  Newline Character 
+  Length Field 
+Correct!
+  Checksum Field 
+  Binary data 
+ 
+Question 4
+1 / 1 pts
+You have overwritten a stack buffer by abusing an unsafe call to memcpy and are about to overwrite the return address on the stack with one of your choosing. Which of the following addresses, all of which are mapped and executable, can you use? (Select All That Apply)
+Correct!
+  0x00007FFFFFFF326a 
+Correct!
+  0x00007FFFFFFF0020 
+Correct!
+  0x00007FFFFFFF25ab 
+Correct!
+  0x00007FFFFFFFda20 
+  None of these 
+ 
+Question 5
+1 / 1 pts
+When fuzzing a target binary, you get it to crash in a variety of ways. Which of the following can be promising in terms of exploitability? (Select All That Apply)
+
+Correct!
+  Core dump shows RIP=0xAAAAAAAA 
+  Crash due to divide by zero 
+  Crash due to assertion error 
+Correct!
+  Crash due to SIGILL 
+ 
+Question 6
+1 / 1 pts
+In the Use After Free lab, what best characterizes the error of the the application programmer? 
+Correct!
+  Read from a pointer to memory that may have been freed 
+  Using the same structure that stores usernames to store admin permissions 
+  Write to a pointer to memory that may be freed 
+  Requesting the same block of memory from malloc from a previous allocation 
+  Using a pointer to memory that is allocated 
+  Freeing an allocated block multiple times 

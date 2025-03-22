@@ -1,0 +1,68 @@
+Question 1
+1 / 1 pts
+What are the following instructions most likely doing?
+
+push rbp
+mov rbp, rsp
+sub rsp, 30h
+  Cleaning up the stack to perform arithmetic 
+Correct!
+  Setting up the frame pointer and allocating space for local variables 
+  Setting up the frame pointer and cleaning up local variables 
+  Cleaning up the stack after a function call 
+ 
+Question 2
+1 / 1 pts
+In Ghidra, in what views can you rename local variables? (Select all that apply) 
+Correct!
+  Decompiler View 
+Correct!
+  Listing view 
+Correct!
+  Symbol tree 
+  Register manager 
+ 
+Question 3
+1 / 1 pts
+What is the purpose of the function call tree in Ghidra? 
+  It shows the stack trace for the current function 
+Correct!
+  It shows all the functions the given function calls 
+Correct!
+  It shows all the functions that call the given function 
+  It shows all the functions that exist in the binary 
+ 
+Question 4
+1 / 1 pts
+What action will allow Ghidra to highlight all occurrences of a call instruction in the listing view? (with default settings)
+  Left clicking the text 
+  Pressing the H key 
+Correct!
+  Middle mouse button click 
+ 
+Question 5
+0 / 1 pts
+In x64 Intel Assembly and assuming FPO is off, what offset from rbp is needed to reference a local variable that was labeled by Ghidra as local_28? 
+Answer in hex with no leading zeros 0x..
+
+[rbp - ???]
+
+ 
+
+You Answered
+0x28
+Correct Answers
+0x20 
+ 
+Question 6
+1 / 1 pts
+What flag when passed to gcc embeds debug information into the binary?
+
+ 
+
+Correct!
+-g
+Correct Answers
+- g 
+-g 
+g 

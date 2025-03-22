@@ -1,0 +1,64 @@
+Question 1
+1 / 1 pts
+Which of the following are characteristics of UDP, as seen by the Application layer? 
+Correct!
+  Unordered 
+  Reliable 
+Correct!
+  Unreliable 
+  Connection-oriented 
+ 
+Question 2
+1 / 1 pts
+If host A sends a SYN with seqno 1924728 to host B, what ACK value does host B send in response? 
+  1924726 
+  1924725 
+  1924728 
+  1924727 
+Correct!
+  1924729 
+  The value is generated independently 
+ 
+Question 3
+1 / 1 pts
+Which of the following are adjectives you would use to describe TCP?
+Correct!
+  Unicast 
+  Unidirectional Only 
+  Multicast 
+  Broadcast 
+ 
+Question 4
+1 / 1 pts
+What is the maximum size of a UDP datagram's payload when encapsulated in IPv6? 
+Correct!
+65527 bytes
+Correct Answers
+65,527 
+65527 bytes 
+65527 
+65,527 bytes 
+ 
+Question 5
+1 / 1 pts
+What is the maximum data size in a TCP segment for a connection on a link-layer with a 1280 byte MTU and the IPv6 network layer protocol? 
+Correct!
+1220 bytes
+Correct Answers
+1,220 bytes 
+1,220 
+1220 
+1220 bytes 
+ 
+Question 6
+1 / 1 pts
+Which TCP flags are used for proper connection setup and tear down? (Select all that apply) 
+  PSH 
+  RST 
+Correct!
+  ACK 
+Correct!
+  FIN 
+Correct!
+  SYN 
+  PTC 

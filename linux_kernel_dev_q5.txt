@@ -1,0 +1,290 @@
+Question 1
+1 / 1 pts
+You are creating an interrupt handler (ISR) to run in response to a special hardware device needing service. However, one of the functions in the handler, do_work, runs for too much time. Which of the following is an option to resolve this issue?
+  Clear interrupts (with cli) so that your handler cannot be interrupted 
+  All of these 
+Correct!
+  Have a work queue execute do_work at a later time 
+  Call ssleep inside do_work to allow other tasks a chance to run 
+  Dynamically allocate a softirq to offload do_work 
+ 
+Question 2
+1 / 1 pts
+When you insert a kernel module (insmod my_module.ko), what is the name of the task in which your module’s init function runs?
+  kthreadd 
+  interrupt context 
+Correct!
+  insmod 
+  init 
+  the current running shell 
+ 
+Question 3
+1 / 1 pts
+Consider the function copy_to_user in kernel version 5.2.15. Assuming no errors occur, what values of the third parameter (count/length) will be treated as special cases? Assume the x86_64 architecture is used.  Only consider cases handled explicitly by C code (don't consider any inline assembly)
+  32 
+Correct!
+  2 
+Correct!
+  8 
+  3 
+Correct!
+  1 
+  14 
+Correct!
+  10 
+Correct!
+  4 
+Correct!
+  16 
+  12 
+ 
+Question 4
+Not yet graded / 1 pts
+Given shuf_user and shuf_shared.h, implement a device driver that will allow shuf_user to print out its flag. You will be required to implement Read, Write, and Lseek. Information on what the operations should do is provided in shuf_shared.h
+
+Read and Lseek should work as typically expected for reading and seeking in the buffer.
+
+Write will not overwrite bytes in the buffer, but will xor the existing bytes with the input bytes, byte for byte at the correct offset.
+
+Upon proper creation of the driver, the usermode program will print out the flag.
+
+For more information, see the shared header file provided. (shuf_shared.h)
+
+Provide code and answer. This will be hand-graded by the instructor.
+
+0.5 pt - Provide your code
+0.5 pt - Provide your answer
+
+Your Answer:
+FLAG{THE_CHARACTER_DRIVER_IS_RYAN_GOSLING}
+
+ 
+
+#include <linux/module.h>
+#include <linux/fs.h>
+#include <linux/cdev.h>
+#include <linux/uaccess.h>
+#include <linux/mutex.h>  
+#include "shuf_shared.h"
+
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("Zach W");
+MODULE_DESCRIPTION("XOR-based kmem driver for shuf_user");
+MODULE_VERSION("1.0");
+
+static dev_t shuf_dev;
+static struct cdev shuf_cdev;
+static DEFINE_MUTEX(shuf_mutex);
+
+static unsigned char shufbuf[SHUFBUF_SZ];
+
+static int shuf_open(struct inode *inode, struct file *filp)
+{
+    return 0;
+}
+
+static int shuf_release(struct inode *inode, struct file *filp)
+{
+    return 0;
+}
+
+static ssize_t shuf_read(struct file *filp, char __user *buf,
+                         size_t count, loff_t *ppos)
+{
+    ssize_t retval = 0;
+
+    mutex_lock(&shuf_mutex);
+
+    if (*ppos >= SHUFBUF_SZ)
+    {
+        goto out;
+    }
+
+    if (count > SHUFBUF_SZ - *ppos)
+    {
+        count = SHUFBUF_SZ - *ppos;
+    }
+   
+    if (copy_to_user(buf, &shufbuf[*ppos], count))
+    {
+        retval = -EFAULT;
+        goto out;
+    }
+
+    *ppos += count;
+
+    retval = count;
+
+    //ugh gotos.  but i think it makes since here with the lock
+out:
+    mutex_unlock(&shuf_mutex);
+    return retval;
+}
+
+static ssize_t shuf_write(struct file *filp, const char __user *buf,
+                          size_t count, loff_t *ppos)
+{
+    ssize_t written = 0;
+    size_t to_write = 0;
+    size_t i = 0;
+    unsigned char tmp[256];
+
+    mutex_lock(&shuf_mutex);
+
+    if (*ppos >= SHUFBUF_SZ)
+    {
+        goto out;
+    }
+       
+    to_write = count;
+    if (to_write > (SHUFBUF_SZ - *ppos))
+    {
+        to_write = SHUFBUF_SZ - *ppos;
+    }        
+
+    if (copy_from_user(tmp, buf, to_write))
+    {
+        written = -EFAULT;
+        goto out;
+    }
+
+    for (i = 0; i < to_write; i++)
+        shufbuf[*ppos + i] ^= tmp[i];
+
+    *ppos += to_write;
+
+    written = to_write;
+
+out:
+    mutex_unlock(&shuf_mutex);
+    return written;
+}
+
+static loff_t shuf_llseek(struct file *filp, loff_t offset, int whence)
+{
+    loff_t newpos;
+
+    mutex_lock(&shuf_mutex);
+
+    switch (whence)
+    {
+        case SEEK_SET:
+            newpos = offset;
+            break;
+        case SEEK_CUR:
+            newpos = filp->f_pos + offset;
+            break;
+        case SEEK_END:
+            newpos = SHUFBUF_SZ + offset;
+            break;
+        default:
+            mutex_unlock(&shuf_mutex);
+            return -EINVAL;
+    }
+
+    if (newpos < 0)
+    {
+        newpos = 0;
+    }  
+
+    if (newpos > SHUFBUF_SZ)
+    {
+        newpos = SHUFBUF_SZ;
+    }
+
+    filp->f_pos = newpos;
+
+    mutex_unlock(&shuf_mutex);
+    return newpos;
+}
+
+static const struct file_operations shuf_fops =
+{
+    .owner   = THIS_MODULE,
+    .open    = shuf_open,
+    .release = shuf_release,
+    .read    = shuf_read,
+    .write   = shuf_write,
+    .llseek  = shuf_llseek,
+};
+
+
+static int __init shuf_init(void)
+{
+    int ret;
+
+    pr_info("shuf_driver: init\n");
+
+    shuf_dev = MKDEV(SHUF_MAJ, SHUF_MIN);
+
+    ret = register_chrdev_region(shuf_dev, 1, "shuf_driver");
+    if (ret < 0)
+    {
+        pr_err("shuf_driver: Failed to register_chrdev_region\n");
+        return ret;
+    }
+
+    cdev_init(&shuf_cdev, &shuf_fops);
+    shuf_cdev.owner = THIS_MODULE;
+
+    ret = cdev_add(&shuf_cdev, shuf_dev, 1);
+    if (ret < 0)
+    {
+        pr_err("shuf_driver: cdev_add failed\n");
+        unregister_chrdev_region(shuf_dev, 1);
+        return ret;
+    }
+
+    memset(shufbuf, 0, SHUFBUF_SZ);
+
+    pr_info("shuf_driver: loaded. Major=%d, Minor=%d\n",
+            MAJOR(shuf_dev), MINOR(shuf_dev));
+    return 0;
+}
+
+static void __exit shuf_exit(void)
+{
+    cdev_del(&shuf_cdev);
+    unregister_chrdev_region(shuf_dev, 1);
+    pr_info("shuf_driver: exit\n");
+}
+
+module_init(shuf_init);
+module_exit(shuf_exit);
+ 
+Question 5
+1 / 1 pts
+Kernel version 5.2.15 has an implementation of kmalloc (using SLUB) that selects an appropriate cache based on two index values:
+
+kmalloc_caches[
+1
+ ][
+9
+ ]
+
+What would these indices be when kmalloc is called like it is below?
+
+kmalloc(333, __GFP_RECLAIMABLE | __GFP_ZERO);
+
+ 
+
+Answer 1:
+Correct!1
+Correct Answer
+0x1 
+Answer 2:
+Correct!9
+Correct Answer
+0x9 
+ 
+Question 6
+1 / 1 pts
+A struct super_block contains which of the following? (Select All That Apply)
+Correct!
+  struct super_operations 
+  A pointer to a dentry for current directory 
+Correct!
+  A pointer to a dentry for the root directory 
+Correct!
+  The file system’s block size 
+  pid 

@@ -1,0 +1,83 @@
+Question 1
+1 / 1 pts
+Which of the following shared libraries does "echo" dynamically link with? (Select All That Apply) 
+  libpthread.so.0 
+  libselinux.so.1 
+  libpcre2-8.so.0 
+  libcap.so.2 
+Correct!
+  /lib64/ld-linux-x86-64.so.2 
+Correct!
+  libc.so.6 
+  libdl.so.2 
+ 
+Question 2
+1 / 1 pts
+Under which circumstances should you make an instance of struct sockaddr? 
+  When you're using IPv6 addresses 
+  When you're calling recvfrom and don't know the address type of the remote endpoint 
+Correct!
+  You should never do this 
+  When you're using IPv4 addresses 
+ 
+UnansweredQuestion 3
+0 / 2 pts
+Find the flag hidden within "question3.so". 
+
+Use explicit loading
+
+1 pt - please provide your code
+
+1 pt - please provide your answer 
+
+ 
+
+Your code will be hand-graded by the instructor.
+
+Your Answer:
+ 
+Question 4
+1 / 1 pts
+What does fork() return on failure? 
+  The value 0 is returned to the parent, no child is created 
+  The value -1 is returned to the parent, the child is created, prints to stderror, and is destroyed. 
+Correct!
+  The value -1 is returned to the parent, no child is created. 
+  Nothing, causes a core dump. 
+ 
+Question 5
+1 / 1 pts
+Which of the following outputs are possible given the following program, given that none of the functions called will result in an error. (Select All That Apply)
+
+int main() {
+        fork();
+	if (!fork()) {
+		fork();
+		execl("/bin/echo", "echo", "-n", "B", NULL);
+		fork();
+	}
+
+	printf("A");
+	fflush(NULL);
+	execl("/bin/echo", "echo", "-n", "C", NULL);
+	printf("D");
+
+	return 0;
+}
+Correct!
+  ACACBBBB 
+Correct!
+  AACBCBBB 
+  CAACBBBB 
+  AACBACBACBAC 
+Correct!
+  AACBBBCB 
+  BBACAC 
+  AACBBBBCDDD 
+ 
+UnansweredQuestion 6
+0 / 1 pts
+You have been provided "q6_client", which immediately raises SIGSTOP once run. Create a server that listens on port 8080 of localhost. Then, send the SIGCONT signal to the client in order to receive the flag. 
+You Answered
+Correct Answers
+443 

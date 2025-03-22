@@ -1,0 +1,119 @@
+Question 1
+0.67 / 1 pts
+As a programmer, you suspect that your program will be subject to LD_PRELOAD once run on a target system. Which of the following options can you employ to prevent your program from using the shared objects identified in LD_PRELOAD? 
+Correct!
+  Statically link with the library functions you use 
+Correct Answer
+  Open the shared object explicitly using dlopen 
+  Make sure your rpath only includes .so files you trust 
+Correct!
+  Have the program fork, unset the LD_PRELOAD environment variable programmatically, and exec itself 
+ 
+Question 2
+1 / 1 pts
+Given the following output from readelf, how much space (in bytes) is available after the executable section in which we could insert code?
+
+Program Headers:
+  Type           Offset   VirtAddr           PhysAddr           FileSiz  MemSiz   Flg Align
+  PHDR           0x000040 0x0000000000000040 0x0000000000000040 0x0002a0 0x0002a0 R   0x8
+  INTERP         0x0002e0 0x00000000000002e0 0x00000000000002e0 0x00001c 0x00001c R   0x1
+      [Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]
+  LOAD           0x000000 0x0000000000000000 0x0000000000000000 0x001250 0x001250 R   0x1000
+  LOAD           0x002000 0x0000000000002000 0x0000000000002000 0x003cd1 0x003cd1 R E 0x1000
+  LOAD           0x006000 0x0000000000006000 0x0000000000006000 0x0020e0 0x0020e0 R   0x1000
+  LOAD           0x008bd0 0x0000000000009bd0 0x0000000000009bd0 0x0004b0 0x000608 RW  0x1000
+  DYNAMIC        0x008c58 0x0000000000009c58 0x0000000000009c58 0x0001f0 0x0001f0 RW  0x8
+  NOTE           0x000300 0x0000000000000300 0x0000000000000300 0x000020 0x000020 R   0x8
+  NOTE           0x000320 0x0000000000000320 0x0000000000000320 0x000044 0x000044 R   0x4
+  GNU_EH_FRAME   0x00728c 0x000000000000728c 0x000000000000728c 0x000274 0x000274 R   0x4
+  GNU_STACK      0x000000 0x0000000000000000 0x0000000000000000 0x000000 0x000000 RW  0x10
+  GNU_RELRO      0x008bd0 0x0000000000009bd0 0x0000000000009bd0 0x000430 0x000430 R   0x1
+
+You Answered
+Eight Hundred and fifteen bytes. (0x32F Bytes). 
+Correct Answers
+815 
+0x32F 
+32F 
+0x32f 
+ 
+Question 3
+1 / 1 pts
+The non-PIE ELF file q2_proc, with PID 12024, has been put to sleep in the function fgetc, waiting for user input. Its entry in /proc/12024/maps is as follows:
+
+00400000-00401000 r--p 00000000 fd:02 10225453                           /home/student/q2_proc
+00401000-00402000 r-xp 00001000 fd:02 10225453                           /home/student/q2_proc
+00402000-00403000 r--p 00002000 fd:02 10225453                           /home/student/q2_proc
+00403000-00404000 r--p 00002000 fd:02 10225453                           /home/student/q2_proc
+00404000-00405000 rw-p 00003000 fd:02 10225453                           /home/student/q2_proc
+00942000-00963000 rw-p 00000000 00:00 0                                  [heap]
+7f2d8d1b1000-7f2d8d1d3000 r--p 00000000 fd:00 3944571                    /usr/lib64/libc-2.29.so
+7f2d8d1d3000-7f2d8d320000 r-xp 00022000 fd:00 3944571                    /usr/lib64/libc-2.29.so
+7f2d8d320000-7f2d8d36c000 r--p 0016f000 fd:00 3944571                    /usr/lib64/libc-2.29.so
+7f2d8d36c000-7f2d8d36d000 ---p 001bb000 fd:00 3944571                    /usr/lib64/libc-2.29.so
+7f2d8d36d000-7f2d8d371000 r--p 001bb000 fd:00 3944571                    /usr/lib64/libc-2.29.so
+7f2d8d371000-7f2d8d373000 rw-p 001bf000 fd:00 3944571                    /usr/lib64/libc-2.29.so
+7f2d8d373000-7f2d8d379000 rw-p 00000000 00:00 0
+7f2d8d392000-7f2d8d393000 r--p 00000000 fd:00 3943958                    /usr/lib64/ld-2.29.so
+7f2d8d393000-7f2d8d3b3000 r-xp 00001000 fd:00 3943958                    /usr/lib64/ld-2.29.so
+7f2d8d3b3000-7f2d8d3bb000 r--p 00021000 fd:00 3943958                    /usr/lib64/ld-2.29.so
+7f2d8d3bc000-7f2d8d3bd000 r--p 00029000 fd:00 3943958                    /usr/lib64/ld-2.29.so
+7f2d8d3bd000-7f2d8d3be000 rw-p 0002a000 fd:00 3943958                    /usr/lib64/ld-2.29.so
+7f2d8d3be000-7f2d8d3bf000 rw-p 00000000 00:00 0
+7ffde68c8000-7ffde68ea000 rw-p 00000000 00:00 0                          [stack]
+7ffde695a000-7ffde695d000 r--p 00000000 00:00 0                          [vvar]
+7ffde695d000-7ffde695e000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+An objdump of the portion of main() where fgetc is called is shown below:
+
+0000000000401136 :
+  401136:       55                      push   %rbp
+  401137:       48 89 e5                mov    %rsp,%rbp
+  40113a:       48 83 ec 10             sub    $0x10,%rsp
+  40113e:       bf 10 20 40 00          mov    $0x402010,%edi
+  401143:       e8 e8 fe ff ff          callq  401030 <puts@plt>
+  401148:       48 8b 05 e1 2e 00 00    mov    0x2ee1(%rip),%rax        # 404030 <stdin@@GLIBC_2.2.5>
+  40114f:       48 89 c7                mov    %rax,%rdi
+  401152:       e8 e9 fe ff ff          callq  401040 <fgetc@plt>
+  401157:       88 45 ff                mov    %al,-0x1(%rbp)
+  40115a:       b8 00 00 00 00          mov    $0x0,%eax
+  40115f:       c9                      leaveq
+  401160:       c3                      retq
+You want to modify the return address on the stack to redirect execution to a location of your choice when fgetc finishes. What is the return address on the stack that will be jumped to when fgetc finishes?  Your answer should be in 0x...hexadecimal format without no leading zeros.
+
+Correct!
+0x401157
+Correct Answers
+0x401157 
+ 
+Question 4
+1 / 1 pts
+Which of the following places can you put the code for ELF injection poisoning?
+  Poisoning the stack 
+Correct!
+  Fit in the cracks 
+Correct!
+  Use existing headers for a section that isn't needed 
+Correct!
+  Use an existing section that isn’t needed 
+ 
+Question 5
+1 / 1 pts
+Which of the following techniques can be used to inject malicious code into a process's memory space using the /proc filesystem?
+  Overwriting the /proc/<pid>/cmdline file 
+  Editing the /proc/<pid>/status file 
+  Modifying the /proc/<pid>/environ file 
+Correct!
+  Writing directly to the /proc/<pid>/mem file 
+ 
+Question 6
+1 / 1 pts
+What ptrace request is used to set registers on the trace?
+  PTRACE_PEEKDATA 
+  PTRACE_ATTACH 
+  PTRACE_GETREGS 
+  PTRACE_POKETEXT 
+Correct!
+  PTRACE_SETREGS 
+  PTRACE_CONT

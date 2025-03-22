@@ -1,0 +1,302 @@
+Question 1
+2 / 2 pts
+From History.txt in the regex mini-lab, what is the 1337th character of the file? 
+
+1pt - please provide your code 
+1pt - please provide an final answer (i.e. - we should not need to run your code to obtain your answer)
+Your code will be hand-graded by the instructor.
+
+Your Answer:
+with open("History.txt", "r") as f:
+    s = f.read()
+    print(s[1337])  # if we're 1 indexing the file
+    print(s[1336])  # if we're 0 indexing the file
+ 
+
+2
+1
+
+ 
+Question 2
+1 / 1 pts
+What is the type of each element in sys.argv? 
+  <class 'set'> 
+  <class 'list'> 
+  <class 'tuple'> 
+Correct!
+  <class 'str'> 
+ 
+Question 3
+1 / 1 pts
+Which of the following is are valid modes to open a file? (Select all that apply)
+Correct!
+  ab 
+  rw 
+Correct!
+  r+ 
+Correct!
+  w+ 
+ 
+Question 4
+2 / 2 pts
+What are the first 5 numbers that are divisible by 17 and 46, not including 0? 
+
+1pt - please provide your code 
+1pt - please provide an final answer (i.e. - we should not need to run your code to obtain your answer)
+Your code will be hand-graded by the instructor.
+
+Your Answer:
+results = []
+number = 45
+while len(results) < 5:
+    number += 1
+    if number % 46 == 0 and number % 17 == 0:
+        results.append(number)
+
+print(results)
+[782, 1564, 2346, 3128, 3910]
+ 
+Question 5
+0 / 1 pts
+Choose the built-in types that do not support a sort() function. (Select all that apply)
+Correct Answer
+  tuple 
+Correct Answer
+  dict 
+Correct Answer
+  str 
+You Answered
+  list 
+ 
+Question 6
+1 / 1 pts
+Which of the following are mutable? (Select all that apply)
+Correct!
+  Dictionaries 
+  Strings 
+Correct!
+  Lists 
+  Numbers 
+ 
+Question 7
+1 / 1 pts
+This keyword is used in generator functions to stop execution and return control to the caller, but maintain an internal state for the next iteration:
+Correct!
+yield
+Correct Answers
+"yield" 
+yield 
+ 
+Question 8
+0.5 / 2 pts
+Figure out the secret phrase given the following:
+A --> H, a --> h
+B --> I, b --> i
+C --> J, c --> j
+... (Pattern continues)
+"Mabl phnew atox mtdxg t ehgz mbfx mh wh ur atgw"
+
+1pt - please provide your code 
+1pt - please provide an final answer (i.e. - we should not need to run your code to obtain your answer)
+Your code will be hand-graded by the instructor.
+
+Your Answer:
+value = ord('H') - ord('A')
+
+crypt = 'Mabl phnew atox mtdxg t ehgz mbfx mh wh ur atgw'
+pt = ''.join([chr(ord(i) + value) for i in crypt])
+print(pt)
+This'woul~'h{v't{kn'{'lon'tim'to'~o'|y'h{n~
+ 
+Question 9
+1 / 1 pts
+When defining a regular class member method, what must the first parameter be?
+Correct!
+  self 
+  A variable that will be output 
+  a doc string 
+  __class__ 
+ 
+Question 10
+1 / 1 pts
+If no return statement is reached at the end of a function, what is the return value?
+  0 
+Correct!
+  None 
+  False 
+  <class 'NoneType'> 
+  [] 
+ 
+Question 11
+1 / 1 pts
+This built-in function gives us a listing of all of the attributes and functions/methods defined within an object?
+Correct!
+dir
+Correct Answers
+__dir__() 
+dir() 
+dir 
+ 
+Question 12
+1 / 1 pts
+What object describes which sub-modules are imported when 'from <package> import *' is invoked?
+  __import__ 
+  __builtins__ 
+  __name__ 
+Correct!
+  __all__ 
+ 
+Question 13
+2 / 2 pts
+What is the 100th prime number?
+
+1pt - please provide your code 
+1pt - please provide an final answer (i.e. - we should not need to run your code to obtain your answer)
+Your code will be hand-graded by the instructor.
+
+Your Answer:
+def find_nth_prime(n):
+    primes = []
+    candidate = 2
+    while len(primes) < n:
+       
+        if all(candidate % p != 0 for p in primes):
+            primes.append(candidate)
+        candidate += 1
+   
+    return primes[-1]
+
+print(find_nth_prime(100))
+541
+ 
+Question 14
+2 / 2 pts
+ Produce the SHA1 hexdigest for the string "The quick brown fox jumps over the lazy dog."  Note: be sure to include the . at the end!
+
+1pt - please provide your code 
+1pt - please provide an final answer (i.e. - we should not need to run your code to obtain your answer)
+Your code will be hand-graded by the instructor.
+
+Your Answer:
+import hashlib
+s = "The quick brown fox jumps over the lazy dog."
+h = hashlib.sha1(s.encode()).hexdigest()
+print(h)
+408d94384216f890ff7a0c3528e8bed1e0b01621
+ 
+Question 15
+1 / 1 pts
+What format string can we pass into struct.unpack() to get it to unpack the data string into four Big-Endian 2-byte values? (Select all that apply)
+  "<4h" 
+Correct!
+  ">4h" 
+  "<hhhh" 
+Correct!
+  ">hhhh" 
+ 
+Question 16
+1 / 1 pts
+Determine the value of the a object when the final print occurs.  Your answer should be an integer.
+
+a = 3
+
+def func():
+    a = 9
+
+func()
+print(a)
+Correct!
+3
+Correct Answers
+3 
+ 
+Question 17
+1 / 1 pts
+The Exception class is a sub class of which of the following? (Select all that apply)
+  AllException 
+Correct!
+  object 
+Correct!
+  BaseException 
+  __exception__ 
+ 
+Question 18
+1 / 1 pts
+In a try/except block, when is 'finally' run?
+  Upon exit from the program 
+  Only if exceptions were caught and handled correctly 
+Correct!
+  Always 
+  Only if no exceptions were caught 
+ 
+Question 19
+1 / 1 pts
+If a module is not already loaded, what is the first place the interpreter will look in its attempt to load that module?
+  PYTHONPATH 
+  c:\windows\system32 
+  The installation default path 
+Correct!
+  sys.path[0] 
+ 
+Question 20
+1 / 1 pts
+What is sys.argv[3] for the following commandline - "python foo.py -f file.txt -q 1 -v 1"?
+Correct!
+-q
+Correct Answers
+-q 
+q 
+ 
+Question 21
+1 / 1 pts
+Consider the following function:
+
+def foo(x=[]):
+
+    x.append('bar')
+
+    return x
+
+ 
+
+What does the second call to foo() return?
+
+foo() <-- First Call
+
+foo() <-- Second Call
+
+Correct!
+['bar', 'bar']
+Correct Answers
+['bar', 'bar'] 
+ 
+Question 22
+1 / 1 pts
+Which of the following exceptions will this try/except block catch? (Select all that apply)
+
+
+try:
+    # Code
+except (LookupError, IOError):
+    # Code
+
+  BaseException 
+Correct!
+  IndexError 
+Correct!
+  IOError 
+  RuntimeError 
+ 
+Question 23
+1 / 1 pts
+What is the value of the x object after the following code is executed?
+
+x = "Darth Vader"
+x.upper()
+Correct!
+"Darth Vader"
+Correct Answers
+'Darth Vader' 
+Darth Vader 
+'''Darth Vader''' 
+"Darth Vader" 

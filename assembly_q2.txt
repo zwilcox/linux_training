@@ -1,0 +1,108 @@
+Question 1
+1 / 1 pts
+Given the following NASM struc:
+
+
+struc MyStruc
+    .aLongVar resd 1
+    .aByteVar resb 1
+    .aByteArray resb 6
+    .byteVar2 resb 1
+    .aShortVar resw 1
+endstruc
+Assuming the structure above sits at the address 0x12345678, what would be the address of the 5th element within MyStruc.aByteArray?  Your answer should be in 0x...hexadecimal format without leading zeros.
+
+Correct!
+0x12345681 
+Correct Answers
+0x12345681 
+ 
+Question 2
+1 / 1 pts
+What registers are directly modified during the rep lodsb instruction? (Select all that apply) 
+  RBX
+Correct!
+  RSI
+Correct!
+  RCX
+Correct!
+  RAX
+  RDI
+  RDX
+ 
+Question 3
+1 / 1 pts
+What will be the value of RSI at the end of these instructions? Assume both RDI and RSI are valid address, and the instructions execute properly.
+
+...
+std
+mov rdi, 0x12345678
+mov rsi, 0x10
+mov rcx, 4
+rep movsd
+  0x8 
+  0x4 
+  Not enough information to determine 
+Correct!
+  0x0 
+  0x10 
+ 
+Question 4
+0 / 1 pts
+What is wrong with the following assembly code?
+
+; void strlen2(str1, str2)
+; // gets combined strlen of two strings
+strlen2:
+  push r12
+  call strlen
+  mov r12, rax
+  mov rdi, rsi
+  call strlen
+  add rax, r12
+  pop r12
+  ret
+  There is no argument set up for the first strlen call 
+You Answered
+  There is nothing wrong 
+  The code does not use RBP properly 
+Correct Answer
+  The code uses a volatile register after it may have been changed 
+ 
+Question 5
+1 / 1 pts
+Assume SomeFunction takes eight arguments. What is the offset needed to read the 8th argument in the following function entry code? Answer should be in 0x... hexadecimal format without leading zeros.
+
+push rbx
+mov rax, [rsp+???]
+Correct!
+0x18
+Correct Answers
+0x18 
+ 
+Question 6
+1 / 1 pts
+Which of the following must be preserved by the callee?
+  R11
+  RDI
+Correct!
+  R12
+Correct!
+  RBP
+  RCX
+Correct!
+  R15
+Correct!
+  R13
+Correct!
+  RSP
+Correct!
+  RBX
+  R8
+  RDX
+  R9
+Correct!
+  R14
+  RSI
+  RAX
+  R10

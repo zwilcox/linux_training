@@ -1,0 +1,65 @@
+Question 1
+1 / 1 pts
+According to the state diagram of a TCP connection, what is the first state entered when a FIN packet is sent?
+Correct!
+FIN_WAIT_1
+Correct Answers
+FIN WAIT-1 
+FIN WAIT 1 
+FIN-WAIT-1 
+FIN_WAIT_1 
+ 
+Question 2
+1 / 1 pts
+The bind() function can be used on which side of a TCP connection? 
+  Neither Client nor Server 
+Correct!
+  Both Client and Server 
+  Server Only 
+  Client Only 
+ 
+Question 3
+1 / 1 pts
+In Python, what can the listen() function take as an argument? 
+  Server port 
+  Protocol 
+  Client port 
+  Not enough information 
+Correct!
+  Queue Depth/Backlog 
+ 
+Question 4
+1 / 1 pts
+What protocol does an AF_INET, SOCK_STREAM socket correspond to?
+
+Correct!
+TCP
+Correct Answers
+transmission control protocol 
+TCP 
+Transmission Control Protocol 
+tcp 
+ 
+Question 5
+1 / 1 pts
+What answers below are True about Fully Qualified Domain Names (FQDN's)? (Select all that apply)
+Correct!
+  Can contain a dash 
+Correct!
+  Each label can be up to 63 characters long 
+  Case-sensitive 
+  None of these 
+  All of these 
+ 
+Question 6
+1 / 1 pts
+Which of the following are Valid DHCPv6 message types? (Select all that apply)
+  All of these 
+Correct!
+  SOLICIT 
+  BROADCAST 
+  LEASE 
+  None of these 
+  DENY 
+Correct!
+  REQUEST 

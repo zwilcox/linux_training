@@ -1,0 +1,99 @@
+Question 1
+1 / 1 pts
+You are building a custom linux system that needs to handle multiple interrupts extremely time sensitive. The high volume of interrupts requires that your bottom half run on multiple CPU cores simultaneously, and you have programmed it to never block. What bottom half mechanism is your best option for this setup? 
+  scheduler 
+  work queue 
+  tasklet 
+Correct!
+  softirq 
+ 
+Question 2
+0 / 1 pts
+You have a 32-byte object you wish to allocate within a kmem cache storing objects of 32 bytes in size. Assuming the kmem cache has 4 partial slabs within it, how many new pages must be allocated to perform this operation? 
+You Answered
+0 new pages yo
+Correct Answers
+0 
+ 
+Question 3
+0.67 / 1 pts
+What is wrong with the following definition for a write operation for a file_operations struct?
+
+ 
+
+static ssize_t my_write(struct file* filp, const char __user* buf, size_t size, loff_t* offset) {
+    ssize_t len = min((ssize_t)(1024 - *offset), (ssize_t)size);
+    char buffer[1024];
+    ...
+    memcpy(buffer + *offset, buf, len);
+    *offset += len;
+    ...
+    /* success */
+    return 5;
+}
+Correct!
+  It may cause programs that use it to enter an infinite loop 
+Correct!
+  It does not safely copy memory from usersapce 
+Correct!
+  The memcpy may overflow the local buffer 
+You Answered
+  It does not properly make use of the loff_t* parameter 
+ 
+Question 4
+1 / 1 pts
+What is the proper order of events to get the provided whatdodrv.c file to output the flag?
+Correct!
+ioctl cmd 0 arg 27 
+3
+Correct!
+lseek to 3 
+5
+Correct!
+ioctl cmd 50 arg 0 
+2
+Correct!
+read the flag 
+7
+Correct!
+Open node to 246:121 
+1
+Correct!
+ioctl cmd 80 arg 14 
+4
+Correct!
+ioctl cmd 1 arg 2 
+6
+ 
+Question 5
+1 / 1 pts
+On an x86-64 system, the CPU uses the 
+CR3
+ register for virtual address translation, the 
+LSTAR
+ register for storing the location of the system call handler, and the 
+IDTR 
+ register to to store the location of the IDT .
+Answer 1:
+Correct!CR3
+Correct Answer
+cr3 
+Answer 2:
+Correct!LSTAR
+Correct Answer
+lstar 
+Correct Answer
+LStar 
+Answer 3:
+Correct!IDTR
+Correct Answer
+idtr 
+ 
+Question 6
+1 / 1 pts
+As an unsigned 32 bit integer, what is the device number for /dev/urandom (Maj 1, Min 9) 
+Correct!
+  0x100009 
+  0x190000 
+  0x900001 
+  None of these are correct 

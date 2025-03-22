@@ -1,0 +1,89 @@
+Question 1
+1 / 1 pts
+Your shared object has been loaded into a target binary. Your shared object searches GOT entries for those that match the address of the "puts" function, and modifies them to point to a special "puts" function wrapper. However, you notice that your hook is not being called. Which of the following is a possible explanation for why your "puts" function wrapper is not being invoked? 
+  The "puts" function was optimized out, being replaced with printf 
+  The "puts" function was dynamically linked 
+Correct!
+  The "puts" function had never been called by the target program before the hook was attempted 
+  The shared object modified the target's GOT and not its own 
+ 
+Question 2
+1 / 1 pts
+You are injecting custom memory into a running program. You decide to do this using the ptrace API. The address in the program where you wish to write your code is 0x820432, but it is not executable. What can you do to overcome this? 
+  Change the target's RIP to the address of mprotect in libc 
+Correct!
+  Insert new instructions in the target's memory that is already executable that will call mprotect on 0x820432 
+  Use the GOT to call mprotect on 0x820432 
+  Change RIP in the target process to 0x820432 
+ 
+Question 3
+1 / 1 pts
+You are stepping through a program that has its printf function hooked by an entry stub trampoline technique. As you step through a call to printf, what is the correct order of events? 
+Correct!
+1 
+A call to printf (original address)
+Correct!
+2 
+A jump to the wrapper function
+Correct!
+3 
+Wrapper filters input
+Correct!
+4 
+Wrapper calls the trampoline
+Correct!
+5 
+Trampoline executes the overwritten portion of printf
+Correct!
+6 
+A jump to the nonoverwritten instructions of printf
+Correct!
+7 
+A return from printf
+Correct!
+8 
+Wrapper filters output
+Correct!
+9 
+A return from the wrapper
+ 
+Question 4
+1 / 1 pts
+Suppose that you are going to apply a 5-byte jump patch on the function below, and use a 5-byte jump at the end of the trampoline (to return to the original):
+
+INSTRUCTION BYTES  INSTRUCTION
+6A 2C              push 0x2C 
+68 F8 04 FE 7D     push 0x7DFE04F8 
+8B 75 08           mov esi, dword [ebp+8] 
+33 C0              xor eax, eax 
+83 EC 30           sub esp, 30h 
+89 44 24 f0        mov dword [esp-10h], eax 
+How many total bytes are needed for the entry stub trampoline?
+
+You Answered
+12 bytes
+Correct Answers
+0xc 
+12 
+c 
+Ok
+ 
+Question 5
+1 / 1 pts
+The ________________ system call creates a new anonymous memory region, accessible only through a file descriptor. This is often used for creating temporary files in memory, avoiding the overhead of disk I/O.
+Correct!
+memfd_create
+Correct Answers
+memfd_create 
+memfd_create() 
+ 
+Question 6
+1 / 1 pts
+Which of the following are some general hardening techniques? (Select All That Apply)
+  Don't worry about what may show up in strings 
+Correct!
+  Run in surprising locations 
+Correct!
+  Get rid of symbols 
+Correct!
+  Include Red Herrings 

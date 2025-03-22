@@ -1,0 +1,73 @@
+Question 1
+1 / 1 pts
+What is the CAM of an Ethernet switch used to store?
+  ARP response packets 
+  Routing table 
+Correct!
+  MAC addresses available on physical ports 
+  Queued frames 
+ 
+Question 2
+1 / 1 pts
+Which of the following addresses could be used to reach all fe80 nodes on a LAN segment?
+Correct!
+  ff02::1 
+  ff02::2 
+  ff0g::2 
+  ff03::1 
+  ff01::1 
+ 
+Question 3
+1 / 1 pts
+What are the characteristics of Ethernet address 03:00:31:33:70:00?  (Select all that apply)
+Correct!
+  Locally administered 
+  Globally unique 
+Correct!
+  Multicast 
+  Unicast 
+ 
+Question 4
+1 / 1 pts
+Which of the following IS a valid TCP header option? (Select all that apply)
+Correct!
+  Timestamp 
+Correct!
+  Window Scale 
+  Fragment 
+Correct!
+  NOP 
+ 
+Question 5
+1 / 1 pts
+Which of the following are valid IPv6 extension headers?  (Select all that apply)
+Correct!
+  Authentication 
+  None of these 
+Correct!
+  Fragment 
+Correct!
+  Routing 
+  Maximum Segment Size 
+ 
+Question 6
+1 / 1 pts
+My IP address is 2001::1, what type of address is it?
+  Link-Local 
+  Multicast Address 
+  Public Local Address 
+Correct!
+  Aggregatable Global Unicast Address 
+  Not enough information 
+ 
+Question 7
+1 / 1 pts
+Which flag is set in the TCP header directly resulting from a connect() call on a TCP socket?
+  ACK 
+  FIN 
+Correct!
+  SYN 
+  RST 
+  PSH 
+  PTC 
+  URG 

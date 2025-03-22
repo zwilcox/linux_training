@@ -1,0 +1,172 @@
+Question 1
+0.67 / 1 pts
+Which of the following functions is thread safe according to documentation? (Select All That Apply) 
+  localtime 
+  strtok 
+Correct!
+  printf 
+Correct!
+  fopen 
+Correct Answer
+  srand 
+ 
+Question 2
+1 / 1 pts
+A multi-threaded program creates 3 producer threads and 20 consumer threads.
+
+During execution, the producer threads routinely need to safely add to a queue. Consumer threads routinely remove an item from the queue, process it, discard the item, and repeat. They never attempt to remove items from an empty queue.
+
+ 
+
+Two semaphores, sem_a and sem_b, are used by the program and initialized as follows:
+
+sem_init(&sem_a, 0, 0);
+sem_init(&sem_b, 0, 1);
+ 
+
+Which of the following code blocks correctly implement the behavior described?
+
+  
+Producer:
+
+ while (1) { 
+     /* produce an item */ 
+     sem_wait(&sem_a); 
+     sem_wait(&sem_b); 
+     /* push item to queue */ 
+ } 
+Consumer:
+
+ while (1) { 
+     /* pull item from queue */ 
+     sem_post(&sem_b); 
+     sem_post(&sem_a); 
+     /* process item */ 
+ }
+  
+Producer:
+
+ while (1) { 
+     /* produce an item */ 
+     sem_wait(&sem_b); 
+     sem_wait(&sem_a); 
+     /* push item to queue */ 
+     sem_post(&sem_a); 
+     sem_post(&sem_b); 
+ } 
+
+Consumer:
+
+ while (1) { 
+     sem_wait(&sem_a); 
+     sem_wait(&sem_b); 
+     /* pull item from queue */ 
+     sem_post(&sem_b); 
+     sem_post(&sem_a); 
+     /* process item */ 
+ }
+Correct!
+  
+Producer:      
+
+ while (1) {        
+     /* produce an item */         
+     sem_wait(&sem_b);         
+     /* push item to queue */         
+     sem_post(&sem_b);         
+     sem_post(&sem_a);     
+ }   
+Consumer:      
+
+ while (1) {         
+     sem_wait(&sem_a);         
+     sem_wait(&sem_b);         
+     /* pull item from queue */         
+     sem_post(&sem_b);         
+     /* process item */     
+ }
+  
+Producer:
+
+ while (1) { 
+     /* produce an item */ 
+     sem_wait(&sem_a); 
+     sem_wait(&sem_b); 
+     /* push item to queue */ 
+     sem_post(&sem_b); 
+     sem_post(&sem_a); 
+ } 
+Consumer:
+
+ while (1) { 
+     sem_wait(&sem_b); 
+     sem_wait(&sem_a); 
+     /* pull item from queue */ 
+     sem_post(&sem_a); 
+     sem_post(&sem_b); 
+     /* process item */ 
+ }
+ 
+Question 3
+0.5 / 1 pts
+How could you ensure a specific thread handles a signal sent to that process? (Select All That Apply)
+  Set up a signal handler for the signal you are expecting on only that thread. 
+  Set up empty signal handlers on all other threads in order to pass the signal through to the desired thread. 
+Correct Answer
+  Mirror the signal to other threads in the program using pthread_kill() 
+  Spawn the thread you'd like to handle the signal first 
+Correct!
+  Block the signal on all other threads. 
+ 
+Question 4
+1 / 1 pts
+A program is designed so that the lock for a shared resource is both rarely held, and only ever held for two lightweight, fast instructions. Which synchronization mechanism is best suited for this situation? 
+Correct!
+spinlock
+Correct Answers
+Spinlocks 
+spinlocks 
+spinlock 
+Spinlock 
+ 
+Question 5
+1 / 1 pts
+What happens when a thread successfully calls execl (with no prior fork()) within a process that has ten running threads? 
+  The calling thread will begin executing a new program and all other threads will continue normally 
+Correct!
+  The calling thread will begin executing a new program and all other threads will terminate 
+  The calling thread will begin executing a new program and all other threads will terminate after they have finished their work and exited 
+  The main thread will begin executing a new program and all other threads will continue normally 
+ 
+Question 6
+2 / 2 pts
+Write a simple C program that opens a specified file in read-only mode. The program must include error handling to address potential issues like file not found or permission errors.
+
+1 pt - Provide the complete C source code.
+1 pt - The code must demonstrate comprehensive error checking.
+This submission will be manually reviewed by the instructor.
+
+Your Answer:
+ 
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <string.h>
+
+int main(void)
+{
+    const char *filename = "somefile.txt";
+
+    FILE *file = fopen(filename, "r");
+    if (file == NULL) {
+        fprintf(stderr, "Error: Failed to open '%s': %s\n",
+                filename, strerror(errno));
+        return 1;
+    }
+
+    printf("File '%s' opened successfully in read-only mode.\n", filename);
+
+    fclose(file);
+    return 0;
+}

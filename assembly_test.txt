@@ -1,0 +1,268 @@
+Question 1
+1 / 1 pts
+Assume SomeFunction takes 8 arguments. What is the offset needed to read the 8th argument in the following function entry code?  Answer should be in 0x... hexadecimal format without leading zeros.
+
+Note: assume Linux x64 Intel
+
+SomeFuction:
+    push rbx
+    push rsi
+    mov rax, [rsp+???]
+Correct!
+0x20
+Correct Answers
+0x20 
+ 
+Question 2
+1 / 1 pts
+On x64 Linux, what does the caller have to add to RSP to clean the stack after a call to a 3-argument function? 
+Correct!
+  nothing 
+  0x10 
+  0x18 
+  0x8 
+ 
+Question 3
+1 / 1 pts
+What is the sign of the offset applied to RBP in order to reach the procedure's local data? 
+  zero (no sign) 
+Correct!
+  negative 
+  positive 
+ 
+Question 4
+1 / 1 pts
+What register is incremented/decremented in a scasb the instruction? 
+  RAX
+  RSI
+  RDX
+Correct!
+  RDI
+  RCX
+  RBX
+ 
+Question 5
+1 / 1 pts
+Why aren't C function names mangled in 64-bit Linux? 
+Correct!
+  Linux only has one calling convention 
+  64-bit compilers can determine which calling convention is being used without help of the programmer. 
+  Name mangling is necessary for C functions in 64-bit Linux 
+ 
+Question 6
+1 / 1 pts
+Which of the following string instructions could be used to implement C-function strchr()?
+  stosb
+  cmpsb
+Correct!
+  scasb
+  lodsb
+  movsb
+ 
+Question 7
+1 / 1 pts
+Which of the following registers are (directly or indirectly) modified as a result of executing the POPF instruction? (Select all that apply) 
+  RBP
+Correct!
+  RFLAGS
+Correct!
+  RSP
+  RSI
+  RDI
+ 
+Question 8
+1 / 1 pts
+Which two of the following instructions would cause a loopne instruction to fall through? 
+Correct!
+  ZF is set
+  RAX is not zero
+  ZF is not set
+  RCX is not zero
+  RAX is zero
+Correct!
+  RCX is zero
+ 
+Question 9
+1 / 1 pts
+By convention, a compiler configured to compile a function without FPO, will use the RBP register for what? 
+  It is not used at all 
+  To preserve the return value 
+  It can be used for anything 
+Correct!
+  As a stack frame base pointer 
+ 
+Question 10
+1 / 1 pts
+Assume RAX points to a large buffer and each byte in that buffer contains the value 0xff.  After the following code runs, how many total bytes of memory have changed from their initial value?  Answer should an integer.
+
+ xor     rcx, rcx 
+
+.examLoop:  
+    mov     [rax+rcx], rcx
+    inc     rcx
+    cmp     rcx, 2 
+    jle     .examLoop
+Correct!
+10
+Correct Answers
+10 
+ 
+Question 11
+1 / 1 pts
+Given the code below, is the value in RAX being treated as signed or unsigned?
+
+neg rax
+add rax, rbx
+  unsigned 
+Correct!
+  signed 
+ 
+Question 12
+1 / 1 pts
+What is the value of RAX at the end of this loop?  Your answer should be in 0x... hexadecimal format without leading zeros.
+
+...
+block1:
+  mov rcx, 0x1
+  mov rax, 0x2
+block2:
+  cmp rcx, 0x5
+  jge block4
+block3:
+  inc rcx
+  add rax, rax
+  jmp block2
+block4:
+Correct!
+0x20
+Correct Answers
+0x20 
+ 
+Question 13
+1 / 1 pts
+What assembly instruction could you use to replicate the functionality of the following code?
+
+...
+block1:
+  mov rcx, 0x1
+  mov rax, 0x2
+block2:
+  cmp rcx, 0x5
+  jge block4
+block3:
+  inc rcx
+  add rax, rax
+  jmp block2
+block4:
+  shr 
+  xor 
+  push 
+Correct!
+  shl 
+ 
+Question 14
+1 / 1 pts
+What is the value of RAX after the instructions below executes?  Answer should be a full 8-byte value in 0x... hexadecimal format.
+
+mov al, 0x80
+movsx rax, al
+Correct!
+0xFFFFFFFFFFFFFF80
+Correct Answers
+0xFFFFFFFFFFFFFF80 
+ 
+Question 15
+1 / 1 pts
+Which of the following are status flags? 
+Correct!
+  SF
+Correct!
+  CF
+  DF
+  IF
+  RF
+Correct!
+  ZF
+ 
+Question 16
+1 / 1 pts
+Given the following NASM struc and the instruction mov rbx, [rax + MyStruc2.byteVar2]
+What constant, displacement value will the MyStruc2.byteVar2 resolve to?  Your answer should be 0x... hexadecimal format without leading zeros.
+
+struc MyStruc2
+ .aLongVar resd 1
+ .aByteVar resb 4
+ .byteVar2 resb 1
+ .aShortVar resw 1
+ .aByteArray resb 8
+ endstruc
+Correct!
+0x8
+Correct Answers
+0x8 
+ 
+Question 17
+1 / 1 pts
+Which instructions will jump following this code? (Select all that apply)
+
+mov rax, 0x40
+xor rbx, rbx
+inc rbx	
+shl rbx, 2
+cmp rax, rbx
+  jz
+Correct!
+  jne
+Correct!
+  jnz
+  je
+Correct!
+  jmp
+ 
+Question 18
+1 / 1 pts
+What is the value of EAX after the following code?  Answer should be in 0x... hexadecimal format without leading zeros.
+
+mov eax, 0x12345678
+shr eax, 24
+shl eax, 8
+Correct!
+0x1200
+Correct Answers
+0x1200 
+ 
+Question 19
+1 / 1 pts
+In the following code, what is the value of RIP after completion of this function?  Answer should be in 0x... hexadecimal format without leading zeros.
+
+...
+Code:
+   mov rax, 0x41414141
+   push rax
+   ret
+Correct!
+0x41414141
+Correct Answers
+0x41414141 
+ 
+Question 20
+1 / 1 pts
+If a function was compiled using FPO, what will RSP be used for? 
+  It can be used for anything 
+Correct!
+  As a stack-frame pointer 
+  It is not used at all 
+ 
+Question 21
+0.67 / 1 pts
+According to the Intel manual, which of the following instructions allow relative operands.
+
+  idiv 
+Correct!
+  call 
+Correct Answer
+  mov 
+Correct!
+  jmp 
+  xchg 
+  add 

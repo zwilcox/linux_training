@@ -1,0 +1,301 @@
+Question 1
+1 / 1 pts
+Two user space programs each use the read() system call to read from a file. Program A reads from a file in /tmp (tmpfs) and Program B reads from a file in /home/student (ext4). Other than this difference, the programs are identical. If you were to trace the kernel functions invoked by read() from each of these programs with the function_graph option, what is the name of the first unique kernel function that you would find in program A's trace?  Both programs have been provided for your analysis.
+
+Correct!
+shmem_file_read_iter
+Correct Answers
+shmem_file_read_iter 
+ 
+Question 2
+1 / 1 pts
+Which of the following mechanisms directly modify pre-existing kernel instructions dynamically?
+
+(Select multiple)
+
+  tracepoints 
+Correct!
+  kprobes 
+  eBPF 
+Correct!
+  Ftrace 
+ 
+Question 3
+1 / 1 pts
+Which of the following mechanisms can hook locations that are not predefined? 
+  Ftrace 
+  tracepoints 
+Correct!
+  kprobes 
+  ASLR 
+ 
+Question 4
+1 / 1 pts
+Which of the following statements is true about a kernel with struct randomization and KASLR enabled? 
+  Struct member offsets never change without source changes, base addresses can change with reboots 
+Correct!
+  Struct organization can change after a new compilation, base addresses can change with reboots 
+  Struct member offsets don't change during runtime, base addresses do change during runtime 
+  Struct member offsets change per runtime instance, base addresses change during runtime 
+ 
+Question 5
+1 / 1 pts
+What are function attributes that would cause a function to not show up in an ftrace recording? 
+Correct!
+  notrace 
+  static 
+  extern 
+Correct!
+  __always_inline 
+ 
+Question 6
+0.5 / 1 pts
+Running your keylogger solution (lab12), when the spacebar is released, 
+0xB9
+ is read from the keyboard data register and the 
+0x1
+ is read from the status register. Answers should be in 0x... hexadecimal format without leading zeros.
+
+Answer 1:
+Correct!0xb9
+Correct Answer
+b9 
+Answer 2:
+You Answered0x1
+Correct Answer
+1c 
+Correct Answer
+0x1c 
+ 
+Question 7
+1 / 1 pts
+It is possible for a call to malloc to result in a system call. 
+Correct!
+  True 
+  False 
+ 
+Question 8
+1 / 1 pts
+The following is a hex dump of a struct task_struct from kernel 5.2.15. The kernel has been compiled with an unknown struct random randomization seed. Which thread_info flags are set? Remember endianness! (Remember these are hexadecimal representations of bytes...not bits)!
+
+00000000: 1101 0000 0000 0000 0000 0000 0000 0000  ................
+00000010: 0000 0000 0000 0000 0080 7d85 97af ffff  ................
+00000020: 0200 0000 0040 4000 0000 0000 0000 0000  ................
+00000030: 0000 0000 0000 0000 0100 0000 0100 0000  ................
+00000040: 0700 0000 0000 0000 709c 2b25 0100 0000  ........p.......
+00000050: 0000 5169 4994 ffff 0100 0000 0100 0000  ..QiI...........
+00000060: 0100 0000 7800 0000 7800 0000 7800 0000  ....x...x...x...
+00000070: 0000 0000 0000 0000 4061 e5a5 ffff ffff  .........a......
+00000080: 0000 1000 0000 0000 0000 4000 0000 0000  ................
+00000090: 0000 1000 0000 0000 0100 0000 0000 0000  ................
+000000a0: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+000000b0: d092 266c 4994 ffff d092 266c 4994 ffff  ...lI......lI...
+000000c0: 0100 0000 0000 0000 dae9 46da 4434 0200  ..........F.D4..
+000000d0: aa79 0d00 0000 0000 a3f8 9e07 0100 0000  .y..............
+000000e0: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+000000f0: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+  TIF_NOHZ 
+  TIF_ADDR32 
+Correct!
+  TIF_SYSCALL_TRACE 
+Correct!
+  TIF_SECCOMP 
+Correct!
+  TIF_SINGLESTEP 
+  TIF_FSCHECK 
+ 
+Question 9
+1 / 1 pts
+On x86_64, in kernel 5.2.15, what is the difference in how the kernel processes a PTRACE_PEEKTEXT versus a PTRACE_PEEKDATA?
+  The difference is only in the flags that are passed to the underlying function that does the peeking 
+  A PTRACE_PEEKTEXT is actually the same as a PTRACE_POKETEXT, and a PTRACE_PEEKDATA is the same as a PTRACE_POKEDATA 
+  A PTRACE_PEEKTEXT does not cause any effect on the tracee, but a PTRACE_PEEKDATA does 
+Correct!
+  A PTRACE_PEEKTEXT is treated exactly the same as a PTRACE_PEEKDATA 
+ 
+Question 10
+1 / 1 pts
+Under what circumstances will a post_handler for your kprobe NOT be called by kprobes? Assume the 5.2.15 kernel. 
+Correct!
+  The probed instruction causes a fault 
+Correct!
+  The pre_handler returns a nonzero value 
+Correct!
+  The flags field of the kprobe struct is 0x2 
+Correct!
+  The kprobe struct's post_handler field is NULL 
+ 
+Question 11
+1 / 1 pts
+Calls to what function get placed into a binary when GCC's  -pg option is present? Provide the function's name.
+Correct!
+mcount
+Correct Answers
+__fentry__ 
+mcount 
+ 
+Question 12
+1 / 1 pts
+A network program makes a call to receive data from the network. Please order the following events from first to last 
+Correct!
+1 
+The application calls recvmsg from glibc
+Correct!
+2 
+The value 47 is placed into %eax
+Correct!
+3 
+The syscall instruction is invoked
+Correct!
+4 
+The CPU switches the protection level to ring 0
+Correct!
+5 
+The entry_SYSCALL_64 routine calls do_syscall_64
+Correct!
+6 
+The sys_call_table's 47th entry is called
+Correct!
+7 
+The sysretq instruction is invoked
+Correct!
+8 
+The CPU switches the protection level to ring 3
+ 
+Question 13
+1 / 1 pts
+What protection mechanism, when active, would prevent the kernel from accidentally reading a userspace buffer? 
+  SMEP 
+  KASLR 
+  NX 
+Correct!
+  SMAP 
+ 
+Question 14
+1 / 1 pts
+The vm_area_struct accessible from the mm member of a task_struct is part of a linked list of virtual memory segments ordered 
+  randomly 
+Correct!
+  by virtual address 
+  by allocation time 
+  by physical address 
+ 
+Question 15
+1 / 1 pts
+Which of the following must always result in a switch ring3->ring0 in order to succeed? (Select all that apply)
+Correct!
+  An application goes to sleep 
+Correct!
+  An application sends a SIGKILL to another process 
+Correct!
+  An application references memory that is not paged in 
+  An application makes a call to strcpy 
+  An application uses malloc to obtain a reference to another 1024 bytes of heap memory 
+ 
+Question 16
+1 / 1 pts
+Which of the following, when finished, returns execution to the instruction following the one that was executing when they were invoked? (select all that apply)
+Correct!
+  Interrupt handler for the system timer 
+  The page fault exception 
+  The divide by zero exception 
+Correct!
+  Interrupt handler for keyboard input 
+Correct!
+  The socket system call 
+ 
+Question 17
+1 / 1 pts
+Which softirq has a higher priority? 
+Correct!
+  Network transmission 
+  Network reception 
+ 
+Question 18
+0 / 1 pts
+What is the name of the member of the task_struct that is used for iterating through the threads associated with the task, and for counting the number of threads associated with the task? 
+You Answered
+thread_group
+Correct Answers
+signal_struct 
+struct signal_struct signal 
+signal 
+struct signal_struct 
+struct signal_struct signal; 
+ 
+Question 19
+1 / 1 pts
+The name of the system call handler for the x86_64 architecture is 
+entry_SYSCALL_64
+ and it terminates with two Intel instructions (in order), 
+swapgs
+ and 
+sysretq
+ . (For the instructions, simply list the instruction name in lowercase - no semicolons or operands)
+Answer 1:
+Correct!entry_SYSCALL_64
+Correct Answer
+entry_syscall_64 
+Answer 2:
+Correct!swapgs
+Answer 3:
+Correct!sysretq
+Correct Answer
+sysret 
+ 
+Question 20
+1 / 1 pts
+In kernel 5.2.15, the struct file_operations structure for the character devices /dev/random and /dev/urandom are in the /drivers/char/random.c file. When sending an ioctl to the device urandom with a cmd of RNDZAPENTCNT, what capability is required to have the ioctl return success (0)? Put "NONE" if there is no capability required, or if the call will always error. 
+Correct!
+CAP_SYS_ADMIN
+Correct Answers
+CAP_SYS_ADMIN 
+0x15 
+21 
+ 
+Question 21
+1 / 1 pts
+You need to capture all data leaving your linux system (going out a network device, on wire). You want to use hooking with netfilter to accomplish this. Which of the following hook locations (or combinations) guarantee that you will hook all the data that is leaving the system? (It is acceptable to hook additional packets that aren't leaving the system, so long as all exiting sk_buffs are also hooked) 
+Correct!
+  FORWARD and LOCAL_OUT 
+Correct!
+  PRE_ROUTING and LOCAL_OUT 
+Correct!
+  POST_ROUTING 
+  LOCAL_IN and LOCAL_OUT 
+  LOCAL_OUT 
+  FORWARD 
+ 
+Question 22
+1 / 1 pts
+Implement a driver that will understand the ioctl command IOCTL_WRITE_TO (see the provided shared header file, rw_shared.h). This command should allow a process to write a byte to another process at an offset from the base of the ELF file rw_user.
+
+The ioctl command should take as an argument a pointer to a struct write_to. (See the comments in the shared header file for more information)
+
+The provided user mode binary rw_user will create a node to the device you implement, and attempt to write to another copy of itself, at the specified offset from the base of the elf.
+
+If the ioctl was correctly implemented, after running rw_user with no arguments, it will print out the flag.
+
+Correct!
+FLAG{PIOCTLOSAURUS}
+Correct Answers
+{PIOCTLOSAURUS} 
+PIOCTLOSAURUS 
+FLAG{PIOCTLOSAURUS} 
+ 
+Question 23
+1 / 1 pts
+There is a user mode program given to you called waldo. Upon running, it will fork several times, and wait for the user to press enter.
+
+Create a kernel driver that will iterate over the current processes.
+
+When it finds a waldo task that both has a UID != 0 and a UID == GID, it should set the task’s real_start_time member to 0. You should insert your kernel module after running the waldo program as root. 
+
+After successful modification of the real_start_time member, press the enter key and the program will output the flag.
+
+Correct!
+[TUX_WOULD_KILL_JOFFREY]
+Correct Answers
+FLAG[TUX_WOULD_KILL_JOFFREY] 
+TUX_WOULD_KILL_JOFFREY 
+[TUX_WOULD_KILL_JOFFREY] 

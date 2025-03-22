@@ -1,0 +1,86 @@
+Question 1
+0 / 1 pts
+Assume you have written code saved in a file "example.c" 
+
+What command would you use to tell GCC to compile this file without linking or assembling?
+
+Do not add the "-o" option. 
+
+#include <stdio.h>
+
+int main(int argc, char* argv) {
+    printf("Hello World\n");
+    return 0;
+}
+You Answered
+-c
+Correct Answers
+gcc -S example.c 
+ 
+Question 2
+1 / 1 pts
+Which step in the project build order involves a 1:1 conversion between two different file formats? 
+  Compiler 
+  Linker 
+  Preprocessor 
+Correct!
+  Assembler 
+ 
+Question 3
+1 / 1 pts
+What kinds of files does the linker interact with while resolving cross-object references? 
+Correct!
+  Static libraries (.a) 
+  None of these 
+  Kernel Objects (.ko) 
+Correct!
+  Other object files in the project (.o) 
+Correct!
+  Shared Objects (.so) 
+  Preprocessed Source (.i) 
+ 
+Question 4
+0 / 1 pts
+Assuming the following makefile is named "Makefile" and exists in the current directory, when you run "make" which rule will run?
+Test these out!
+
+                                                              
+01 .PHONY: final_target
+02
+03 .first_target:
+04     mycommand param56
+05 
+06 .second_target:
+07     mycommand param5
+08 
+09 third_target:
+10     mycommand myparam3
+11 
+12 final_target:
+13     mycommand myparam2
+You Answered
+.first_target
+Correct Answers
+third_target 
+ 
+Question 5
+1 / 1 pts
+perror() conforms to which of the following standards? Select all that apply. 
+Correct!
+  4.3BSD 
+Correct!
+  C99 
+Correct!
+  POSIX.1-2001 
+Correct!
+  POSIX.1-2008 
+ 
+Question 6
+1 / 1 pts
+Which of the following is the member of the structure used by the stat function to store the group id of the owner? 
+  st_groupid 
+Correct!
+  st_gid 
+  st_group_id 
+  st_id 
+  st_group 

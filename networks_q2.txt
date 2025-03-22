@@ -1,0 +1,82 @@
+Question 1
+1 / 1 pts
+Where might an IPv6 packet be fragmented? 
+Correct!
+  Source 
+  Destination 
+  Ethernet Switch 
+  Router 
+ 
+Question 2
+1 / 1 pts
+What is the hardware address of fe80::2c0:91ff:fe09:e34f?
+
+Hint: Assume this address was assigned via SLAAC (StateLess Address Auto Configuration)
+
+  00:c0:ff:fe:e3:4f 
+Correct!
+  00:c0:91:09:e3:4f 
+  2c:09:1f:09:e3:4f 
+  192.168.1.4f 
+ 
+Question 3
+2 / 2 pts
+Using the RFCs and the provided (optional) cno_net_helper.py file, construct a IPv6 router advertisement packet advertising a network of 9:9:9:(student number in hex). For example, if you are student 11, advertise a routed network of 9:9:9:B.
+
+Your instructor will be monitoring the network and will record if you are successful.
+
+1 pt - please upload your code 
+
+1 pt - make sure your instructor tells you that you are good to go -> Success is your grade determination
+
+ 
+
+Your code will be hand-graded by the instructor.
+
+ 
+
+ routerAdvertisement.py
+ 
+Question 4
+1 / 1 pts
+Out of the below addresses, what IPv6 addresses can be used to traverse the Internet? (Select all that apply)
+  ff02::1:2:3:4 
+  None 
+Correct!
+  2605:59c0:175:a910::614 
+  All of these 
+Correct!
+  2607:1:4:813::200e 
+  fe80::1:2:3:4 
+ 
+Question 5
+1 / 1 pts
+As a network stack prepares to send a packet on the physical wire, which of the following might it use to determine the hardware address of the destination node? (Select all that apply) 
+Correct!
+  Address Resolution Protocol 
+Correct!
+  Cache 
+Correct!
+  Neighbor Discovery Protocol 
+  Multicast subscription to network's resolution protocol mechanism 
+  Ethernet Resolution Protocol 
+ 
+Question 6
+1.5 / 2 pts
+Using the following hexadecimal representation of a raw packet, select any and all answers that apply:
+
+\x00\x0c\x29\x81\x8f\x40\x00\x0c\x29\x78\xec\x6a\x08\x00\x45\x00\x00\x54\x49\xb7\x40\x00\x40\x01\x97\x66\xac\x10\x00\xa4\xac\x10\x00\xc7\x08\x00\x6b\xb3\x15\xc6\x00\x01\x51\x74\x22\x5b\x00\x00\x00\x00\x3c\xe3\x07\x00\x00\x00\x00\x00\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1a\x1b\x1c\x1d\x1e\x1f\x20\x21\x22\x23\x24\x25\x26\x27\x28\x29\x2a\x2b\x2c\x2d\x2e\x2f\x30\x31\x32\x33\x34\x35\x36\x37
+  The package purpose was a ping reply 
+Correct!
+  The packet's destination address was the host with IP 172.16.0.199 
+Correct!
+  This package used the internet control message protocol 
+Correct!
+  The packet's purpose was a ping request 
+  This packet used the transmission control protocol 
+  The packet used the version 6 protocol 
+Correct!
+  The packet was sent by IP 172.16.0.164 
+You Answered
+  The first checksum is 0x66ac 
+  This package used the user datagram protocol 

@@ -1,0 +1,247 @@
+Question 1
+1 / 1 pts
+Why is the vulnerable function in Webserver_lab8 protected from a saved RIP overwrite exploit? 
+  When called, the signal handler pivots the stack. 
+  The buffer overflow is too short to reach saved EIP. 
+  NUL-byte restriction prevents useful bounce point. 
+Correct!
+  stack canary prevents return to shellcode 
+ 
+Question 2
+1 / 1 pts
+You attempt to exploit a webserver with NX protection using a function with an unbounded strcpy on a stack local buffer, it doesn't matter if there are null bytes in your rop chain 
+  True 
+Correct!
+  False 
+ 
+Question 3
+1 / 1 pts
+The 2015 Stagefright bug is an example of what type of vulnerability (Select all that apply)? 
+Correct!
+  Integer Overflow 
+  Use-After-Free 
+Correct!
+  Buffer Overflow 
+  Command Injection 
+ 
+Question 4
+1 / 1 pts
+Put the following ROP gadgets and data in the correct order (lowest address to highest address) to build a ROP chain that successfully executes mprotect and returns to the next ROP gadget.
+
+int mprotect(void *addr, size_t len, int prot);
+Correct!
+pop_rdi_pop_rsi_pop_rdx_gadget 
+1
+Correct!
+0x1000 (size_t len) 
+3
+Correct!
+mprotect address 
+5
+Correct!
+page_addr 
+2
+Correct!
+Next ROP Gadget 
+6
+Correct!
+0x7 (int prot, PROT_READ | PROT_WRITE | PROT_EXEC) 
+4
+ 
+Question 5
+1 / 1 pts
+A "memory peek" vulnerability may help you overcome which protection mechanism? 
+Correct!
+  ASLR 
+  SMEP 
+  IDS 
+  NX 
+ 
+Question 6
+1 / 1 pts
+There exists a structure that is linked in a doubly linked circular list. The structure is composed as such:
+
+struct test_t {
+        long mynum1;            // offset 0x0
+        long mynum2;            // offset 0x8
+        long munum3;            // offset 0x10
+        struct test_t* next;    // offset 0x18
+        struct test_t* prev;    // offset 0x20
+                                // length 0x28
+    }
+If we have corrupted the structure so that next = 0x7f44440000 and prev = 0x4c33330000. Upon an attempted unlink operation on this structure, which of the following is true?
+
+  The CPU may attempt to write the value 0x7f44440020 to address 0x4c33330018 
+  The CPU may attempt to write the value 0x7f44440000 to address 0x4c33330020 
+Correct!
+  The CPU may attempt to write the value 0x7f44440000 to address 0x4c33330018 
+  The CPU may attempt to write the value 0x7f44440018 to address 0x4c33330020 
+  The CPU may attempt to write the value 0x7f44440020 to address 0x4c33330000 
+ 
+Question 7
+1 / 1 pts
+At what offset on the stack does this function store it's canary?
+
+401136:       55                      push   rbp
+401137:       48 89 e5                mov    rbp,rsp
+40113a:       48 81 ec 20 02 00 00    sub    rsp,0x220
+401141:       89 bd ec fd ff ff       mov    DWORD PTR [rbp-0x214],edi
+401147:       48 89 b5 e0 fd ff ff    mov    QWORD PTR [rbp-0x220],rsi
+40114e:       64 48 8b 04 25 28 00    mov    rax,QWORD PTR fs:0x28
+401155:       00 00 
+401157:       48 89 45 f8             mov    QWORD PTR [rbp-0x8],rax
+40115b:       31 c0                   xor    eax,eax
+40115d:       48 8b 85 e0 fd ff ff    mov    rax,QWORD PTR [rbp-0x220]
+401164:       48 8b 08                mov    rcx,QWORD PTR [rax]
+401167:       48 8d 85 f0 fd ff ff    lea    rax,[rbp-0x210]
+40116e:       ba 00 02 00 00          mov    edx,0x200
+401173:       48 89 ce                mov    rsi,rcx
+401176:       48 89 c7                mov    rdi,rax
+401179:       e8 b2 fe ff ff          call   401030 
+40117e:       b8 00 00 00 00          mov    eax,0x0
+401183:       48 8b 55 f8             mov    rdx,QWORD PTR [rbp-0x8]
+401187:       64 48 33 14 25 28 00    xor    rdx,QWORD PTR fs:0x28
+40118e:       00 00 
+401190:       74 05                   je     401197 
+401192:       e8 a9 fe ff ff          call   401040 <__stack_chk_fail@plt>
+401197:       c9                      leave  
+401198:       c3                      ret 
+  rbp + fs 
+Correct!
+  rbp - 0x8 
+  It doesn't store the canary on the stack 
+  rbp + 0x10 
+  rbp - 0x220 
+ 
+Question 8
+1 / 1 pts
+In Webserver_lab7, what was the address of the function containing the vulnerability? 
+  0x00401d96 
+  0x401050 
+Correct!
+  0x4020bc 
+  0x4020ee 
+ 
+Question 9
+1 / 1 pts
+In Webserver_lab8, what was the Build number? 
+Correct!
+Build 7531
+Correct Answers
+Build 7531 
+build 7531 
+7531 
+ 
+Question 10
+1 / 1 pts
+In Webserver_lab9, what was the address of the function that would do a linked-list unlink operation that could be used for a Write-What-Where? 
+Correct!
+  0x4016ae 
+  0x4014ea 
+  0x401db8 
+  0x4012c6 
+ 
+Question 11
+1 / 1 pts
+In Webserver_lab10, which of these addresses could be used as a gadget to set the first parameter as part of a chain leading to a syscall gadget? 
+  0x40127f 
+  0x40257d 
+Correct!
+  0x402583 
+  0x402582 
+ 
+Question 12
+1 / 1 pts
+Why does a fuzzer benefit from code coverage information? 
+  A fuzzer does not benefit from code coverage information. 
+  If a fuzzer has the source code, it can label the variables that are passed to vulnerable functions. 
+Correct!
+  Code coverage information helps the fuzzer mutate inputs well. 
+  Code coverage information helps the fuzzer be able to instantiate the program quicker. 
+ 
+Question 13
+1 / 1 pts
+char userbuf[0x200];
+fgets(userbuf, 0x200, stdin);
+printf(userbuf);
+A program that contains the snippet above could potentially provide which of the following vulnerabilities?
+
+  Write What Where 
+Correct!
+  Any of these 
+  None of these 
+  Memory peek 
+  ASLR defeat 
+ 
+Question 14
+1 / 1 pts
+A program could grow the stack by repeatedly doing: 
+  xchng rsp, rsp 
+  pop rax 
+  jmp rsp 
+Correct!
+  push rax 
+  inc rbp 
+ 
+Question 15
+1 / 1 pts
+Given the objdump from a EXEC program, what is the minimum number of input bytes (as argv[1]) required to entirely overwrite all 8 bytes of the saved rip on the stack?
+
+0000000000401136 <main>:
+  401136:	55                   	push   %rbp
+  401137:	53                   	push   %rbx
+  401138:	41 54                	push   %r12
+  40113a:	48 89 e5             	mov    %rsp,%rbp
+  40113d:	48 83 ec 40          	sub    $0x40,%rsp
+  401141:	48 8b 76 08          	mov    0x8(%rsi),%rsi
+  401145:	48 89 e7             	mov    %rsp,%rdi
+  401148:	e8 e3 fe ff ff       	callq  401030 <strcpy@plt>
+  40114d:	48 89 e7             	mov    %rsp,%rdi
+  401150:	e8 eb fe ff ff       	callq  401040 <printf@plt>
+  401155:	48 89 ec             	mov    %rbp,%rsp
+  401158:	41 5c                	pop    %r12
+  40115a:	5b                   	pop    %rbx
+  40115b:	5d                   	pop    %rbp
+  40115c:	c3                   	retq
+Correct!
+0x60
+Correct Answers
+96 
+0x60 
+ 
+Question 16
+1 / 1 pts
+From the shared directory (in mnt/share/linux-vr-and-exploitation/test), download the test_UAF.c source code. This file contains a dummy flag that is NOT the answer to this question.
+
+Analyze (and/or compile) the code to find a use-after-free vulnerability and execute an exploit that will print out the dummy flag. When you are confident that you can retrieve the flag, use ncat to connect to the instructor's machine and perform the exploit remotely. The program being run on the instructor's machine is the same as the one you have, but the flag is different.  Place the flag you retrieve into the answer field below.
+
+To connect to the machine with ncat, use
+
+ncat --ssl 172.16.1.100 <port>
+Where <port> is port 8866.
+
+Correct!
+FLAG{THIS_IS_THE_FLAG_YOU_ARE_LOOKING_FOR}
+Correct Answers
+FLAG{THIS_IS_THE_FLAG_YOU_ARE_LOOKING_FOR} 
+{THIS_IS_THE_FLAG_YOU_ARE_LOOKING_FOR} 
+THIS_IS_THE_FLAG_YOU_ARE_LOOKING_FOR 
+ 
+Question 17
+1 / 1 pts
+You found an overflow in a usermode program by abusing an unsafe strcat to a buffer in RWX (read write executable) memory. You are writting a short amount of shellcode in the buffer.
+
+Which of the following x86_64 instructions (in intel syntax) would be safe to use in the shellcode?
+
+(Select multiple)
+
+  mov rax, 0x0 
+Correct!
+  xor [rcx], cl 
+  add [rax], al 
+Correct!
+  inc rax 
+Correct!
+  xor rdi, rdi 
+Correct!
+  add al, 0x0001 

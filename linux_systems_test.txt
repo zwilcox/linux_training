@@ -1,0 +1,349 @@
+Question 1
+1 / 1 pts
+Which GCC option produces human-readable assembly? 
+  -c 
+Correct!
+  -S 
+  -E 
+  -o 
+ 
+Question 2
+1 / 1 pts
+To which of the following standards does execv conform?
+
+(Select all that apply)
+
+  GNU 
+  C-99 
+Correct!
+  POSIX.1-2001 
+  C-89 
+Correct!
+  POSIX.1-2008 
+ 
+Question 3
+1 / 1 pts
+What is the group ID of the /etc/shadow file? Express the answer as a decimal number.
+Correct!
+0
+Correct Answers
+0 
+ 
+Question 4
+1 / 1 pts
+Under what conditions does fgets stop reading from the provided input stream?
+
+(Select all that apply)
+
+Correct!
+  EOF encountered 
+  Null ('\0') encountered 
+  Carraige return ('\r') encountered 
+Correct!
+  Newline ('\n') encountered 
+ 
+Question 5
+1 / 1 pts
+fopen returns NULL and errno has a value of 63.  To which enum name does this errno correspond? 
+  EMFILE 
+  EINVAL 
+Correct!
+  ENOSR 
+  EINTR 
+ 
+Question 6
+1 / 1 pts
+How many shared object files are dynamically linked with /bin/echo? 
+  7 
+Correct!
+  3 
+  5 
+  0 
+ 
+Question 7
+1 / 1 pts
+Upon success, fork returns 
+[ Select ]
+ to the parent and zero to the child. execv returns 
+[ Select ]
+ .
+Show Answers for
+Answer 1:
+Correct!
+the child's PID 
+Answer 2:
+Correct!
+zero 
+Answer 3:
+Correct!
+only upon error 
+ 
+Question 8
+1 / 1 pts
+Which of the following code snippets properly (will not cause errors) use execv to execute the program /bin/echo?
+
+(Select all that apply)
+
+Correct!
+  
+char* c_args[4]; 
+char path[] = "/bin/echo"; 
+c_args[0] = path; 
+c_args[1] = "question"; 
+c_args[2] = "8"; 
+c_args[3] = NULL; 
+
+if (execv(c_args[0], c_args) == -1) { 
+perror("execv"); 
+}
+  
+char path[] = "/bin/echo"; 
+char* c_args[] = { "/bob", "question", "8" }; 
+
+if (execv(c_args[0], c_args) == -1) { 
+perror("execv"); 
+}
+Correct!
+  
+char* c_args[] = { "/bin/echo", "question", "8", NULL }; 
+
+if (execv(c_args[0], c_args) == -1) { 
+perror("execv"); 
+}
+Correct!
+  
+char path[] = "/bin/echo"; 
+char* c_args[] = { "/bob", "question", "8", NULL }; 
+
+if (execv(path, c_args) == -1) { 
+perror("execv"); 
+}
+  
+char path[] = "/bin/echo"; 
+char* c_args[] = { "/bob", "question", "8" }; 
+
+if (execv(path, c_args) == -1) { 
+perror("execv"); 
+}
+ 
+Question 9
+1 / 1 pts
+You notice that your single-process program is periodically paused as the result of receiving a SIGSTOP. To prevent this from happening, you can 
+  Call the raise function to have your program send SIGCONT to itself to resume 
+Correct!
+  None of these 
+  Use the sigaction function to ignore the signal 
+  Create and register a signal handling function to do nothing when the signal is received 
+ 
+Question 10
+1 / 1 pts
+Receiving multiple signals of the same type is not differentiated from receiving a single signal of that type. 
+Correct!
+  True 
+  False 
+ 
+Question 11
+1 / 1 pts
+The POSIX socket send function automatically null-terminates the buffer of data to be transmitted. 
+  True 
+Correct!
+  False 
+ 
+Question 12
+1 / 1 pts
+Develop a TCP client that downloads a file from a server running on 172.16.1.100 on port 8080. The server will send the data automatically upon client connection. The first two bytes sent by the server will be a big-endian representation of the size in bytes of the file. The file data will be sent afterward.
+
+Save the file to disk as test_program, make it executable using "chmod +x test_program", and run it. Place its output in the field below, exactly as it appears in your terminal.
+
+Correct!
+Congratulations! You got it!
+Correct Answers
+Congratulations! You got it! 
+ 
+Question 13
+1 / 1 pts
+A multi-threaded program creates five producer threads and five consumer threads. During execution, the producer threads routinely need to safely add to a queue, and not allow it to fill beyond 50 items. Consumer threads routinely remove an item from the queue, perform some processing on the item, discard the item, and repeat. They never attempt to remove items from an empty queue
+
+Three semaphores, sem_a, sem_b, and sem_c, are used by the program and initialized as follows:
+
+sem_init(&sem_a, 0, 1);
+sem_init(&sem_b, 0, 50);
+sem_init(&sem_c, 0, 0);
+Select the proper order of calls to sem_wait and sem_post for the producer and consumer threads.
+
+  
+Producer:
+
+ while (1) { 
+     sem_wait(&sem_a); 
+     sem_wait(&sem_b); 
+     /* put item in queue */ 
+     sem_post(&sem_c); 
+     sem_post(&sem_a); 
+ } 
+Consumer:
+
+ while (1) { 
+     sem_wait(&sem_c); 
+     sem_wait(&sem_a); 
+     /* remove item from queue */ 
+     sem_post(&sem_a); 
+     sem_post(&sem_b); 
+     /* process item */ 
+ }
+Correct!
+  
+Producer:
+
+ while (1) { 
+     sem_wait(&sem_b); 
+     sem_wait(&sem_a); 
+     /* put item in queue */ 
+     sem_post(&sem_a); 
+     sem_post(&sem_c); 
+ } 
+Consumer:
+
+ while (1) { 
+     sem_wait(&sem_c); 
+     sem_wait(&sem_a); 
+     /* remove item from queue */ 
+     sem_post(&sem_a); 
+     sem_post(&sem_b); 
+     /* process item */
+  }
+  
+Producer:
+
+ while (1) { 
+     sem_wait(&sem_c); 
+     sem_wait(&sem_a); 
+     /* put item in queue */
+     sem_post(&sem_a); 
+     sem_post(&sem_b); 
+ } 
+Consumer:
+
+ while (1) { 
+     sem_wait(&sem_b); 
+     sem_wait(&sem_a); 
+     /* remove item from queue */ 
+     sem_post(&sem_a); 
+     sem_post(&sem_c); 
+     /* process item */ 
+ }
+  
+Producer:
+
+ while (1) { 
+     sem_wait(&sem_b); 
+     sem_wait(&sem_a); 
+     /* put item in queue */ 
+     sem_post(&sem_a); 
+     sem_post(&sem_b); 
+ } 
+Consumer:
+
+ while (1) { 
+     sem_wait(&sem_c); 
+     sem_wait(&sem_a); 
+     /* remove item from queue */
+     sem_post(&sem_a); 
+     sem_post(&sem_c); 
+     /* process item */ 
+ }
+ 
+
+ 
+Question 14
+1 / 1 pts
+You are developing a time-sensitive, multi-threaded application. You find that you need to protect access to an integer in global memory. However, sleep is for the weak (it is imperative that none of your threads sleep while accessing the variable). Which of the following constructs, used alone, can protect this integer?
+
+(Select all that apply)
+
+Correct!
+  Spinlock 
+  Mutex 
+Correct!
+  GCC __atomic Builtins 
+  Barrier 
+  Binary semaphore 
+  Condition variable 
+ 
+Question 15
+1 / 1 pts
+What is the advantage of using nonblocking I/O versus blocking I/O? 
+Correct!
+  Using nonblocking I/O allows a program to perform other processing if an I/O operation cannot be immediately completed 
+  Nonblocking I/O gives higher priority to I/O operations, guaranteeing that they complete without the need to block 
+  There is no advantage 
+  Nonblocking I/O can be used without threading, unlike blocking I/O 
+ 
+Question 16
+1 / 1 pts
+What signal is sent to a TCP client program that attempts to send data to the server after shutting down the writing side of its socket? 
+Correct!
+  SIGPIPE (13) 
+  SIGABRT (6) 
+  SIGSEGV (11) 
+  SIGHUP (1) 
+  SIGCLOSE (28) 
+ 
+Question 17
+1 / 1 pts
+What is the problem with how the following function uses select?
+
+ 
+
+void printTwoSockets(int sock1, int sock2) {
+	char readbuf[0x1000];
+	ssize_t amt = 0;
+	fd_set in_set = {0};
+	int maxfd = -1;
+
+	FD_ZERO(&in_set);
+	FD_SET(sock2, &in_set);
+	FD_SET(sock1, &in_set);
+
+	maxfd = sock1;
+	if (maxfd < sock2) {
+		maxfd = sock2;
+	}
+
+	while (1) {
+		if (select(maxfd+1, &in_set, NULL, NULL, NULL) == -1) {
+			perror("select");
+			exit(-1);
+		}
+
+		if (FD_ISSET(sock1, &in_set)) {
+			// read from sock1
+			amt = recv(sock1, readbuf, sizeof(readbuf)-1, 0) == -1;
+			if (amt <= 0) {
+				perror("recv sock1");
+				exit(-1);
+			}
+			
+			readbuf[amt] = '\0';
+
+			printf("%s\n", readbuf);
+		}
+
+		if (FD_ISSET(sock2, &in_set)) {
+			amt = recv(sock2, readbuf, sizeof(readbuf)-1, 0) == -1;
+			if (amt <= 0) {
+				perror("recv sock2");
+				exit(-1);
+			}
+
+			readbuf[amt] = '\0';
+			
+			printf("%s\n", readbuf);
+		}
+	}
+}
+  Having the 5th argument to "select" (timeout) be NULL will cause a SEGFAULT because "select" may modify the timevalue while running. 
+Correct!
+  "select" may have taken file descriptors out of in_set, and in_set should be refilled each time before "select" is called. 
+  "select" is meant to read from a file descriptor, but here it is being used for sockets. "accept" should be used instead. 
+  This code will try to "recv" from unready file descriptors because it doesn't check "select"'s return value

@@ -1,0 +1,71 @@
+The default systemd "runlevel" (target) is: 
+Correct!
+graphical.target
+Correct Answers
+5 
+graphical.target 
+ 
+Question 2
+1 / 1 pts
+In the command:
+
+    cat /etc/passwd | grep student | base64
+The standard input of the base64 command is obtained from the standard output of grep and the standard output of the base64 command is sent to the current tty/pts
+
+Show Answers for
+Answer 1:
+Correct!
+the standard output of grep 
+Answer 2:
+Correct!
+the current tty/pts 
+ 
+Question 3
+1 / 1 pts
+Which of the following execution states can a process transition through during its lifetime? (Select All That Apply)
+
+  Orphan 
+Correct!
+  Stopped 
+Correct!
+  Uninterruptible Sleep 
+Correct!
+  Running 
+  Dead 
+ 
+Question 4
+1 / 1 pts
+A single-threaded process has a PID that ___________ its TID. 
+
+  is less than 
+  is greater than 
+  does not match 
+Correct!
+  equals 
+ 
+Question 5
+1 / 1 pts
+Multiple threads that share a virtual address space can share a heap but will have a separate allocated 
+[ Select ]
+ at 
+[ Select ]
+ location in the address space.
+Show Answers for
+Answer 1:
+Correct!
+heap 
+Answer 2:
+Correct!
+stack 
+Answer 3:
+Correct!
+a different 
+ 
+Question 6
+1 / 1 pts
+What is the primary purpose of pipe()?
+  duplicate an existing file descriptor to a new file descriptor 
+Correct!
+  unidirectional data channel that can be used for inter‐process communication 
+  bidirectional data channel that can be used for inter‐process communication 
+  redirect input and output streams

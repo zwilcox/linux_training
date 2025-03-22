@@ -1,0 +1,297 @@
+Match the registers with the arguments for setting up the following syscall on a powerpc system
+
+int socket(int domain, int type, int protocol) 
+Correct!
+int domain 
+r3
+Correct!
+int type 
+r4
+Correct!
+int protocol 
+r5
+Other Incorrect Match Options:
+r9
+rcx
+rdx
+rax
+r8
+ 
+Question 2
+1 / 1 pts
+The following:
+
+sudo chmod 04755 ./netapp
+will cause the program to be 
+
+  readable only by a user who has an ID of 4 
+  executed as the current user 
+  executable and writable by others 
+  writable by everyone 
+Correct!
+  executed as the owner of the file 
+ 
+Question 3
+1 / 1 pts
+Which capabilities are enabled (in any capacity) for the /bin/ping program 
+Correct!
+  cap_net_raw+p
+  cap_net_send_recv
+  cap_net_broadcast
+  cap_net_bind_service
+Correct!
+  cap_net_admin
+ 
+Question 4
+1 / 1 pts
+What is the first string located in the .rodata section of test.so 
+Correct!
+You got the answer!
+Correct Answers
+you got the answer! 
+You got the answer! 
+ 
+Question 5
+1 / 1 pts
+Which of the following would allow you to run program as root without using sudo? 
+  chmod 0777 program
+Correct!
+  chmod u+s program
+  chmod 1777 program
+  chmod +t program
+ 
+Question 6
+1 / 1 pts
+Whats the UID for the root user 
+Correct!
+0
+Correct Answers
+Zero 
+0x0 
+0 
+ 
+Question 7
+1 / 1 pts
+Traditional pipes are bi-directional 
+  True 
+Correct!
+  False 
+ 
+Question 8
+1 / 1 pts
+What special character is used to make/represent an abstract unix socket name? 
+  \r
+  \n
+  \t
+Correct!
+  \0
+ 
+Question 9
+1 / 1 pts
+What is a swap partition used for? 
+  It is used for handling the copying files. 
+Correct!
+  It is used to swap out memory in physical RAM to some other device/disk. 
+  It is used to swap files between computers. 
+  It is used to extend the virtual address range for processes beyond the amount of RAM in a system. 
+ 
+Question 10
+1 / 1 pts
+Which symbol from an ls -l command indicates that there are ACL's present on a file 
+  d 
+  * 
+Correct!
+  + 
+  C 
+ 
+Question 11
+1 / 1 pts
+You use a separate partition for your /home directory than for the rest of your file hierarchy. For convenience, you decide to create a hard link to /etc/hosts within /home/coolguy. This is a problem because 
+  The /etc folder is protected from hard links for security purposes
+  All of the above 
+  If /etc is removed, then the hard link will no longer point to the hosts file
+Correct!
+  Hard links cannot be created across file system boundaries 
+ 
+Question 12
+1 / 1 pts
+On a target system, you manage to replace /lib64/libc.so.6 (glibc) with your own, modified version that logs the system calls invoked during runtime (a call to your logger is placed before each instance of the syscall instruction). However, you notice that some invocations of system calls by programs on the target system are not being logged at all. Which of the following is not a possible explanation for this: 
+  Calls made by programs written in a languages that provide their own system call wrappers 
+  Calls made by programs linking with an alternate version of glibc somewhere else in the filesystem 
+Correct!
+  Calls made by programs using the glibc syscall function instead of the standard glibc wrappers 
+  None - these are all possible explanations 
+ 
+Question 13
+1 / 1 pts
+You create a binary file compiled from C that dynamically links with the standard library. What is the correct order of the following functions from the moment the binary is executed until main gets called? 
+Correct!
+  _start (in loader's ELF) --> _start (in your ELF) --> __libc_start_main --> main 
+  _start (in your ELF) --> _start (in loader's ELF) --> __libc_start_main --> main 
+  _start (in your ELF) --> __libc_start_main --> _start (in loader's ELF) --> main 
+  _start (in loader's ELF) --> __libc_start_main --> _start (in your ELF) --> main 
+ 
+Question 14
+1 / 1 pts
+What is wrong with the following code?
+int main() {
+    dup2(open("/dev/null", O_WRONLY), STDOUT_FILENO​);
+    close(1);
+    close(2);
+    execl("/bin/echo", "/bin/echo", "Hello", "World", NULL);
+    return 0;
+}
+  execl fails because /bin/echo is not a valid file descriptor
+  nothing - echo succeeds but its output is being redirected to /dev/null
+Correct!
+  echo errors because it attempts to write using a closed file descriptor
+  dup2 fails because it can't redirect a descriptor opened with O_WRONLY
+ 
+Question 15
+2 / 2 pts
+Given the executable pipetest, create a program that will obtain it's flag{}.
+
+Using pipes, create a program that will:
+- read the first line of pipetest's output
+- write that line back to pipetest's standard input
+- close the pipe to pipetest's standard input 
+- read the flag{} from pipetest's standard output
+
+Be sure to include you code and the flag!
+
+Your Answer:
+Flag: iloveinternals
+
+ 
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/wait.h>
+
+#define BUFFER_SIZE 1024
+
+int main() {
+    int parent_to_child[2];
+    int child_to_parent[2];
+    pid_t pid;
+    char buffer[BUFFER_SIZE];
+    ssize_t bytes_read;
+
+    if (pipe(parent_to_child) < 0)
+    {
+        perror("pipe");
+        exit(EXIT_FAILURE);
+    }
+
+    if (pipe(child_to_parent) < 0 )
+    {
+        perror("pipe");
+        exit(EXIT_FAILURE);
+    }
+
+    pid = fork();
+    if (pid == -1)
+    {
+        perror("fork");
+        exit(EXIT_FAILURE);
+    }
+
+    if (pid == 0)
+    {
+        // child
+        close(parent_to_child[1]);
+        close(child_to_parent[0]);
+
+        dup2(parent_to_child[0], STDIN_FILENO);
+        dup2(child_to_parent[1], STDOUT_FILENO);
+
+        close(parent_to_child[0]);
+        close(child_to_parent[1]);
+
+        execl("./pipetest", "./pipetest", NULL);
+        perror("execl");
+        exit(EXIT_FAILURE);
+    }
+    else
+    {  
+        // parent
+        close(parent_to_child[0]);
+        close(child_to_parent[1]);
+
+        bytes_read = read(child_to_parent[0], buffer, BUFFER_SIZE - 1);
+        if (bytes_read < 0)
+        {
+            perror("read");
+            exit(EXIT_FAILURE);
+        }
+        buffer[bytes_read] = '\0';
+
+        write(parent_to_child[1], buffer, bytes_read);
+        close(parent_to_child[1]);
+
+        bytes_read = read(child_to_parent[0], buffer, BUFFER_SIZE - 1);
+        if (bytes_read > 0)
+        {
+            buffer[bytes_read] = '\0';
+            printf("Flag: %s\n", buffer);
+        }
+        else
+        {
+            perror("read flag");
+        }
+
+        wait(NULL);
+    }
+
+    return 0;
+}
+ 
+Question 16
+0 / 2 pts
+Given the executable uberhash2000, implement a shared object (.so) that will allow it to run correctly to completion and print out the flag.  Some RE might be useful to determine what function(s) should be in your shared object. 
+You Answered
+Flag is:{2086473605}
+Correct Answers
+7cb2f3f6 
+0x7cb2f3f6 
+0x7CB2F3F6 
+2092102646 
+7CB2F3F6 
+ 
+Question 17
+2 / 2 pts
+You are given the file ded_elf, which is a corrupted ELF file with the following problems:
+
+Magic bytes are incorrect in the header
+Type is incorrect - it should be DYN
+The entry point value is incorrect
+The interpreter is wrong (PT_INTERP program header has a corrupted value)
+These problems need to be fixed so the ELF file can be executed and dump out the flag{}.  This can be done programmatically (your ELF parsing lab may be of help) or it can be done using a hex editor.
+
+If you wish to edit hex directly, xxd is a useful tool for that:
+
+Use xxd ded_elf > elf.hex to dump the file to hex.
+
+After changing the bytes , use xxd -r elf.hex > gud_elf  to go from a hex dump back to a binary file.
+
+You may also use hexedit, Ghidra, etc.
+
+When you are finished, enter the flag in the field below.
+
+Correct!
+flag{thanks_for_healing_me}
+Correct Answers
+flag{thanks_for_healing_me}\n 
+flag{thanks_for_healing_me} 
+thanks for healing me 
+thanks_for_healing_me 
+ 
+Question 18
+1 / 1 pts
+In the binary from quiz 3 (q3) what is the unresolved value initially in the GOT entry for fprintf?  Answer should be a address in 0x... hex format with no leading zeros.
+Correct!
+0x401096
+Correct Answers
+0x401096 

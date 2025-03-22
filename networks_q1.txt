@@ -1,0 +1,73 @@
+Question 1
+1 / 1 pts
+What does an Ethernet switch use to populate its forwarding table? 
+  Destination Ethernet address of Neighbor solicitation frames 
+Correct!
+  Source Ethernet address of all frames 
+  Source Ethernet address of X.25 frames 
+  Destination Ethernet address of all frames 
+ 
+Question 2
+0 / 1 pts
+How big is the target hardware address field of an ARP reply header? 
+You Answered
+  6 bytes 
+  0 bytes 
+  4 bytes 
+Correct Answer
+  Not enough information 
+  8 bytes 
+ 
+Question 3
+1 / 1 pts
+What words describe Ethernet address 0a:aa:ba:ad:f0:00? (Select all that apply) 
+Correct!
+  Locally administered 
+Correct!
+  Unicast 
+  Multicast/Broadcast 
+  Globally Unique 
+ 
+Question 4
+1 / 1 pts
+Select all bit values that apply to internet protocol addressing schemes. (Select all that apply)
+  256 bit 
+  48 bit 
+Correct!
+  128 bit 
+Correct!
+  32 bit 
+ 
+Question 5
+2 / 2 pts
+The Ethernet address of IPv6 address [fe80::280:52FF:FE4E:1186] is ________.
+
+1 pt - please show your work 
+
+1 pt - please provide an answer
+
+ 
+
+Your code will be hand-graded by the instructor.
+
+Your Answer:
+00:80:52:4E:11:86
+
+The last eight bytes are: 0280:52FF:FE4E:1186.
+
+Convert to 8 byte pair:
+
+02 80 52 FF FE 4E 11 86
+
+ 
+Question 6
+1 / 1 pts
+A system is broadcasting a ping (in IPv4). Examine the network traffic and report the rogue signal's hardware address.
+
+Correct!
+00:50:56:01:09:3b
+Correct Answers
+00:50:56:01:09:3b 
+a4:bb:6d:e1:8c:80 
+00:50:56:01:09:3B 
+A4:BB:6D:E1:8C:80 

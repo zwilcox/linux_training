@@ -1,0 +1,60 @@
+Question 1
+1 / 1 pts
+What is the (dereferenced) value of the argument passed to opendir in the print_dir_info function when it is first called?
+Correct!
+.
+Correct Answers
+. 
+"." 
+ 
+Question 2
+1 / 1 pts
+How many functions deep are you in the stack trace whenever you are in print_file_info?
+
+Correct!
+  It depends 
+  0 
+  4 
+  3 
+  2 
+  1 
+ 
+Question 3
+1 / 1 pts
+What is the second argument type to print_file_info?
+Correct!
+char* 
+Correct Answers
+char[] 
+char * 
+char* 
+char[ ] 
+ 
+Question 4
+1 / 1 pts
+Which of these functions does not exist (even as a reference) in the binary?
+  None of these 
+  main 
+  print_dir_info 
+Correct!
+  srand 
+Correct!
+  strtok 
+  printf 
+ 
+Question 5
+1 / 1 pts
+In the block starting at address 0x0040128a what is being checked to determine if print_file_info will be called or not?
+
+Correct!
+  local_20 is being checked to see if it is equal to . or .. 
+  local_20 is being checked to see if it is an empty string 
+  local_20 is being checked to see if it is null terminated 
+ 
+Question 6
+0 / 1 pts
+What is the return type of print_file_info?
+You Answered
+error code
+Correct Answers
+int 

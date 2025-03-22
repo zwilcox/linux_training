@@ -1,0 +1,76 @@
+Question 1
+1 / 1 pts
+Explain what the continue directive does, in terms of execution.
+  Resume execution outside of the current scope 
+  Resume execution outside of the loop block 
+  Move execution to the next branch instruction 
+Correct!
+  Move execution to the top of the loop block 
+ 
+Question 2
+1 / 1 pts
+If no return statement is reached at the end of a function, what is the return value?
+Correct!
+  None 
+  0 
+  False 
+  [] 
+ 
+Question 3
+1 / 1 pts
+Identify the legal ways for the return value of the below function can be assigned (select all that apply):
+
+def foo(a,b,c):
+
+    return c,b,a
+Correct!
+  Return can assign it to exactly the same number of variables as were returned 
+Correct!
+  No unpacking is done and the return value is a single tuple containing the return values 
+  Return can assign the result to fewer variables, but only if the last variable is followed by a ',' (comma) 
+  Return can assign it into the same number of variables as is returned from the function, but more is okay 
+ 
+Question 4
+0.67 / 1 pts
+Which of the following statements are true for generators? (select all that apply) 
+Correct!
+  Each time (except the last) Python's next() is called on a generator object, the function executes until a yield is reached
+Correct!
+  Python's StopIteration is used to denote the end of a generator function
+  Python's GeneratorEnd is used to denote the end of a generator function
+Correct Answer
+  Python's yield preserves local state within the function and returns a generator object
+ 
+Question 5
+2 / 2 pts
+How many bytes are in the result of pickling the string hello with Python 3.12?  
+
+1pt - please provide your code 
+1pt - please provide an final answer (i.e. - we should not need to run your code to obtain your answer)
+Your code will be hand-graded by the instructor.
+
+Your Answer:
+import pickle
+
+pickled_data = pickle.dumps("hello")
+print(len(pickled_data))
+20 bytes
+ 
+Question 6
+2 / 2 pts
+What is the result of packing 0x444f4f47 into a little-endian, unsigned long?
+
+1pt - please provide your code 
+1pt - please provide an final answer (i.e. - we should not need to run your code to obtain your answer)
+Your code will be hand-graded by the instructor.
+
+Your Answer:
+import struct
+
+packed_data = struct.pack('<L', 0x444f4f47)
+
+print(packed_data)
+print(packed_data.hex())
+----------------------
+b'GOOD'
+474f4f44

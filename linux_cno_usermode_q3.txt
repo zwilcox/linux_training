@@ -1,0 +1,89 @@
+Question 1
+1 / 1 pts
+What is the Intel x64 Assembly instruction byte sequence for a 0xE9 5-byte jump given two addresses: source 0x454545 and target 0x434343?
+
+
+Your answer should be a hex byte sequence separated by spaces and use hex capitalizing the letters.
+
+Example:  90 FF C0 90 90
+
+Correct!
+E9 F9 FD FD FF
+Correct Answers
+E9 F9 FD FD FF 
+ 
+Question 2
+1 / 1 pts
+What is the problem with placing a 5-byte jump patch on the function foo located at address 0x01003B22 below?
+
+ADDRESS     INSTRUCTION BYTES    INSTRUCTION
+foo:
+01003B22    31 C0                xor eax, eax
+01003B24    C3                   ret
+01003B25    90                   nop
+baz:
+01003B26    55                   push ebp
+01003B28    8B EC                mov ebp, esp
+01003B2B    83 EC 3C             sub esp, 3Ch
+...
+Correct!
+  The patch will modify the baz function's instructions. 
+  The patch will break the loop in the foo function. 
+  There is no problem with patching in this situation. 
+  The patch will cause the stack pointer to be mis-aligned for the function foo. 
+ 
+Question 3
+1 / 1 pts
+The following will correctly inject an infinite loop (jmp -2) into a traced program's memory, from a tracer - assume program is little endian:
+
+...
+ptrace(PTRACE_PEEKTEXT, pid, targetaddr, 0xFEEB);
+...
+Correct!
+  False, because the POKETEXT command should be used instead of the PEEKTEXT command 
+  False, because the ptrace data is ignored for the PEEKTEXT command, so 0xFEEB should be the addr argument 
+  True 
+  False, because the machine is little endinan so the data should be 0xEBFE 
+ 
+Question 4
+1 / 1 pts
+What is the address (not the offset) of the .dynamic section in the executable q3? Your answer should be in 0x...hexadecimal format with no leading zeros. 
+Correct!
+0x403e20
+Correct Answers
+0x403E20 
+0x403e20 
+ 
+Question 5
+1 / 1 pts
+There are 3 reserved entries in the GOT. What do they hold?
+Match the answer to the correct index.
+
+ 
+
+ 
+
+Correct!
+GOT[0] 
+the address of the .dynamic section
+Correct!
+GOT[1] 
+the address of the link_map structure that contains information about the dynamic linker
+Correct!
+GOT[2] 
+the address of the dynamic linker code
+Other Incorrect Match Options:
+trampolines for code defined in dynamic libraries
+global symbols
+ 
+Question 6
+1 / 1 pts
+In regards to Entry Stub Trampolines, you need a length-disassembler to know which of the following answers? (Select All That Apply)
+
+  The type of instructions used in the original function 
+  The opcodes of the instructions you are overwriting 
+Correct!
+  Where to jump to at the end of the trampoline 
+  The name of the function being stubbed 
+Correct!
+  How many bytes to put in the trampoline 

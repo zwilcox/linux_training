@@ -1,0 +1,84 @@
+Question 1
+1 / 1 pts
+Which of the following symbols can be kprobed? Assume the x86 architecture and kernel 5.2.15. 
+Correct!
+  inet_ioctl 
+  do_general_protection 
+Correct!
+  __tasklet_schedule 
+  debug_stack_set_zero 
+ 
+Question 2
+1 / 1 pts
+Which of the following systems can be directly invoked from userspace? 
+  schedule_init registration 
+  kprobe registration 
+  tracepoints registration 
+Correct!
+  eBPF programs 
+ 
+Question 3
+1 / 1 pts
+You are writing a kernel module that, upon loading, will modify a region of memory in an already running process. You can modify the contents of another process's virtual memory addresses using the 
+access_process_vm
+ function. Passing in 
+FOLL_FORCE 
+ to the function will cause this to disregard any permissions on that physical memory.
+Answer 1:
+Correct!access_process_vm
+Correct Answer
+ptrace_access_vm 
+Correct Answer
+__access_remote_vm 
+Correct Answer
+access_remote_vm 
+Answer 2:
+Correct!FOLL_FORCE
+ 
+Question 4
+Not yet graded / 1 pts
+On x86_64, in kernel 5.2.15, is there a difference in how the kernel processes a PTRACE_PEEKTEXT versus a PTRACE_PEEKDATA? 
+
+0.5 pt - Yes or No
+
+0.5 pt - provide code/elixir source to prove your answer
+
+This will be hand-graded by the instructor. 
+
+Your Answer:
+No:
+
+https://elixir.bootlin.com/linux/v5.2.15/source/kernel/ptrace.c#L910-L912Links to an external site.
+
+ 
+
+switch
+Links to an external site. (request
+Links to an external site.) {
+	case PTRACE_PEEKTEXT
+Links to an external site.:
+	case PTRACE_PEEKDATA
+Links to an external site.:
+		return generic_ptrace_peekdata
+Links to an external site.(child
+Links to an external site., addr, data);
+ 
+Question 5
+1 / 1 pts
+You are rooting a kernel on a device for which you have the source code but no binary or compilation script. You decide to compile the kernel yourself with the code, and use the resulting image to give you the offsets for members of the cred struct. This is 
+  a good idea, because you can use this to defeat KASLR 
+  a good idea, because you can't guess the offsets dynamically 
+  a bad idea, because KASLR will change the offets within a struct 
+Correct!
+  a bad idea, because your compilation may have a different "__randomize_layout" seed 
+ 
+Question 6
+0.5 / 1 pts
+To create a kprobe, a struct kprobe must be created and registered with the kprobe system. The user specifies which of the following? (Select All That Apply)
+You Answered
+  symbols 
+  opcodes 
+Correct!
+  pre_handler 
+Correct!
+  post_handler 

@@ -1,0 +1,84 @@
+Question 1
+1 / 1 pts
+ 
+
+What is the problem with the following kthread routine?
+
+static int kthread_start(void* data) {
+  struct mydata * d = (struct mydata*)data;
+  while (!kthread_should_stop()) {
+    // Do tasks
+    // ...
+    ssleep(1); // sleep for a bit
+  }
+  
+  // exiting!
+  printk(KERN_INFO "exiting thread\n");
+  kthread_stop(current)
+  return -1;
+}
+ 
+
+  kthread_should_stop requires an argument to specify which kernel thread to stop 
+  The thread shouldn't return a negative number 
+Correct!
+  The call to kthread_stop is a problem 
+  It is bad to ssleep inside of a kernel thread, because it takes CPU time 
+  kthread_should_stop shouldn't be called in a loop, it should only ever be called once per kthread 
+  The thread needs to call do_exit, and can't just return 
+ 
+Question 2
+0.5 / 1 pts
+Softirq functions can be run in what context(s)? (Select All That Apply)
+  none of these 
+Correct!
+  interrupt 
+Correct Answer
+  process 
+  SELinux 
+  shell 
+ 
+Question 3
+1 / 1 pts
+What is the x86 assembly instruction that is used to return from an interrupt 
+You Answered
+IRET/IRETD/IRETQ
+Correct Answers
+iret 
+Iret 
+iretq 
+Iretq 
+IRET 
+IRETQ 
+ 
+Question 4
+1 / 1 pts
+In kernel 5.2.15, which of the following items are not function pointers in the file_operations structure? 
+  fadvise 
+  lock 
+Correct!
+  owner 
+Correct!
+  mmap_supported_flags 
+Correct!
+  __randomize_layout 
+ 
+Question 5
+1 / 1 pts
+What is the subcategory of synchronous interrupts (exception) that gets reported during an instruction’s execution that can possibly be corrected?
+Correct!
+fault
+Correct Answers
+faults 
+fault 
+Fault 
+Faults 
+ 
+Question 6
+1 / 1 pts
+The kernel function copy_in_user can be used to: 
+Correct!
+  copy user memory to user mode 
+  copy user memory to kernel mode 
+  copy kernel memory to kernel mode 
+  copy kernel memory to user mode 

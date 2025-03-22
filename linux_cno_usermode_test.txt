@@ -1,0 +1,272 @@
+What are the instruction bytes for a 5-byte relative jump, located at address 0x4A4A4A4A, that jumps to 0x45454545? 
+Correct!
+  E9F6FAFAFA
+  E9FAFAFAFB
+  E900FBFAFA
+  E9FBFAFAFA
+  E9FAFAFB00
+  E9FAFAFAF6
+ 
+Question 2
+1 / 1 pts
+In the labs, which portion of a dis-assembler is required when writing code patches? Why? 
+Correct!
+  A length disassembler, so that we can determine instruction length 
+  A full disassembler, so that we don't patch over syscall instruction 
+  A code flow disassembler, so that we can determine instruction length 
+  A code flow disassembler, so that we do not patch over loop/jmp boundaries 
+ 
+Question 3
+1 / 1 pts
+You are patching an original function using 12-byte: mov rax, <addr>; jmp rax instruction sequence. The entry stub trampoline is located at address 0x00C0FFEE. The original function located at 0x4011a6 follows below:
+
+  4011a6:	55                   	push   %rbp
+  4011a7:	48 89 e5             	mov    %rsp,%rbp
+  4011aa:	53                   	push   %rbx
+  4011ab:	48 83 ec 38          	sub    $0x38,%rsp
+  4011af:	89 7d cc             	mov    %edi,-0x34(%rbp)
+  4011b2:	48 89 75 c0          	mov    %rsi,-0x40(%rbp)
+  4011b6:	48 c7 45 e8 10 20 40 	movq   $0x402010,-0x18(%rbp)
+...
+How many total bytes will the entry stub trampoline be if it ends with a 12 byte jump?  Answer should be an integer value.
+
+Correct!
+24
+Correct Answers
+24 
+ 
+Question 4
+1 / 1 pts
+You need addresses from 0x424698 through 0x428834 to be made executable. They are currently only readable. Which of the following calls to mprotect will correctly make these addresses executable? 
+Correct!
+  mprotect(0x424698 & (~0xFFF), 5 * 0x1000, PROT_READ | PROT_EXEC);
+  mprotect(0x424698 & 0xF, 4 * 0x1000, PROT_READ | PROT_EXEC);
+  mprotect(0x424698 & 0xFFFFFFFFFFFFF000, 3 * 0x1000, PROT_READ | PROT_EXEC);
+  mprotect(0x424698 & (~0xFF), 0x428834 - 0x424698, PROT_READ | PROT_EXEC);
+ 
+Question 5
+0 / 1 pts
+Given the following extended inline assembly snippet, which statement is false?
+
+__asm__(
+        "movq %%rax, %%rbx\n\t"
+        "bswap %rbx\n\t"
+        "movq %%rbx, %[var]\n\t"
+        "test %%rbx, %%rax\n\t"
+        "setz %[pal]\n\t"
+        : [var] "=r" (outvar), [pal] "=r" (outpal)
+        : "a" (invar)
+        : "cc", "%rbx");
+Correct Answer
+  The C variable pal is bound to an output register
+You Answered
+  After execution, the C variable outvar will be derived from an endian-swapped invar
+  RAX is bound to an input variable
+  The flags will be affected during the execution of the resulting assembly 
+ 
+Question 6
+1 / 1 pts
+If we store our shared object's contents in a file created with memfd_create, and want to load it, what is a path we could pass to dlopen? memfd_create returned 8. 
+Correct!
+ /proc/self/fd/8
+Correct Answers
+/proc/self/fd/8 
+"/proc/self/fd/8" 
+ 
+Question 7
+1 / 1 pts
+The following code snippets represent original functions which are to be hooked by an entry stub trampoline.
+
+Which of the following would not be safe to use for a entry stub trampoline using a fixed 5-byte jump patch (and a 5 byte jump at the end of the trampoline)?
+
+A:
+
+  163055:       48 81 c6 00 01 00 00    add    $0x100,%rsi
+  16305c:       48 81 c7 00 01 00 00    add    $0x100,%rdi
+  163063:       48 81 fa 80 00 00 00    cmp    $0x80,%rdx
+B:
+
+  164a4a:       48 83 f9 30             cmp    $0x30,%rcx
+  164a4e:       73 10                   jae    164a60
+  164a50:       48 01 ce                add    %rcx,%rsi
+C:
+
+   fc9b7:       b8 35 00 00 00          mov    $0x35,%eax
+   fc9bc:       0f 05                   syscall 
+   fc9be:       48 3d 01 f0 ff ff       cmp    $0xfffffffffffff001,%rax
+D:
+
+   fd31b:       48 3d 00 f0 ff ff       cmp    $0xfffffffffffff000,%rax
+   fd321:       77 05                   ja     fd328
+   fd323:       c3                      retq 
+Correct!
+  B 
+  A 
+  C 
+  D 
+ 
+Question 8
+1 / 1 pts
+The image auth, with PID 12639, has been put to sleep in the function fgets, waiting for user input. Its entry in /proc/12639/maps is as follows:
+
+5621c335d000-5621c335e000 r--p 00000000 fd:02 10487881                   auth
+5621c335e000-5621c335f000 r-xp 00001000 fd:02 10487881                   auth
+5621c335f000-5621c3360000 r--p 00002000 fd:02 10487881                   auth
+5621c3360000-5621c3361000 r--p 00002000 fd:02 10487881                   auth
+5621c3361000-5621c3362000 rw-p 00003000 fd:02 10487881                   auth
+5621c4abe000-5621c4adf000 rw-p 00000000 00:00 0                          [heap]
+7f88ac4bc000-7f88ac4de000 r--p 00000000 fd:00 3944571                    /usr/lib64/libc-2.29.so
+7f88ac4de000-7f88ac62b000 r-xp 00022000 fd:00 3944571                    /usr/lib64/libc-2.29.so
+7f88ac62b000-7f88ac677000 r--p 0016f000 fd:00 3944571                    /usr/lib64/libc-2.29.so
+7f88ac677000-7f88ac678000 ---p 001bb000 fd:00 3944571                    /usr/lib64/libc-2.29.so
+7f88ac678000-7f88ac67c000 r--p 001bb000 fd:00 3944571                    /usr/lib64/libc-2.29.so
+7f88ac67c000-7f88ac67e000 rw-p 001bf000 fd:00 3944571                    /usr/lib64/libc-2.29.so
+7f88ac67e000-7f88ac684000 rw-p 00000000 00:00 0
+7f88ac69d000-7f88ac69e000 r--p 00000000 fd:00 3943958                    /usr/lib64/ld-2.29.so
+7f88ac69e000-7f88ac6be000 r-xp 00001000 fd:00 3943958                    /usr/lib64/ld-2.29.so
+7f88ac6be000-7f88ac6c6000 r--p 00021000 fd:00 3943958                    /usr/lib64/ld-2.29.so
+7f88ac6c7000-7f88ac6c8000 r--p 00029000 fd:00 3943958                    /usr/lib64/ld-2.29.so
+7f88ac6c8000-7f88ac6c9000 rw-p 0002a000 fd:00 3943958                    /usr/lib64/ld-2.29.so
+7f88ac6c9000-7f88ac6ca000 rw-p 00000000 00:00 0
+7ffdf0de7000-7ffdf0e09000 rw-p 00000000 00:00 0                          [stack]
+7ffdf0ea9000-7ffdf0eac000 r--p 00000000 00:00 0                          [vvar]
+7ffdf0eac000-7ffdf0ead000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+An objdump of the portion of authecheck(), where fgets is called is shown below:
+
+0000000000001183 :
+    1183:       55                      push   %rbp
+    1184:       48 89 e5                mov    %rsp,%rbp
+    1187:       48 83 ec 10             sub    $0x10,%rsp
+    118b:       48 89 7d f8             mov    %rdi,-0x8(%rbp)
+    118f:       48 8d 3d 81 0e 00 00    lea    0xe81(%rip),%rdi        # 2017 
+    1196:       b8 00 00 00 00          mov    $0x0,%eax
+    119b:       e8 a0 fe ff ff          callq  1040 
+    11a0:       48 8b 05 a9 2e 00 00    mov    0x2ea9(%rip),%rax        # 4050 
+    11a7:       48 89 c2                mov    %rax,%rdx
+    11aa:       be 04 00 00 00          mov    $0x4,%esi
+    11af:       48 8d 3d 92 2e 00 00    lea    0x2e92(%rip),%rdi        # 4048 
+    11b6:       e8 95 fe ff ff          callq  1050 # fgets
+    11bb:       90                      nop
+    11bc:       c9                      leaveq
+    11bd:       c3                      retq
+You want to modify the return address on the stack to redirect execution to a location of your choice when fgets finishes. What is the return address (no offset) on the stack that will be jumped to when fgets finishes?  Your answer should be in 0x...hexadecimal format with no leading zeros.
+
+You Answered
+0x5621C335F1BB
+Correct Answers
+0x5621C335E1BB 
+0x5621c335e1bb 
+watch the copy paste
+ 
+Question 9
+1 / 1 pts
+You know that a process with PID 2351 has some interesting memory contents. However, running cat /proc/2351/mem fails. Why is this? 
+Correct!
+  cat accesses unmapped pages in the process
+  cat can only show a limited amount of data
+  cat cannot use the proc filesystem
+  the process cannot be ptraced twice 
+ 
+Question 10
+1 / 1 pts
+Using LD_PRELOAD with a value of ../my.so will not work in which of the following cases? 
+Correct!
+  During secure execution mode 
+  Another user compiled the target binary 
+  The environment variable PWD is set to /tmp/test
+  The target binary has a null rpath
+ 
+Question 11
+1 / 1 pts
+After hooking a function with an entry stub trampoline, if you want to call the original function without the hook, you can... 
+Correct!
+  Call the trampoline directly 
+  Call the address of the original function 
+  Call to an offset just after the clobbered bytes of the original function 
+  Call the original function address from within the wrapper 
+ 
+Question 12
+1 / 1 pts
+In the ptrace injection lab, why did we have to write the path to the shared object into the tracee's memory? 
+Correct!
+  So that the tracee could reference this string as a parameter to dlopen 
+  So that we could allocate memory 
+  We didn't have to, we could have instead written the address of the string into a register 
+  To be clean and clean up 
+ 
+Question 13
+1 / 1 pts
+Which hardening technique would not impede the static analysis? 
+Correct!
+  Preventing ptrace attachment 
+  Using overlapping instructions 
+  Using a packer 
+  Inserting unused code 
+ 
+Question 14
+1 / 1 pts
+Which of the following instructions is not PIC (position-independent):
+
+ 
+
+ 
+
+Disassembly of section .text:
+
+0000000000401000 (_start):
+  401000:       48 8d 3d 0f 00 00 00    lea    0xf(%rip),%rdi        # 401016 (otherplaces)
+  401007:       e8 00 00 00 00          callq  40100c (goplaces)
+
+000000000040100c (goplaces):
+  40100c:       48 8b 04 25 00 10 40    mov    0x401000,%rax
+  401013:       00
+  401014:       ff e0                   jmpq   *%rax
+
+0000000000401016 (otherplaces):
+  401016:       48 c7 c0 3c 00 00 00    mov    $0x3c,%rax
+  40101d:       0f 05                   syscall
+
+Correct!
+  The instructions at 40100c-401016 
+  The instructions at 401000-40100c 
+  The instructions at 401016-40101f 
+  All of the instructions are PIC 
+ 
+Question 15
+2 / 2 pts
+Given the binary cno_poke, use the ptrace API to modify a global integer variable named changeme at address 0x4040ac to be itself times two (self  * 2).
+
+Note that changeme's value will be different every time, so the variable should be read and written to in the same session. The address of changeme is in the cno_poke's symbol table.
+
+If the variable changes properly, cno_poke will output the flag to stdout. (Error information may be output on stderror.)
+
+You are provided with starter code that will interact with changeme by waiting for an attachment and then continuing.
+
+Correct!
+flag{POKING_AND_PEEKING_ARE_RUDE}
+Correct Answers
+POKING_AND_PEEKING_ARE_RUDE 
+flag{POKING_AND_PEEKING_ARE_RUDE} 
+ 
+Question 16
+1 / 1 pts
+Given the binary test_infectable, at what address can we place our infection of 2700 bytes (0xa8c), if any?  Assume page sizes of 0x1000.  What is the address (not the offset) of the gap where our infection could fit.  Answer should be in 0x...hexadecimal format with no leading zeros.  Put "0" for your answer if there is no suitable address. 
+You Answered
+0x040e56b
+Correct Answers
+0x40e56b 
+0x40E56B 
+Ok
+ 
+Question 17
+2 / 2 pts
+Hook the glibc write function in the binary cno_hook so that any write that has a buffer argument containing an 'A' as its first element has everything following the 'A' redirected to stdout (instead of whatever file descriptor it was originally going to be written to).  Don't print out the leading 'A'.
+
+When the program terminates, what is the flag printed to stdout?
+
+Correct!
+flag{TWO_WRITES_DONT_MAKE_A_WRONG}
+Correct Answers
+flag{TWO_WRITES_DONT_MAKE_A_WRONG} 
+TWO_WRITES_DONT_MAKE_A_WRONG 

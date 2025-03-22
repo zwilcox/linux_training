@@ -1,0 +1,73 @@
+Question 1
+1 / 1 pts
+If currently running in protected mode, the HLT instruction will produce an exception if the privilege level (ring level) is not below or equal to _? 
+Correct!
+  0 
+  INT32_MIN 
+  2 
+  3 
+  1 
+ 
+Question 2
+1 / 1 pts
+In kernel version 5.2.15, the wrmsrl (write model-specific register long) function is used to interact with model-specific registers. On x86, this function causes a call to inline assembly to be made. What elements are specified as clobbers in this asm call? 
+  RCX 
+  RSP 
+  RDX 
+  None 
+Correct!
+  Memory 
+  RAX 
+ 
+Question 3
+1 / 1 pts
+If you were to return -EBUSY from the init function of your kernel module what would happen?
+Try it out and give an answer!
+
+ 
+
+This will be hand-graded by the instructor.
+
+Your Answer:
+Get the following error
+
+Get an error:
+
+ 
+
+insmod: ERROR: could not insert module kern_mod.ko: Device or resource busy
+
+ 
+Question 4
+0.75 / 1 pts
+Which of the following will always cause a system currently executing in ring 3 (CPL = 3) to switch to ring 0 as part of its operation
+Correct!
+  A system call 
+Correct!
+  An interrupt 
+Correct Answer
+  A context switch 
+Correct!
+  An Access to paged-out memory 
+  A glibc call 
+  A normal fuction call 
+ 
+Question 5
+1 / 1 pts
+Linux uses the _____________ function to setup state for a CPU.
+Correct!
+cpu_init
+Correct Answers
+cpu_init() 
+cpu_init 
+ 
+Question 6
+1 / 1 pts
+What are some reasons that an interrupt may occur? (Select All That Apply)
+  A program successfully completing its execution 
+Correct!
+  A hardware device needs attention 
+Correct!
+  User presses a key on the keyboard 
+Correct!
+  Divide by Zero Exception 

@@ -1,0 +1,233 @@
+Question 1
+1 / 1 pts
+Which of the following functions does not contain a function call in ReTestLabs? 
+
+Correct!
+  GetScore
+  NewGame
+  EndGame
+  Buy
+ 
+Question 2
+1 / 1 pts
+What is the name of the C library function that is called to get input from the user for a Game Id? 
+Correct!
+  fgets
+  getchar
+  getch
+  strtoul
+ 
+Question 3
+1 / 1 pts
+A few of the functions return integers that are used as cookie console error codes. What string does error code 1 correspond to? 
+
+Correct!
+Unspecified Error
+Correct Answers
+Unspecified Error 
+unspecified error 
+Unspecified 
+"Unspecified Error" 
+"Unspecified" 
+ 
+Question 4
+1 / 1 pts
+There are two global counters in the source code, we called them:
+
+// tracks running games
+int32_t active_games = AG_START_VAL;
+// used for unique game ids
+int32_t game_id_counter = GID_START_VAL;
+
+The address of the global in the binary most likely to be named game_id_counter is what?
+
+Your answer should be a memory address starting with hex "0x" without leading zeros, such as 0x1234567
+
+Correct!
+0x404190
+Correct Answers
+0x404190 
+ 
+Question 5
+1 / 1 pts
+There are two global counters:
+
+// tracks running games
+int32_t active_games = AG_START_VAL;
+// used for unique game ids
+int32_t game_id_counter = GID_START_VAL;
+
+The address of the global in the binary most likely to be named active_games is what?
+
+Your answer should be a memory address starting with hex "0x" without leading zeros, such as 0x1234567
+
+Correct!
+0x4041ac
+Correct Answers
+0x4041AC 
+0x4041ac 
+ 
+Question 6
+1 / 1 pts
+What is the size of the game state structure when first allocated?
+
+This is only considering the top level size of the main structure created when a new game is started, not including sizes of things it points to.
+
+Your answer should be a "0x" hex format without leading zeros.
+
+Correct!
+0x38
+Correct Answers
+0x38 
+ 
+Question 7
+1 / 1 pts
+The active game structures are held in a global array of game structure pointers. How many pointers can this structure hold? 
+Correct!
+  0x100 
+  0x800 
+  0x8 
+  0x6 
+  0x300 
+ 
+Question 8
+1 / 1 pts
+What is the address of the parent function that will do the actual freeing (not the function free) of a game structure? 
+
+Answer should be in "0x" hex format without leading zeros.
+
+Correct!
+0x40125e
+Correct Answers
+0x40125e 
+0x40125E 
+ 
+Question 9
+1 / 1 pts
+Which of the following best describes the signature of Bake? 
+Correct!
+  int Bake(int);
+  void Bake();
+  void Bake(int);
+  int Bake(struct game*);
+  void Bake(struct game*);
+  int Bake();
+ 
+Question 10
+1 / 1 pts
+What is the most likely signature for EndGame? 
+Correct!
+  void EndGame(int);
+  int EndGame(int);
+  void EndGame(void);
+  void EndGame(int, int);
+ 
+Question 11
+1 / 1 pts
+What is the most likely function signature for the function at address 0x4011a6? 
+Correct!
+  char* somefunction(int)
+  char* somefunction(char*)
+  void somefunction(char*)
+  struct item* somefunction(int)
+ 
+Question 12
+1 / 1 pts
+What is the purpose of the loop in the function Difficulty? 
+Correct!
+  Continues waiting for input if all it got was a newline from fgets 
+  Waits for the user to enter a number that is in the valid difficulty range 
+  Removes newlines from the input 
+  Increases the difficulty of a specified game with each iteration of the loop 
+  Decreases the difficulty of the default config with each iteration of the loop 
+ 
+Question 13
+1 / 1 pts
+What is most true about the Difficulty function? 
+Correct!
+  Sets the default difficulty, so games started after the change will have their item prices scaled 
+  Changes the difficulty for all games, changing item prices 
+  Does nothing to the games 
+  Sets the difficulty of only future games, by changing the rate of cookie creation 
+ 
+Question 14
+1 / 1 pts
+What is the address of the entry point for this binary? 
+
+Answer should be in "0x" hex format without leading zeros.
+
+Correct!
+0x4010c0
+Correct Answers
+0x4010c0 
+0x4010C0 
+ 
+Question 15
+1 / 1 pts
+In the binary, how many separate functions call to the fgets C function? 
+
+Answer should be an integer value.
+
+Correct!
+3
+Correct Answers
+3 
+ 
+Question 16
+1 / 1 pts
+What is most true about the instruction at 0x401737? 
+Correct!
+  It takes user input as an offset into a table of pointer to decide where to jump 
+  It is probably due to an inlined strcpy 
+  This is most likely hand written assembly 
+  It is an unconditional jump that will always go to a certain location in the main function 
+ 
+Question 17
+1 / 1 pts
+Which of the following shared libraries are needed by the binary? (Select all that apply) 
+Correct!
+  libm.so.6
+Correct!
+  ld-linux-x86-64.so.2
+Correct!
+  libdl.so.2
+Correct!
+  libc.so.6
+  libpthread.so
+  libssl.so.1.1
+  libc.so.4
+ 
+Question 18
+1 / 1 pts
+Which of the following tools is not a dynamic analysis tool? 
+
+Correct!
+  objdump 
+  gdb 
+  ltrace 
+  ltrace 
+  ps 
+ 
+Question 19
+1 / 1 pts
+What is the BuildID[sha1] of the ReTestLabs binary?
+Correct!
+6f45692b349225eb7785e038f48bc698160722ff
+Correct Answers
+6f45692b349225eb7785e038f48bc698160722ff 
+=6f45692b349225eb7785e038f48bc698160722ff 
+ 
+Question 20
+1 / 1 pts
+What is the Version of this game?
+
+ 
+
+Hint: Look in Ghidra! 
+
+Correct!
+Version 0.03 -- chocolate chunk
+Correct Answers
+Version 0.03 -- chocolate chunk 
+Version 0.03 
+0.03 

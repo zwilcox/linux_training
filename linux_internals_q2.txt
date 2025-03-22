@@ -1,0 +1,115 @@
+Question 1
+1 / 1 pts
+Which of the following file systems does Linux support? (Select All That Appy)
+Correct!
+  EXT4 
+Correct!
+  ReiserFS 
+  EXT5 
+  BFS 
+Correct!
+  XFS 
+ 
+Question 2
+1 / 1 pts
+Files placed in /run _______ remain available after the system reboots
+  must 
+Correct!
+  will not 
+  can 
+ 
+Question 3
+1 / 1 pts
+All real files on disk have an associated inode number, but which of the following "file" types cannot be associated with an inode number: 
+Correct!
+  all of these file types have an inode number 
+  disk devices 
+  sockets 
+  the root directory 
+ 
+Question 4
+1 / 1 pts
+What is the correct value for the e_type field of an elf file that is a core dump? 
+Correct!
+ET_CORE
+Correct Answers
+ET_CORE 
+ 
+Question 5
+2 / 2 pts
+You have been provided "question5_executable", which expects a command line argument of a file descriptor in base 10. The file descriptor should be to the write end of a pipe. The provided program will write a flag to that pipe. Create a program that uses execv to start the given program, passing it a pipe file descriptor, then reading the flag out from the pipe. Write the flag given back as the answer. 
+
+Provide the answer and your code!
+
+Your Answer:
+Flag: 1412
+
+code: -->
+
+ 
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+int main(void)
+{
+    int pipefd[2];
+    if (pipe(pipefd) == -1)
+    {
+        perror("pipe");
+        exit(EXIT_FAILURE);
+    }
+
+    pid_t pid = fork();
+    if (pid < 0)
+    {
+        perror("fork");
+        exit(EXIT_FAILURE);
+    }
+    else if (pid == 0) // Child process
+    {
+        close(pipefd[0]);
+        char fd_str[16];
+        snprintf(fd_str, sizeof(fd_str), "%d", pipefd[1]);
+
+        char *args[] = {"./question5_executable", fd_str, NULL};
+        execv("./question5_executable", args);
+        perror("execv");
+        exit(EXIT_FAILURE);
+    }
+    else  // Parent process
+    {
+        close(pipefd[1]);
+
+        char buffer[256];
+        ssize_t n = read(pipefd[0], buffer, sizeof(buffer) - 1);
+        if (n < 0)
+        {
+            perror("read");
+            exit(EXIT_FAILURE);
+        }
+
+        buffer[n] = '\0';
+        printf("Flag: %s\n", buffer);
+        wait(NULL);
+    }
+
+    return 0;
+}
+ 
+Question 6
+1 / 1 pts
+Running the following command will show the contents of an ELF header. Which of the following answers will you find? (Select All That Apply)
+
+readelf -h /bin/echo
+  Interpreter 
+Correct!
+  Entry Point Address 
+Correct!
+  Flags 
+  Symbols 
+Correct!
+  Class 
+  Notes 

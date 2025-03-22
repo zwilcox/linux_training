@@ -1,0 +1,63 @@
+Question 1
+0 / 1 pts
+What byte value is read from the keyboard's data port when the backspace key is released? Express your answer in hexadecimal. 
+You Answered
+0x8E assuming set 1.  0xF0, 0x66 if assuming set 2
+Correct Answers
+8e 
+0x8e 
+0x8E 
+8E 
+ 
+Question 2
+1 / 1 pts
+If you overwrote the int3 exception handler in the kernel with your own that did not call the original, which of the following probe/tracing systems would cease to provide any information at all? 
+Correct!
+  kprobes 
+  All systems would provide data 
+  eBPF 
+  Ftrace 
+ 
+Question 3
+1 / 1 pts
+When registering for a shared IRQ, returning IRQ_HANDLED will:
+  Prevent all other registered handlers from running. 
+  Indicate an error condition to the kernel. 
+Correct!
+  Mark the interrupt as handled but allow other handlers to run. 
+ 
+Question 4
+0.5 / 1 pts
+You would like to hook the "clone" system call in kernel 5.2.15, using a kprobe. If you want to hook based on symbol name, what name should you use? Assume the x86_64 architecture. 
+(Select All That Apply)
+  __x86_sys_clone 
+Correct!
+  __x64_sys_clone 
+  None of these 
+Correct Answer
+  sys_clone 
+ 
+Question 5
+1 / 1 pts
+In kernel version 5.2.15 what is the name of the proto struct that will be used by the kernel when an application successfully creates a socket using socket(PF_INET, SOCK_DGRAM, IPPROTO_ICMP)?
+Correct!
+ping_prot 
+Correct Answers
+struct ping_prot 
+ping_prot 
+ 
+Question 6
+1 / 1 pts
+Which of the following are Linux Security Modules that have been accepted into the mainline kernel? (Select All That Apply)
+
+ 
+
+Correct!
+  SELinux 
+Correct!
+  TOMOYO 
+  Snacks 
+  Mine 
+Correct!
+  Yama 
+  Armory 

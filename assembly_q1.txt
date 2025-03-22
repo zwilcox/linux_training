@@ -1,0 +1,78 @@
+Question 1
+1 / 1 pts
+Which of the following C'ish pseudo-code lines is roughly equivalent to the x64 Assembly instruction: add rcx, rbx?  (Select all that apply)
+  rax = rcx + rbx 
+Correct!
+  rcx = rcx + rbx 
+Correct!
+  rcx += rbx 
+  rbx = rcx + rbx 
+  rax += rbx 
+  None of these 
+ 
+Question 2
+1 / 1 pts
+What is the value in AH after the following code? Answer should be in decimal format.
+
+mov al, 9
+movzx rax, al
+Correct!
+0
+Correct Answers
+0 
+ 
+Question 3
+1 / 1 pts
+What is the value of AX after this code?
+
+ror ax, 0x10
+shl ax, 2
+  0x00 
+Correct!
+  Not enough information to determine 
+  0x100 
+  0x10 
+  0x40 
+ 
+Question 4
+1 / 1 pts
+Which of the below instructions can accept memory as the operand(s)?
+
+Correct!
+  mov 
+  None of them can use memory references 
+Correct!
+  sub 
+Correct!
+  jmp 
+Correct!
+  add 
+ 
+Question 5
+1 / 1 pts
+What will EDX contain after this code runs?
+
+...
+mov rcx, rsp
+mov dword [rsp], 0x12345678
+inc rsp
+mov dword [rsp], 0x12345678
+xor rdx, rdx
+mov edx, dword [rcx]
+Correct!
+  0x34567878 
+  0x87654321 
+  Not enough information to determine 
+  0x12345678 
+  0x12876543 
+ 
+Question 6
+1 / 1 pts
+What is the value of RSP after these two instructions execute?  Assume memory address 0x1420 is valid. Answer should be in 0x... hexadecimal format without leading zeros.
+
+mov rsp, 0x1420
+pop rax
+Correct!
+0x1428
+Correct Answers
+0x1428 

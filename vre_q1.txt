@@ -1,0 +1,126 @@
+uestion 1
+1 / 1 pts
+Line 17 is an example of what kind of vulnerability?
+
+  1 #include 
+  2 #include 
+  3 #define BUFSIZE 0xffff
+  4 int exFunc(unsigned char *copyMe, unsigned int cbCopyMe) {
+  5     unsigned int count;
+  6     unsigned char *pbjBuffer;
+  7
+  8     if(cbCopyMe > 0) {
+  9         pbjBuffer = calloc(1, BUFSIZE);
+ 10         if(pbjBuffer == NULL ) {
+ 11             goto ErrorExit;
+ 12         }
+ 13     }
+ 14     for (count=0; count < cbCopyMe; count++) {
+ 15         pbjBuffer[count] = copyMe[count];
+ 16     }
+ 17     printf("Copied %u bytes\n", count);
+ 18 ErrorExit:
+ 19     if(pbjBuffer != NULL) {
+ 20         free(pbjBuffer);
+ 21     }
+ 22     return 1;
+ 23 }
+  Logic Flaw 
+  Numerical Error (Integer Overflow) 
+  Format String 
+Correct!
+  None of these 
+ 
+Question 2
+1 / 1 pts
+Which local variables may be used in an undefined state?
+
+If there are no variables that may be used in an undefined state, answer with None. 
+
+  1 #include 
+  2 #include 
+  3 #define BUFSIZE 0xffff
+  4 int exFunc(unsigned char *copyMe, unsigned int cbCopyMe) {
+  5     unsigned int count;
+  6     unsigned char *pbjBuffer;
+  7
+  8     if(cbCopyMe > 0) {
+  9         pbjBuffer = calloc(1, BUFSIZE);
+ 10         if(pbjBuffer == NULL ) {
+ 11             goto ErrorExit;
+ 12         }
+ 13     }
+ 14     for (count=0; count < cbCopyMe; count++) {
+ 15         pbjBuffer[count] = copyMe[count];
+ 16     }
+ 17     printf("Copied %u bytes\n", count);
+ 18 ErrorExit:
+ 19     if(pbjBuffer != NULL) {
+ 20         free(pbjBuffer);
+ 21     }
+ 22     return 1;
+ 23 }
+Correct!
+pbjBuffer
+Correct Answers
+unsigned char *pbjBuffer 
+pbjBuffer 
+ 
+Question 3
+1 / 1 pts
+Which of the following may be used to eliminate a race condition? (Select All That Apply)
+  Threads 
+Correct!
+  Mutex 
+Correct!
+  Semaphore 
+  Linked List 
+  All of these 
+  None of these 
+ 
+Question 4
+1 / 1 pts
+Which, if any, of the following format specifiers cause a memory dereference (argument is treated as a pointer)? (Select all that apply) 
+  %i 
+Correct!
+  %n 
+  %d 
+Correct!
+  %s 
+  %x 
+ 
+Question 5
+1 / 1 pts
+What is this an example of?
+
+int main(int argc, char *argv[])
+{
+        char buf[255] = {0};
+
+        if (argc >= 3 && atoi(argv[2]) < 255) {
+                snprintf(buf, atoi(argv[2]), argv[1]);
+                printf("buf = %s. \n", buf);
+        }
+        return 0;
+}
+  Array Index Error 
+  Stack Buffer Overflow 
+  Heap Buffer Overflow and Signed/Unsigned Conversion Error 
+  Heap Buffer Overflow 
+  Heap Buffer Overflow and Integer Overflow 
+  Stack Buffer Overflow and Integer Overflow 
+Correct!
+  Stack Buffer Overflow and Signed/Unsigned Conversion Error 
+ 
+Question 6
+1 / 1 pts
+In lab 3 we ran crasher.py with some different options, when we ran 
+
+crasher.py 1
+What exception occurred?
+
+You Answered
+Floating point exception due to a divide by zero
+Correct Answers
+SIGFPE 
+Ok
